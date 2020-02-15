@@ -36,9 +36,9 @@ class Bancontroller extends Controller
                 'maloaiban' => 'required',
             ],
             [
-                'tenban.required' => 'Bạn chưa điền tên bàn',
+                'tenban.required' => 'Lỗi rồi! Bạn chưa điền tên bàn',
                 'tenban.min' => 'Tên bàn phải có ít nhất 3 ký tự',
-                'tenban.unique' => 'Tên bàn đã tồn tại',
+                'tenban.unique' => 'Lỗi rồi! Tên bàn đã tồn tại',
                                 
             ]);
 
