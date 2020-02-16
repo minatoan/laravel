@@ -8,10 +8,15 @@ class menu extends Model
 {
     //
     protected $table = "menu";
-    protected $primariKey = 'mamon';
-
+    public $timestamps = false;
+    
     public function loaimon()
     {
-        return $this->belongsTo('App\loaimon','maloaimon','maloaimon');        
+        return $this->belongsTo('App\loaimon','maloaimon','id');        
+    } 
+
+    public function tochuc()
+    {
+        return $this->belongsTo('App\tochuc','matc','id');        
     } 
 }

@@ -21,9 +21,6 @@ Route::get('/home','AdminController@index')->name('home');
 
 Route::group(['prefix'=>'admin'],function()
 {
-    
-
-    
 
 	Route::group(['prefix'=>''],function()
 	{
@@ -56,23 +53,61 @@ Route::group(['prefix'=>'admin'],function()
         ]);
 
 	});
-	//admin/loaiban/loaiban.php
-    Route::group(['prefix'=>'loaiban'],function(){
-        Route::get('loaiban','LoaiBancontroller@getLoaiBan');
+	//admin/loaiban/
+    Route::group(['prefix'=>''],function(){
 
-        Route::get('loaiban','LoaiBancontroller@getThem');
-        Route::post('loaiban','LoaiBancontroller@postThem');
-        
-        Route::get('sua/{maloaiban}','LoaiBancontroller@getSua');
-        Route::post('sua/{maloaiban}','LoaiBancontroller@postSua');
-        
-        Route::get('xoa/{maloaiban}','LoaiBancontroller@getXoa');
+        Route::get('loaiban', [
+            'as'=> 'loaiban-them',
+            'uses'=> 'LoaiBancontroller@getThemLoaiBan'
+        ]);
+        Route::post('loaiban', [
+            'as'=> 'loaiban-them',
+            'uses'=> 'LoaiBancontroller@postThemLoaiBan'
+        ]);
+
+        Route::get('loaiban/{id?}', [
+            'as'=> 'loaiban-sua',
+            'uses'=> 'LoaiBancontroller@getSuaLoaiBan'
+        ]);
+
+        Route::post('loaiban/{id?}', [
+            'as'=> 'loaiban-sua',
+            'uses'=> 'LoaiBancontroller@postSuaLoaiBan'
+        ]);
+
+        Route::get('xoaloaiban/{id?}', [
+            'as'=> 'loaiban-xoa',
+            'uses'=> 'LoaiBancontroller@getXoaLoaiBan'
+        ]);
     });
     //admin/menu/menu.php
-    Route::group(['prefix'=>'menu'],function()
+    Route::group(['prefix'=>''],function()
 	{
-		Route::get('menu','MenuController@getMenu');
+        // Route::get('menu','Menucontroller@getMenu');
+        
+        Route::get('menu', [
+            'as'=> 'menu-them',
+            'uses'=> 'Menucontroller@getThemMenu'
+        ]);
+        Route::post('menu', [
+            'as'=> 'menu-them',
+            'uses'=> 'Menucontroller@postThemMenu'
+        ]);
 
+        Route::get('menu/{id?}', [
+            'as'=> 'menu-sua',
+            'uses'=> 'Menucontroller@getSuaMenu'
+        ]);
+
+        Route::post('menu/{id?}', [
+            'as'=> 'menu-sua',
+            'uses'=> 'Menucontroller@postSuaMenu'
+        ]);
+
+        Route::get('xoamenu/{id?}', [
+            'as'=> 'menu-xoa',
+            'uses'=> 'Menucontroller@getXoaMenu'
+        ]);
     });
     //admin/loaimon/loaimon
     Route::group(['prefix'=>'loaimon'],function()
@@ -93,11 +128,5 @@ Route::group(['prefix'=>'admin'],function()
 
     });
     
-    Route::group(['prefix'=>'test'],function()
-	{
-        Route::get('test','testcontroller@getTest');
-        Route::post('test','testcontroller@postTest');
-        
-
-	});
+    
 });

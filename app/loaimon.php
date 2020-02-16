@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class loaimon extends Model
 {
     //
-    protected $table = "loaimon";
-    protected $primariKey = 'maloaimon';
-
+    protected $table = "loaimon";   
+    public $timestamps = false;
     public function menu()
     {
-        return $this->belongsTo('App\menu','maloaiban','maloaiban');        
+        return $this->belongsTo('App\menu','maloaiban','id');        
     }
 }

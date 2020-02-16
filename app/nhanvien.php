@@ -8,7 +8,7 @@ class nhanvien extends Model
 {
     //
     protected $table = "nhanvien";
-    protected $primariKey = 'manv';
+    public $timestamps = false;
 
     public function tochuc()
     {

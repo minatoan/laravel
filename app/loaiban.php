@@ -8,7 +8,7 @@ class loaiban extends Model
 {
     //
     protected $table = "loaiban";
-    
+    public $timestamps = false;
     protected $fillable = ['maloaiban','tenloaiban','matc'];
     public function ban()
     {

@@ -13,12 +13,7 @@ use App\loaiban;
 use DB;
 class Bancontroller extends Controller
 {
-    //
-    public function getBan()
-    {
-        $ban = ban::all();    
-        return view('admin.ban.ban',['ban' => $ban]);
-    }
+    //   
 
 // ------------------------------------------Thêm bàn
     public function getThemBan()
@@ -44,10 +39,7 @@ class Bancontroller extends Controller
 
             $ban = new ban;
             $ban->tenban = $request->tenban;
-            $ban->maloaiban = $request->maloaiban;
-            // echo "<pre>";
-            // print_r($ban->toArray());
-            // echo "</pre>";
+            $ban->maloaiban = $request->maloaiban;           
             $ban->save();
             
             return redirect()->back()->with(Toastr::success('Thêm thành công'));
@@ -65,17 +57,17 @@ class Bancontroller extends Controller
     {
         $ban = ban::where('id', $id)->first();
 
-        // $this->validate($request,
-        //     [
-        //         'tenban' => 'required|unique:ban,tenban|min:3|max:100',
-        //         'maloaiban' => 'required',
-        //     ],
-        //     [
-        //         'tenban.required' => 'Bạn chưa điền tên bàn',
-        //         'tenban.min' => 'Tên bàn phải có ít nhất 3 ký tự',
-        //         'tenban.unique' => 'Tên bàn đã tồn tại',
+        $this->validate($request,
+            [
+                'tenban' => 'required|unique:ban,tenban|min:3|max:100',
+                'maloaiban' => 'required',
+            ],
+            [
+                'tenban.required' => 'Bạn chưa điền tên bàn',
+                'tenban.min' => 'Tên bàn phải có ít nhất 3 ký tự',
+                'tenban.unique' => 'Tên bàn đã tồn tại',
                                 
-        //     ]);
+            ]);
         $ban->id = $id;
         $ban->tenban = $request->tenban;
         $ban->maloaiban = $request->maloaiban;
@@ -107,7 +99,7 @@ class Bancontroller extends Controller
         //         //     // $value->delete();
         //         // }
                 
-        //     }toastr["error"]("Are you the six fingered man?")
+        //     }
         // }
         $ban->delete($ban);
         
