@@ -59,7 +59,7 @@ class LoaiMoncontroller extends Controller
             'matc' => 'required',
         ],
         [
-            'tenloaimon.required' => 'Lỗi rồi! Bạn chưa điền tên loai bàn',
+            'tenloaimon.required' => 'Lỗi rồi! Bạn chưa điền tên loại món',
             'tenloaimon.min' => 'Tên loại món phải có ít nhất 3 ký tự',
             'tenloaimon.unique' => 'Lỗi rồi! Tên loại món đã tồn tại',
         

@@ -130,7 +130,7 @@ Route::group(['prefix'=>''],function(){
         'uses'=> 'LoaiMoncontroller@getSuaLoaiMon'
     ]);
 
-    Route::post('loaiban/{id?}', [
+    Route::post('loaimon/{id?}', [
         'as'=> 'loaimon-sua',
         'uses'=> 'LoaiMoncontroller@postSuaLoaiMon'
     ]);

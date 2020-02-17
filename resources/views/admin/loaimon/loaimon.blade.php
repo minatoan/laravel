@@ -28,7 +28,7 @@
                                 <thead class=" text-primary">
                                     <th>STT</th>
                                     <th>Tên loại món</th>
-                                 
+                                    <th>Tổ chức</th>
                                     <th>Thao tác</th>
                                     </th>
                                 </thead>
@@ -40,6 +40,7 @@
                                     <tr>
                                         <td>{{++$i}}</td>
                                         <td>{{$lm->tenloaimon}}</td>
+                                        <td>{{$lm->tochuc->tentc}}</td>
                                        
                                         <td class="left">
                                             <button type="button" class="btn btn-warning" data-toggle="modal"

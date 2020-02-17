@@ -13,4 +13,9 @@ class loaimon extends Model
     {
         return $this->belongsTo('App\menu','maloaiban','id');        
     }
+
+    public function tochuc()
+    {
+        return $this->belongsTo('App\tochuc','matc','id');        
+    }
 }
