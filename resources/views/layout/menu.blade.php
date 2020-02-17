@@ -61,7 +61,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="admin/loaimon/loaimon" class="nav-link">
+                            <a href="admin/loaimon" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Loại món</p>
                             </a>

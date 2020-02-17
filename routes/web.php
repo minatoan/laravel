@@ -80,6 +80,9 @@ Route::group(['prefix'=>'admin'],function()
             'uses'=> 'LoaiBancontroller@getXoaLoaiBan'
         ]);
     });
+
+    
+
     //admin/menu/menu.php
     Route::group(['prefix'=>''],function()
 	{
@@ -109,12 +112,35 @@ Route::group(['prefix'=>'admin'],function()
             'uses'=> 'Menucontroller@getXoaMenu'
         ]);
     });
-    //admin/loaimon/loaimon
-    Route::group(['prefix'=>'loaimon'],function()
-	{
-		Route::get('loaimon','LoaiMonController@getLoaimon');
 
-    });
+//admin/loaimon/
+Route::group(['prefix'=>''],function(){
+
+    Route::get('loaimon', [
+        'as'=> 'loaimon-them',
+        'uses'=> 'LoaiMoncontroller@getThemLoaiMon'
+    ]);
+    Route::post('loaimon', [
+        'as'=> 'loaimon-them',
+        'uses'=> 'LoaiMoncontroller@postThemLoaiMon'
+    ]);
+
+    Route::get('loaimon/{id?}', [
+        'as'=> 'loaiban-sua',
+        'uses'=> 'LoaiMoncontroller@getSuaLoaiMon'
+    ]);
+
+    Route::post('loaiban/{id?}', [
+        'as'=> 'loaimon-sua',
+        'uses'=> 'LoaiMoncontroller@postSuaLoaiMon'
+    ]);
+
+    Route::get('xoaloaimon/{id?}', [
+        'as'=> 'loaimon-xoa',
+        'uses'=> 'LoaiMoncontroller@getXoaLoaiMon'
+    ]);
+});
+
     //admin/nhanvien/nhanvien
     Route::group(['prefix'=>'nhanvien'],function()
 	{
