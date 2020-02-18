@@ -142,15 +142,60 @@ Route::group(['prefix'=>''],function(){
 });
 
     //admin/nhanvien/nhanvien
-    Route::group(['prefix'=>'nhanvien'],function()
-	{
-		Route::get('nhanvien','NhanViencontroller@getNhanVien');
+    Route::group(['prefix'=>''],function(){
 
-	});
+        Route::get('nhanvien', [
+            'as'=> 'nhanvien-them',
+            'uses'=> 'NhanViencontroller@getThemNhanVien'
+        ]);
+        Route::post('nhanvien', [
+            'as'=> 'nhanvien-them',
+            'uses'=> 'NhanViencontroller@postThemnhanvien'
+        ]);
+    
+        Route::get('nhanvien/{id?}', [
+            'as'=> 'nhanvien-sua',
+            'uses'=> 'NhanViencontroller@getSuaNhanVien'
+        ]);
+    
+        Route::post('nhanvien/{id?}', [
+            'as'=> 'nhanvien-sua',
+            'uses'=> 'NhanViencontroller@postSuaNhanVien'
+        ]);
+    
+        Route::get('xoanhanvien/{id?}', [
+            'as'=> 'nhanvien-xoa',
+            'uses'=> 'NhanViencontroller@getXoaNhanVien'
+        ]);
+    });
     //admin/tochuc/tochuc
-    Route::group(['prefix'=>'tochuc'],function()
+    Route::group(['prefix'=>''],function()
 	{
-		Route::get('tochuc','ToChuccontroller@getToChuc');
+        // Route::get('tochuc','ToChuccontroller@getToChuc');
+        
+        Route::get('tochuc', [
+            'as'=> 'tochuc-them',
+            'uses'=> 'ToChuccontroller@getThemTochuc'
+        ]);
+        Route::post('tochuc', [
+            'as'=> 'tochuc-them',
+            'uses'=> 'ToChuccontroller@postThemTochuc'
+        ]);
+
+        Route::get('tochuc/{id?}', [
+            'as'=> 'tochuc-sua',
+            'uses'=> 'ToChuccontroller@getSuaTochuc'
+        ]);
+
+        Route::post('tochuc/{id?}', [
+            'as'=> 'tochuc-sua',
+            'uses'=> 'ToChuccontroller@postSuaTochuc'
+        ]);
+
+        Route::get('xoatochuc/{id?}', [
+            'as'=> 'tochuc-xoa',
+            'uses'=> 'ToChuccontroller@getXoaTochuc'
+        ]);
 
     });
     

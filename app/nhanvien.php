@@ -8,11 +8,14 @@ class nhanvien extends Model
 {
     //
     protected $table = "nhanvien";
+    // protected $primariKey = 'id';
+
     public $timestamps = false;
+    
 
     public function tochuc()
     {
-        return $this->belongsTo('App\tochuc','matc','matc');        
+        return $this->belongsTo('App\tochuc','matc','id');        
     } 
 
 

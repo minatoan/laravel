@@ -57,13 +57,13 @@ class LoaiBancontroller extends Controller
 
         $this->validate($request,
         [
-            'tenloaiban' => 'required|unique:loaiban,tenloaiban|min:3|max:100',
+            'tenloaiban' => 'required|min:3|max:100',
             'matc' => 'required',
         ],
         [
             'tenloaiban.required' => 'Lỗi rồi! Bạn chưa điền tên loai bàn',
             'tenloaiban.min' => 'Tên loại bàn phải có ít nhất 3 ký tự',
-            'tenloaiban.unique' => 'Lỗi rồi! Tên loại bàn đã tồn tại',
+            
         
         ]);
         $loaiban->id = $id;

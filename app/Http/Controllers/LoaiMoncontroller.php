@@ -55,13 +55,13 @@ class LoaiMoncontroller extends Controller
 
         $this->validate($request,
         [
-            'tenloaimon' => 'required|unique:loaimon,tenloaimon|min:3|max:100',
+            'tenloaimon' => 'required|min:3|max:100',
             'matc' => 'required',
         ],
         [
             'tenloaimon.required' => 'Lỗi rồi! Bạn chưa điền tên loại món',
             'tenloaimon.min' => 'Tên loại món phải có ít nhất 3 ký tự',
-            'tenloaimon.unique' => 'Lỗi rồi! Tên loại món đã tồn tại',
+            
         
         ]);
         $loaimon->id = $id;

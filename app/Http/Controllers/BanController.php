@@ -59,13 +59,12 @@ class Bancontroller extends Controller
 
         $this->validate($request,
             [
-                'tenban' => 'required|unique:ban,tenban|min:3|max:100',
+                'tenban' => 'required|min:3|max:100',
                 'maloaiban' => 'required',
             ],
             [
                 'tenban.required' => 'Bạn chưa điền tên bàn',
-                'tenban.min' => 'Tên bàn phải có ít nhất 3 ký tự',
-                'tenban.unique' => 'Tên bàn đã tồn tại',
+                'tenban.min' => 'Tên bàn phải có ít nhất 3 ký tự',                
                                 
             ]);
         $ban->id = $id;

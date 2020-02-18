@@ -65,15 +65,14 @@ class Menucontroller extends Controller
 
         $this->validate($request,
         [
-            'tenmon' => 'required|unique:menu,tenmon|min:3|max:100',
+            'tenmon' => 'required|min:3|max:100',
             'maloaimon' => 'required',
             'dongia' => 'required',
             'matc' => 'required',
         ],
         [
             'tenmon.required' => 'Lỗi rồi! Bạn chưa điền tên đồ uống',
-            'tenmon.min' => 'Tên đồ uống phải có ít nhất 3 ký tự',
-            'tenmon.unique' => 'Lỗi rồi! Tên đồ uống đã tồn tại',  
+            'tenmon.min' => 'Tên đồ uống phải có ít nhất 3 ký tự',        
             'dongia.required' => 'Lỗi rồi! Bạn chưa điền giá',          
         ]);
         $menu->id = $id;
