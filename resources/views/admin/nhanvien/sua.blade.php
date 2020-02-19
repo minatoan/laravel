@@ -14,7 +14,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="col-form-label">Tài khoản</label>
-                        <input type="text" name="id"  value="{{$nv->id}}" class="form-control">
+                        <input type="text" name="manv"  value="{{$nv->manv}}" class="form-control">
                     </div>
 
                     <label class="col-form-label">Tên nhân viên</label>
@@ -27,7 +27,11 @@
                         </div>
                         <div class="col-sm-6">
                             <label class="col-form-label">Giới tính</label>                            
-                            <select class="form-control" name="gioitinh" value="{{$nv->gioitinh}}"  >                            
+                            <select class="form-control" name="gioitinh"  value="{{$nv->gioitinh}}" > 
+                            @foreach($nhanvien as $nv)
+                            <option  
+                                >{{$nv->gioitinh}}</option>
+                            @endforeach          
                             </select>
                             
                         </div>

@@ -198,6 +198,36 @@ Route::group(['prefix'=>''],function(){
         ]);
 
     });
+//trang chủ order
+    Route::group(['prefix'=>''],function()
+	{
+        // Route::get('tochuc','ToChuccontroller@getToChuc');
+        
+        Route::get('order', [
+            'as'=> 'order-them',
+            'uses'=> 'Ordercontroller@getOrder'
+        ]);
+        Route::post('order', [
+            'as'=> 'order-them',
+            'uses'=> 'Ordercontroller@postThemOrder'
+        ]);
+
+        Route::get('order/{id?}', [
+            'as'=> 'order-sua',
+            'uses'=> 'Ordercontroller@getSuaOrder'
+        ]);
+
+        Route::post('order/{id?}', [
+            'as'=> 'order-sua',
+            'uses'=> 'Ordercontroller@postSuaOrder'
+        ]);
+
+        Route::get('xoaorder/{id?}', [
+            'as'=> 'order-xoa',
+            'uses'=> 'Ordercontroller@getXoaOrder'
+        ]);
+
+    });
     
     
 });

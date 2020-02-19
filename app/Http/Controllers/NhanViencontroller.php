@@ -28,14 +28,15 @@ class NhanViencontroller extends Controller
     {
         $this->validate($request,
             [
-                'id' => 'required',
+                
                 'tennv' => 'required|min:3|max:100',               
                 'ngaysinh' => 'required',
                 'gioitinh' => 'required',
                 'sdt' => 'required|min:10|max:10',
                 'diachi' =>'required',
                 'luongcb' => 'required|min:1|max:100',
-                'matc' => 'required',                
+                'matc' => 'required',
+                'manv' => 'required|unique:nhanvien,manv',                
                 
             ],
             [
@@ -46,11 +47,10 @@ class NhanViencontroller extends Controller
                 'diachi.required' =>'Lỗi rồi! Bạn chưa điền địa chỉ',
                 'luongcb.required' =>'Lỗi rồi! Bạn chưa điền số lương',  
                 'luongcb.min' =>'Lương phải có ít nhất 1 ký tự',
-                            
+                
             ]);
 
-            $nhanvien = new nhanvien;
-            $nhanvien->id = $request->id;
+            $nhanvien = new nhanvien;            
             $nhanvien->tennv = $request->tennv;
             $nhanvien->ngaysinh = $request->ngaysinh;
             $nhanvien->gioitinh = $request->gioitinh;
@@ -60,10 +60,11 @@ class NhanViencontroller extends Controller
             $nhanvien->matc = $request->matc;
             $nhanvien->matkhau = $request->matkhau;
             $nhanvien->ghichu = $request->ghichu;  
+            $nhanvien->manv = $request->manv;  
             
-        //     echo "<pre>";
-        // print_r($nhanvien->toArray());
-        // echo "</pre>";
+            // echo "<pre>";
+            // print_r($nhanvien->toArray());
+            // echo "</pre>";
             $nhanvien->save();            
             return redirect()->back()->with(Toastr::success('Thêm thành công'));
     }

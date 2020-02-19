@@ -39,7 +39,7 @@
                                     @foreach($nhanvien as $nv)
                                     <tr>
                                         <td>{{++$i}}</td>
-                                        <td>{{$nv->id}}</td>
+                                        <td>{{$nv->manv}}</td>
                                         <td>{{$nv->tennv}}</td>
                                         <td>{{$nv->ngaysinh}}</td>
                                         <td>{{$nv->gioitinh}}</td>

@@ -93,7 +93,7 @@
                 
                 <li class="nav-header">CHỨC NĂNG</li>
                 <li class="nav-item">
-                    <a href="pages/calendar.html" class="nav-link">
+                    <a href="admin/order" class="nav-link">
                         <i class="nav-icon far fa-calendar-alt"></i>
                         <p>
                             Trang chủ                            

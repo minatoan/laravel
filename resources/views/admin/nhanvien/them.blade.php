@@ -11,9 +11,15 @@
             <form action="{{route('nhanvien-them')}}" method="POST">
                 {{csrf_field()}}
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label class="col-form-label">Tài khoản</label>
-                        <input type="text" name="id" class="form-control">
+                    <div class="form-group row">
+                        <div class="col-sm-6 ">
+                            <label class="col-form-label">Tài khoản</label>
+                            <input type="text" name="manv" class="form-control">
+                        </div>
+                        <div class="col-sm-6 ">
+                            <label class="col-form-label">Mật khẩu</label>
+                            <input type="text" name="matkhau" class="form-control">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Tên nhân viên</label>
@@ -23,7 +29,6 @@
                         <div class="col-sm-6 ">
                             <label class="col-form-label">Ngày sinh</label>
                             <input type="text" name="ngaysinh" placeholder="YYYY-MM-DD" class="form-control">
-
                         </div>
                         <div class="col-sm-6">
                             <label class="col-form-label">Giới tính</label>
