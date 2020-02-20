@@ -43,7 +43,7 @@
                                         <td>{{++$i}}</td>
                                         <td>{{$mn->tenmon}}</td>
                                         <td>{{$mn->loaimon->tenloaimon}}</td>
-                                        <td>{{$mn->dongia}}</td>
+                                        <td>{!! number_format($mn["dongia"],0,",",".")!!} VND</td>
                                         <td>{{$mn->tochuc->tentc}}</td>
                                         <td class="left">
                                             <button type="button" class="btn btn-warning" data-toggle="modal"
