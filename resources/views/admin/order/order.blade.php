@@ -27,9 +27,15 @@
                 <div class="card card-primary">
                     <div class="card-body p-0">
                         <!-- THE CALENDAR -->
-                        <section class="col-lg-7 connectedSortable">
+                        <div class="card-body">
                             <!-- code ..... -->
-                        </section>
+                            @foreach($name as $od)
+                            <div style="float:left; width: 30px; margin-right:50px; margin-bottom: 10px">
+                                <button type="button" class="btn btn-primary">{{ $od->tenban }}</button>
+                            </div>
+                            @endforeach
+                        </div>
+                        <!-- code ..... -->
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -43,7 +49,39 @@
                             <h3 class="card-title">Bill</h3>
                         </div>
                         <div class="card-body">
+                            <span>
+                                <h3 align="center">COFFE GOOD</h3>
+                                <h6 align="center">ĐC: 43/90 Đường 3/2, Phường Xuân Khánh, Quận Ninh Kiều, TP Cần Thơ
+                                    <br>ĐT: 0900 000 000 <br>--------------------------------</h6>
+                                <h4 align="center">PHIẾU TẠM TÍNH</h4>
+                                <h5 align="center">Bàn</h5>
+                            </span>
 
+                            <label class="col-form-label">Thu ngân: </label>
+
+                            <div class="table-responsive">
+                                <table id="datatables" class="table table-bordered table-striped table-hover"
+                                    data-page-list="[10, 50, 300]" data-sort-order="desc" data-search="true">
+                                    <thead class=" text-dark">
+                                        <th>Tên</th>
+                                        <th>SL</th>
+                                        <th>Giá</th>
+                                        <th>Thành tiền</th>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                        $i=0;
+                                        @endphp
+
+                                        <tr>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h5 align="right"> Tổng tiền: </h5>
+                            <h6 align="center">Xin cảm ơn Quý Khách! (^^)</h6>
                             <!-- code ... -->
                         </div>
                     </div>
@@ -59,22 +97,13 @@
                         <div class="card-body">
                             <!-- the events -->
                             <div class="input-group">
-                                <!-- <div class="external-event bg-success">Pha chế</div>
-                                <div class="external-event bg-warning">Nước ngọt</div>
-                                <div class="external-event bg-primary">Sinh tố</div>
-                                <div class="external-event bg-info">khác</div> -->
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false" style="width: 100%">
-                                        Pha chế
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                        <a class="dropdown-item" href="#">Separated link</a>
+                                
+                                    @foreach($namelm as $lm)
+                                    <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
+                                        <button type="button" class="btn btn-success">{{ $lm->tenloaimon }}</button>
                                     </div>
-                                </div>
+                                    @endforeach
+                            
                             </div>
                         </div>
                         <!-- /.card-body -->

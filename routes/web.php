@@ -212,20 +212,9 @@ Route::group(['prefix'=>''],function(){
             'uses'=> 'Ordercontroller@postThemOrder'
         ]);
 
-        Route::get('order/{id?}', [
-            'as'=> 'order-sua',
-            'uses'=> 'Ordercontroller@getSuaOrder'
-        ]);
+        
 
-        Route::post('order/{id?}', [
-            'as'=> 'order-sua',
-            'uses'=> 'Ordercontroller@postSuaOrder'
-        ]);
-
-        Route::get('xoaorder/{id?}', [
-            'as'=> 'order-xoa',
-            'uses'=> 'Ordercontroller@getXoaOrder'
-        ]);
+        
 
     });
     
