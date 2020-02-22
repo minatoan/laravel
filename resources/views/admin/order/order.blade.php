@@ -31,7 +31,7 @@
                             <!-- code ..... -->
                             @foreach($name as $od)
                             <div style="float:left; width: 30px; margin-right:50px; margin-bottom: 10px">
-                                <button type="button" class="btn btn-primary">{{ $od->tenban }}</button>
+                                <a href="{{route('hien-thi-ban', [$od->id, $od->tenban])}}"><button type="button" class="btn btn-primary">{{ $od->tenban }}</button></a>
                             </div>
                             @endforeach
                         </div>
@@ -41,6 +41,8 @@
                 </div>
                 <!-- /.card -->
             </div>
+
+            <!-- /.billllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll -->
             <div class="col-md-4">
                 <div class="sticky-top mb-3">
                     <!-- /.card -->
@@ -54,7 +56,7 @@
                                 <h6 align="center">ĐC: 43/90 Đường 3/2, Phường Xuân Khánh, Quận Ninh Kiều, TP Cần Thơ
                                     <br>ĐT: 0900 000 000 <br>--------------------------------</h6>
                                 <h4 align="center">PHIẾU TẠM TÍNH</h4>
-                                <h5 align="center">Bàn</h5>
+                                <h5 align="center">{{$id_ban->tenban}}</h5>
                             </span>
 
                             <label class="col-form-label">Thu ngân: </label>
@@ -68,10 +70,7 @@
                                         <th>Giá</th>
                                         <th>Thành tiền</th>
                                     </thead>
-                                    <tbody>
-                                        @php
-                                        $i=0;
-                                        @endphp
+                                    <tbody>                                        
 
                                         <tr>
 
@@ -87,7 +86,7 @@
                     </div>
                 </div>
             </div>
-            <!-- /.col -->
+            <!-- /.colllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll -->
             <div class="col-md-3">
                 <div class="sticky-top mb-3">
                     <div class="card">
@@ -100,7 +99,9 @@
                                 
                                     @foreach($namelm as $lm)
                                     <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
+                                    <a href="{{route('hien-thi', [$lm->id, $lm->tenloaimon])}}">
                                         <button type="button" class="btn btn-success">{{ $lm->tenloaimon }}</button>
+                                    </a>
                                     </div>
                                     @endforeach
                             
@@ -111,18 +112,23 @@
                     <!-- /.card -->
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Create Event</h3>
+                            <h3 class="card-title">Danh sách</h3>
                         </div>
                         <div class="card-body">
-                            <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
-                                <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
-                                <ul class="fc-color-picker" id="color-chooser">
-                                    <li><a class="text-primary" href="#"><i class="fas fa-square"></i></a></li>
-                                    <li><a class="text-warning" href="#"><i class="fas fa-square"></i></a></li>
-                                    <li><a class="text-success" href="#"><i class="fas fa-square"></i></a></li>
-                                    <li><a class="text-danger" href="#"><i class="fas fa-square"></i></a></li>
-                                    <li><a class="text-muted" href="#"><i class="fas fa-square"></i></a></li>
-                                </ul>
+                        <div class="table-responsive">
+                                <table id="datatables" class="table"
+                                    data-page-list="[10, 50, 300]" data-sort-order="desc" data-search="true">
+                                    <thead class=" text-dark">
+                                        <th>Tên</th>         
+                                        <th>Giá</th>                                        
+                                    </thead>
+                                    <tbody>   
+                                        <tr>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
                             </div>
                             <!-- /btn-group -->
                             <div class="input-group">

@@ -211,6 +211,16 @@ Route::group(['prefix'=>''],function(){
             'as'=> 'order-them',
             'uses'=> 'Ordercontroller@postThemOrder'
         ]);
+        
+        Route::get('hien-thi/{id}/{tenban}', [
+            'as' => 'hien-thi-ban',
+            'uses' => 'Ordercontroller@hienthi'
+        ]);
+
+        Route::get('hien-thi/{id}/{tenmon}', [
+            'as' => 'ten-mon',
+            'uses' => 'Ordercontroller@hienthitenmon'
+        ]);
 
         
 

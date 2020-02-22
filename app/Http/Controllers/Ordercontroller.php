@@ -10,24 +10,34 @@ use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use App\ban;
 use App\loaimon;
+use App\bill;
 class Ordercontroller extends Controller
 {
     //getban
     public function getOrder()
     {
+        
         $loaimon = loaimon::select('tenloaimon')->get();
-        $tenban = ban::select('tenban')->get();
+        $tenban = ban::select('tenban','id')->get();
         return view('admin.order.order')->with([
             'name' => $tenban,
             'namelm' => $loaimon
         ]);
     }
 
-    //get loaimon
-    // public function getoderloaimon()
-    // {
-    //     $tenloaimon = loaimon::select('tenloaimon')->get();
-    //     return view('admin.order.order')->with('ten',$tenloaimon);
-    // }
+
+    //get ban ra bill
+    public function hienthi($id, $tenban)
+    {
+        $tenban = ban::select('tenban','id')->get();
+        $loaimon = loaimon::select('tenloaimon')->get();
+        $id_ban = ban::find($id);
+        
+        return view('admin.order.order')->with([
+            'name' => $tenban,
+            'namelm' => $loaimon,
+            'id_ban' => $id_ban,
+        ]);
+    }
 
 }
