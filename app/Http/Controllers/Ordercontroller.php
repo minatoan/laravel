@@ -21,7 +21,7 @@ class Ordercontroller extends Controller
         $tenban = ban::select('tenban','id')->get();
         return view('admin.order.order')->with([
             'name' => $tenban,
-            'namelm' => $loaimon
+            'namelm' => $loaimon,
         ]);
     }
 

@@ -31,7 +31,9 @@
                             <!-- code ..... -->
                             @foreach($name as $od)
                             <div style="float:left; width: 30px; margin-right:50px; margin-bottom: 10px">
-                                <a href="{{route('hien-thi-ban', [$od->id, $od->tenban])}}"><button type="button" class="btn btn-primary">{{ $od->tenban }}</button></a>
+                                <a href="{{route('hien-thi', [$od->id, $od->tenban])}}"><button type="button"
+                                        class="btn btn-primary">{{ $od->tenban }}</button>
+                                    </a>
                             </div>
                             @endforeach
                         </div>
@@ -56,7 +58,7 @@
                                 <h6 align="center">ĐC: 43/90 Đường 3/2, Phường Xuân Khánh, Quận Ninh Kiều, TP Cần Thơ
                                     <br>ĐT: 0900 000 000 <br>--------------------------------</h6>
                                 <h4 align="center">PHIẾU TẠM TÍNH</h4>
-                                <h5 align="center">{{$id_ban->tenban}}</h5>
+                                <h5 align="center"></h5>
                             </span>
 
                             <label class="col-form-label">Thu ngân: </label>
@@ -70,7 +72,7 @@
                                         <th>Giá</th>
                                         <th>Thành tiền</th>
                                     </thead>
-                                    <tbody>                                        
+                                    <tbody>
 
                                         <tr>
 
@@ -96,15 +98,15 @@
                         <div class="card-body">
                             <!-- the events -->
                             <div class="input-group">
-                                
-                                    @foreach($namelm as $lm)
-                                    <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
-                                    <a href="{{route('hien-thi', [$lm->id, $lm->tenloaimon])}}">
+
+                                @foreach($namelm as $lm)
+                                <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
+                                    <a href="">
                                         <button type="button" class="btn btn-success">{{ $lm->tenloaimon }}</button>
                                     </a>
-                                    </div>
-                                    @endforeach
-                            
+                                </div>
+                                @endforeach
+
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -115,18 +117,16 @@
                             <h3 class="card-title">Danh sách</h3>
                         </div>
                         <div class="card-body">
-                        <div class="table-responsive">
-                                <table id="datatables" class="table"
-                                    data-page-list="[10, 50, 300]" data-sort-order="desc" data-search="true">
+                            <div class="table-responsive">
+                                <table id="datatables" class="table" data-page-list="[10, 50, 300]"
+                                    data-sort-order="desc" data-search="true">
                                     <thead class=" text-dark">
-                                        <th>Tên</th>         
-                                        <th>Giá</th>                                        
+                                        <th>Tên</th>
+                                        <th>Giá</th>
                                     </thead>
-                                    <tbody>   
-                                        <tr>
-
-                                        </tr>
-
+                                    <tbody>
+                                    <td></td>
+                                        
                                     </tbody>
                                 </table>
                             </div>

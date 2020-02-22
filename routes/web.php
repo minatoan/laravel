@@ -213,14 +213,14 @@ Route::group(['prefix'=>''],function(){
         ]);
         
         Route::get('hien-thi/{id}/{tenban}', [
-            'as' => 'hien-thi-ban',
+            'as' => 'hien-thi',
             'uses' => 'Ordercontroller@hienthi'
         ]);
 
-        Route::get('hien-thi/{id}/{tenmon}', [
-            'as' => 'ten-mon',
-            'uses' => 'Ordercontroller@hienthitenmon'
-        ]);
+        // Route::get('hien-thi/{id}/{tenmon}', [
+        //     'as' => 'ten-mon',
+        //     'uses' => 'Ordercontroller@hienthitenmon'
+        // ]);
 
         
 
