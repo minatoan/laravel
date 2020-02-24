@@ -204,29 +204,42 @@ Route::group(['prefix'=>''],function(){
         // Route::get('tochuc','ToChuccontroller@getToChuc');
         
         Route::get('order', [
-            'as'=> 'order-them',
+            'as'=> 'order-get',
             'uses'=> 'Ordercontroller@getOrder'
         ]);
-        Route::post('order', [
-            'as'=> 'order-them',
-            'uses'=> 'Ordercontroller@postThemOrder'
-        ]);
         
-        Route::get('hien-thi/{id}/{tenban}', [
+        
+        Route::get('hien-thi/{id}', [
             'as' => 'hien-thi',
             'uses' => 'Ordercontroller@hienthi'
         ]);
 
-        // Route::get('hien-thi/{id}/{tenmon}', [
-        //     'as' => 'ten-mon',
-        //     'uses' => 'Ordercontroller@hienthitenmon'
-        // ]);
+
+
+        Route::get('ordermenu/{id}', [
+            'as' => 'hien-thi-menu',
+            'uses' => 'Ordercontroller@hienthimenu'
+        ]);
+
+        
 
         
 
         
 
     });
-    
+    Route::group(['prefix'=>''],function(){
+
+        Route::get('login', [
+            'as'=> 'login-them',
+            'uses'=> 'Logincontroller@getdangnhap'
+        ]);
+        Route::post('login', [
+            'as'=> 'login-them',
+            'uses'=> 'Logincontroller@postdangnhap'
+        ]);
+
+        
+    });
     
 });

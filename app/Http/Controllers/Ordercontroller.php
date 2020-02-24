@@ -11,33 +11,49 @@ use Brian2694\Toastr\Facades\Toastr;
 use App\ban;
 use App\loaimon;
 use App\bill;
+use App\menu;
+use App\ctbill;
+use App\nhanvien;
 class Ordercontroller extends Controller
 {
     //getban
     public function getOrder()
     {
-        
-        $loaimon = loaimon::select('tenloaimon')->get();
-        $tenban = ban::select('tenban','id')->get();
-        return view('admin.order.order')->with([
-            'name' => $tenban,
-            'namelm' => $loaimon,
-        ]);
+        $loaimon = loaimon::all();
+        $tenban = ban::all();
+        return view('admin.order.order',compact('loaimon','tenban'));
     }
 
 
     //get ban ra bill
-    public function hienthi($id, $tenban)
+    public function hienthi($id)
     {
-        $tenban = ban::select('tenban','id')->get();
-        $loaimon = loaimon::select('tenloaimon')->get();
+        // $tenban = ban::all();
+        // $loaimon = loaimon::all();
+        // $id_ban = ban::find($id);
+
+        // // ket noi bill va ban lay ra bill cua cai ban do
+        // $bill = bill::where('maban', $id_ban->id)->first();
+        // //  ket noi ctb de lay tat ca san pham của bill
+        // $ctb  = ctbill::where('mabill', $bill->id)->get();        
+
+        // return view('admin.order.orderbill',compact('loaimon','tenban','id_ban', 'ctb', 'bill'));     
+        $tenban = ban::all();
+        $loaimon = loaimon::all();
         $id_ban = ban::find($id);
+        return view('admin.order.orderbill',compact('loaimon','tenban','id_ban'));           
         
-        return view('admin.order.order')->with([
-            'name' => $tenban,
-            'namelm' => $loaimon,
-            'id_ban' => $id_ban,
-        ]);
     }
+
+    // 
+    public function hienthimenu($id)
+    {
+        
+        
+
+    }
+
+    
+
 
 }

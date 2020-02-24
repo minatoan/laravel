@@ -73,6 +73,13 @@
                                     </thead>
                                     <tbody>
                                         
+                                        <tr>
+                                            <td></td>   
+                                            <td></td>
+                                            <td></td>   
+                                            <td></td>
+                                        </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -118,14 +125,16 @@
                                     <thead class=" text-dark">
                                         <th>Tên</th>
                                         <th>Giá</th>
-                                    </thead>
+                                        <th></th>
+                                    </thead>                                    
                                     <tbody>
+                                         @foreach($menu as $mn)
                                          
                                     <tr>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{$mn->tenmon}}</td>
+                                        
                                      </tr>   
-                                     
+                                     $endforeach
                                     </tbody>
                                 </table>
                             </div>

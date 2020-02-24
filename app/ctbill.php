@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ctbill extends Model
 {
     //
-    protected $table = "ctbill";
+    protected $table = "chitietbill";
     
     public $timestamps = false;
 

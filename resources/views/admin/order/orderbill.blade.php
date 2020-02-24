@@ -57,14 +57,14 @@
                                 <h3 align="center">COFFE GOOD</h3>
                                 <h6 align="center">ĐC: 43/90 Đường 3/2, Phường Xuân Khánh <br> Quận Ninh Kiều, TP Cần Thơ
                                     <br>ĐT: 0900 000 000 <br>--------------------------------</h6>
-                                <h4 align="center">PHIẾU TẠM TÍNH</h4>
-                                <h5 align="center" ></h5>
+                                <h4 align="center">PHIẾU TẠM TÍNH</h4>                                      
+                                <h5 align="center" >{{$id_ban->tenban}}</h5>
                             </span>
-
                             <label class="col-form-label">Thu ngân: </label>
+                           
 
                             <div class="table-responsive">
-                                <table  class="table table-bordered table-striped table-hover">
+                                <table  class="table   table-hover">
                                     <thead class=" text-dark">
                                         <th>Tên</th>
                                         <th>SL</th>
@@ -72,13 +72,43 @@
                                         <th>Thành tiền</th>
                                     </thead>
                                     <tbody>
+                                        <?php 
+                                            $bill = DB::table('bill')->where('maban', $id_ban['id'])->first();  
+                                        ?>
                                         
+                                        @if($bill)
+                                            <?php 
+                                                $ctb  = DB::table('chitietbill')->where('mabill', $bill->id)->get();
+                                             ?>
+                                            @foreach($ctb as $value)
+                                            <?php
+                                                $food = DB::table('menu')->where('id', $value->mamon)->first();
+                                                $sum = $value->dongia*$value->soluong;
+                                            ?>
+                                            <tr>
+                                                <td>{{$food->tenmon}}</td>
+                                                <td><input type="number" style="width:40px" value="{{$value->soluong}}"></td>
+                                                <td>{{number_format($value->dongia,0,",",".")}}</td>
+                                                <td>{{number_format($sum,0,",",".")}}</td>
+                                            </tr>
+                                            @endforeach                                         
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td >Tổng: {{number_format($bill->tongtien,0,",",".")}} </td>
+                                        @else
+                                        <tr>
+                                            <td colspan="4">chua co bill</td>
+                                        </tr>
+                                        @endif
                                     </tbody>
                                 </table>
+                            </div> 
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-info">Thanh toán</button>
                             </div>
-                            <h5 align="right"> Tổng tiền: </h5>
-                            <h6 align="center">Xin cảm ơn Quý Khách! (^^)</h6>
                             <!-- code ... -->
+
                         </div>
                     </div>
                 </div>
@@ -97,7 +127,7 @@
 
                                 @foreach($loaimon as $lm)
                                 <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
-                                    <a href="{{route('hien-thi-menu',$lm->id)}}">
+                                    <a href="{{route('hien-thi-menu',$lm->tenloaimon)}}">
                                         <button type="button" class="btn btn-success">{{ $lm->tenloaimon }}</button>
                                     </a>
                                 </div>
