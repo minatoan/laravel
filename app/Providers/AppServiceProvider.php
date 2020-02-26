@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use Auth;
+use App\nhanvien;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +24,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('layout.menu', function($view){
+            $user = Auth::check();
+            $id = Auth::user()['id'];
+            $customer = nhanvien::where('id',$id)->first();
+            // dd($customer);
+            $view->with(['customer' => $customer]);
+        });
     }
 }

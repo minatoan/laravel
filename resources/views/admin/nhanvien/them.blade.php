@@ -14,7 +14,7 @@
                     <div class="form-group row">
                         <div class="col-sm-6 ">
                             <label class="col-form-label">Tài khoản</label>
-                            <input type="text" name="manv" class="form-control">
+                            <input type="text" name="username" class="form-control">
                         </div>
                         <div class="col-sm-6 ">
                             <label class="col-form-label">Mật khẩu</label>
@@ -53,13 +53,23 @@
                         <label class="col-form-label">Địa chỉ</label>
                         <input type="text" name="diachi" class="form-control">
                     </div>
-                    <div class="form-group">
-                        <label class="col-form-label">Tổ chức</label>
+                
+                    <div class="form-group row">
+                        <div class="col-sm-6 ">
+                            <label class="col-form-label">Tổ chức</label>
                         <select class="form-control" name="matc" id="ma_tc">
                             @foreach($tochuc as $tc)
                             <option value="{{$tc->id}}">{{$tc->tentc}}</option>
                             @endforeach
                         </select>
+                        </div>
+                        <div class="col-sm-6 ">
+                            <label class="col-form-label">Quyền</label>
+                        <select class="form-control" name="quyen">
+                            <option value="1">Admin</option>
+                            <option value="0">Nhan vien</option>
+                        </select>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Ghi chú</label>

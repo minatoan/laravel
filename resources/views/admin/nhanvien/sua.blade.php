@@ -12,14 +12,18 @@
             <form action="{{route('nhanvien-sua',$nv->id)}}" method="POST">
                 {{csrf_field()}}
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label class="col-form-label">Tài khoản</label>
-                        <input type="text" name="manv"  value="{{$nv->manv}}" class="form-control">
+                    <div class="form-group row">
+                        <div class="col-sm-6 ">
+                            <label class="col-form-label">Tài khoản</label>
+                            <input type="text" name="username"  value="{{$nv->username}}" class="form-control">
+                        </div>
+                        <div class="col-sm-6 ">
+                            <label class="col-form-label">Tên Nhân Viên</label>
+                            <input type="text" name="tennv" id="ten_nhan_vien" value="{{$nv->tennv}}" class="form-control">
+                        </div>
                     </div>
-
-                    <label class="col-form-label">Tên nhân viên</label>
-                    <input type="text" name="tennv" id="ten_nhan_vien" value="{{$nv->tennv}}" class="form-control">
-
+                    <!-- <label class="col-form-label">Tên nhân viên</label>
+                    <input type="text" name="tennv" id="ten_nhan_vien" value="{{$nv->tennv}}" class="form-control"> -->
                     <div class="form-group row">
                         <div class="col-sm-6 ">
                             <label class="col-form-label">Ngày sinh</label>
@@ -33,7 +37,6 @@
                                 >{{$nv->gioitinh}}</option>
                             @endforeach          
                             </select>
-                            
                         </div>
                     </div>
                     <div class="form-group row">
@@ -49,9 +52,10 @@
                     
                         <label class="col-form-label">Địa chỉ</label>
                         <input type="text" name="diachi" value="{{$nv->diachi}}" class="form-control">
-                    
-                    
-                        <label class="col-form-label">Tên tổ chức</label>
+
+                        <div class="form-group row">
+                            <div class="col-sm-6 ">
+                                <label class="col-form-label">Tên tổ chức</label>
                         <select class="form-control" name="matc" id="ma_tc">
                             @foreach($tochuc as $tc)
                             <option @if($tc->id == $nv->matc)
@@ -60,11 +64,20 @@
                                 value="{{$tc->id}}">{{$tc->tentc}}</option>
                             @endforeach
                         </select>
-                    
-                    
+                            </div>
+                            <div class="col-sm-6 ">
+                                <label class="col-form-label">Quyền</label>
+                                <select class="form-control" name="quyen">
+                                    <option value="1">Admin</option>
+                                    <option value="0">Nhân viên</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    <div class="form-group">
                         <label class="col-form-label">Ghi chú</label>
                         <input type="text" name="ghichu" value="{{$nv->ghichu}}" class="form-control">
-                  
+                    </div>
 
                 </div>
                 <div class="modal-footer">

@@ -11,12 +11,16 @@
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
-            </div>
+            
+            @if($customer->quyen == '1')
+                <div class="info">
+                <a href="#" class="d-block">Admin: {{$customer->tennv}}</a>
+                </div>
+            @elseif($customer->quyen == '0')
+                <div class="info">
+                <a href="#" class="d-block">Nhân viên: {{$customer->tennv}}</a>
+                </div>
+            @endif
         </div>
 
         <!-- Sidebar Menu -->

@@ -17,7 +17,17 @@ Route::get('/home', function () {
 
 
 Route::get('/home','AdminController@index')->name('home');
-
+Route::get('login', [ 
+    'as' => 'login',
+    'uses' => 'LoginController@getLogin'
+    ]);
+Route::post('login', [
+    'as' => 'login', 
+    'uses' => 'LoginController@postLogin'
+    ]);
+ 
+// // Đăng xuất
+Route::get('logout', [ 'as' => 'logout', 'uses' => 'LoginController@getLogout']);
 
 Route::group(['prefix'=>'admin'],function()
 {
@@ -228,18 +238,6 @@ Route::group(['prefix'=>''],function(){
         
 
     });
-    Route::group(['prefix'=>''],function(){
-
-        Route::get('login', [
-            'as'=> 'login-them',
-            'uses'=> 'Logincontroller@getdangnhap'
-        ]);
-        Route::post('login', [
-            'as'=> 'login-them',
-            'uses'=> 'Logincontroller@postdangnhap'
-        ]);
-
-        
-    });
+    
     
 });

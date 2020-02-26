@@ -128,13 +128,20 @@
                                         <th></th>
                                     </thead>                                    
                                     <tbody>
-                                         @foreach($menu as $mn)
-                                         
-                                    <tr>
-                                        <td>{{$mn->tenmon}}</td>
-                                        
-                                     </tr>   
-                                     $endforeach
+                                        <?php 
+                                            $loaidouong = DB::table('menu')->where('maloaimon', $id_loaimon['id'])->get();
+                                        ?>                                       
+                                        @foreach($loaidouong as $lmn)
+                                        <tr>
+                                                <td>{{$lmn->tenmon}}</td>
+
+                                                <td>{{number_format($lmn->dongia,0,",",".")}}</td>
+
+                                                <td class="right"><a href=""><button type="button"
+                                                    class="btn"><i class="fa fa-plus"></i></button></a>
+                                                </td>
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

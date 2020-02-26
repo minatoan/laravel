@@ -11,12 +11,18 @@ use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use App\nhanvien;
 use App\tochuc;
+use Hash;
 
 
 
 class NhanViencontroller extends Controller
 {
-    //
+    //Kiểm tra đăng nhập
+    // public function __construct() {
+    //     $this->middleware('auth');
+    // }
+    
+    //Hiện nv
     public function getThemNhanVien()
     {
         $nhanvien = nhanvien::all();  
@@ -36,7 +42,7 @@ class NhanViencontroller extends Controller
                 'diachi' =>'required',
                 'luongcb' => 'required|min:1|max:100',
                 'matc' => 'required',
-                'manv' => 'required|unique:nhanvien,manv',                
+                'username' => 'required|unique:nhanvien,username',                
                 
             ],
             [
@@ -58,9 +64,11 @@ class NhanViencontroller extends Controller
             $nhanvien->diachi = $request->diachi;
             $nhanvien->luongcb = $request->luongcb;
             $nhanvien->matc = $request->matc;
-            $nhanvien->matkhau = $request->matkhau;
+            $nhanvien->username = $request->username;
+            $nhanvien->password = Hash::make($request->matkhau);
             $nhanvien->ghichu = $request->ghichu;  
-            $nhanvien->manv = $request->manv;  
+            $nhanvien->quyen = $request->quyen;  
+          
             
             // echo "<pre>";
             // print_r($nhanvien->toArray());
@@ -90,6 +98,8 @@ class NhanViencontroller extends Controller
                 'diachi' =>'required',
                 'luongcb' => 'required|min:1|max:100',
                 'matc' => 'required',
+                'username' => 'required|min:3',
+                
             ],
             [
                 'tennv.required' => 'Lỗi rồi! Bạn chưa điền tên nhân viên',
@@ -99,6 +109,11 @@ class NhanViencontroller extends Controller
                 'diachi.required' =>'Lỗi rồi! Bạn chưa điền địa chỉ',
                 'luongcb.required' =>'Lỗi rồi! Bạn chưa điền số lương',  
                 'luongcb.min' =>'Lương phải có ít nhất 1 ký tự', 
+                'username.required' => 'Lỗi rồi! Bạn chưa điền tên tài khoản',
+                'username.min' => 'Tên tài khoản phải có ít nhất 3 ký tự',
+                'password.required' => 'Lỗi rồi! Bạn chưa điền mật khẩu',
+                'password.min' => 'Mật khẩu phải có ít nhất 3 ký tự',
+
             ]);
             $nhanvien->id = $id;
             $nhanvien->tennv = $request->tennv;
@@ -108,8 +123,9 @@ class NhanViencontroller extends Controller
             $nhanvien->diachi = $request->diachi;
             $nhanvien->luongcb = $request->luongcb;
             $nhanvien->matc = $request->matc;
-            $nhanvien->matkhau = $request->matkhau;
+            
             $nhanvien->ghichu = $request->ghichu;  
+            $nhanvien->username = $request->username; 
 
         // echo "<pre>";
         // print_r($nhanvien->toArray());

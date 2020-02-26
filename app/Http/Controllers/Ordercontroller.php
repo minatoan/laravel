@@ -49,7 +49,12 @@ class Ordercontroller extends Controller
     public function hienthimenu($id)
     {
         
-        
+        $tenban = ban::all();
+        $loaimon = loaimon::all();
+        $id_loaimon = loaimon::find($id);
+          
+     
+        return view('admin.order.orderloaimon',compact('loaimon','tenban','menu','id_loaimon'));   
 
     }
 
