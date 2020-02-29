@@ -1,5 +1,5 @@
 @extends('layout.admin')
-
+@extends('layout.menu')
 @section('content')
 
 <!-- Content Header (Page header) -->
@@ -23,9 +23,9 @@
     <div class="container-fluid">
         <div class="row">
             <!-- /.col -->
-            <div class="col-md-5">
-                <div class="card card-primary">
-                    <div class="card-body p-0">
+            <div class="col-md-4">
+                <div class="sticky-top mb-3">
+                    <div class="card">
                         <!-- THE CALENDAR -->
                         <div class="card-body">
                             <!-- code ..... -->
@@ -59,8 +59,10 @@
                                     <br>ĐT: 0900 000 000 <br>--------------------------------</h6>
                                 <h4 align="center">PHIẾU TẠM TÍNH</h4>                                      
                                 <h5 align="center" >{{$id_ban->tenban}}</h5>
+                                
                             </span>
-                            <label class="col-form-label">Thu ngân: </label>
+
+                            <label class="col-form-label">Thu ngân:</label>
                            
 
                             <div class="table-responsive">
@@ -84,6 +86,7 @@
                                             <?php
                                                 $food = DB::table('menu')->where('id', $value->mamon)->first();
                                                 $sum = $value->dongia*$value->soluong;
+                                               
                                             ?>
                                             <tr>
                                                 <td>{{$food->tenmon}}</td>
@@ -91,15 +94,17 @@
                                                 <td>{{number_format($value->dongia,0,",",".")}}</td>
                                                 <td>{{number_format($sum,0,",",".")}}</td>
                                             </tr>
-                                            @endforeach                                         
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td >Tổng: {{number_format($bill->tongtien,0,",",".")}} </td>
+                                            @endforeach
+                                            <tr>                                            
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td >Tổng: {{number_format($bill->tongtien,0,",",".")}} </td>
+                                            </tr>
                                         @else
-                                        <tr>
-                                            <td colspan="4">chua co bill</td>
-                                        </tr>
+                                            <tr>
+                                                <td></td>
+                                            </tr>
                                         @endif
                                     </tbody>
                                 </table>
@@ -113,49 +118,38 @@
                     </div>
                 </div>
             </div>
-
+         
             <!-- /.colllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll -->
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="sticky-top mb-3">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Đồ uống</h4>
-                        </div>
-                        <div class="card-body">
-                            <!-- the events -->
-                            <div class="input-group">
 
-                                @foreach($loaimon as $lm)
-                                <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
-                                    <a href="{{route('hien-thi-menu',$lm->tenloaimon)}}">
-                                        <button type="button" class="btn btn-success">{{ $lm->tenloaimon }}</button>
-                                    </a>
-                                </div>
-                                @endforeach
-
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Danh sách</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table  class="table" data-page-list="[5, 20, 300]">
+                                
+                                <table id="datatables" class="table" data-page-list="[5, 20, 300]">
                                     <thead class=" text-dark">
                                         <th>Tên</th>
                                         <th>Giá</th>
+                                        <th>#</th>
                                     </thead>
-                                    <tbody>
-                                         
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                     </tr>   
-                                     
+                                    <tbody>         
+                                                         
+                                       @foreach($menu as $mu)
+
+                                        <tr>
+                                                <td>{{$mu['tenmon']}}</td>
+
+                                                <td>{{number_format($mu['dongia'],0,",",".")}}</td>
+
+                                                <td class="right"><a ><button type="button"
+                                                    class="btn" data-toggle="modal" data-target="#them{{$mu->id}}"><i class="fa fa-plus"></i></button></a>
+                                                </td>
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -163,11 +157,52 @@
                             
                             <!-- /input-group -->
                         </div>
+                        <!-- /.card-body -->
                     </div>
+                    <!-- /.card -->
+                    
                 </div>
             </div>
 
         </div>
+                @foreach( $menu as $mu )
+                <div class="modal fade" id="them{{$mu->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Thêm vào bill</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form   method="POST">
+                                {{csrf_field()}}
+                                <div class="modal-body">
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 ">
+                                            <label class="col-form-label">Tên món</label>
+                                            <input type="text" name="tenmon" value="{{$mu['tenmon']}}" class="form-control">
+                                        </div>
+                                        <div class="col-sm-6 ">
+                                             <label class="col-form-label">Giá</label>
+                                             <input type="text" name="dongia" value="{{number_format($mu['dongia'],0,",",".")}}" class="form-control">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Số lượng</label>
+                                        <input type="number" name="soluong" value="1" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit"  class="btn btn-primary">Thêm</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
         <!-- /.row -->
     </div><!-- /.container-fluid -->
 </section>

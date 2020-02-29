@@ -11,8 +11,8 @@ class bill extends Model
     
     public $timestamps = false;
 
-    public function ctbill()
+    public function chitietbill()
     {
-        return $this->hasMany('App\ctbill','mabill','id');        
+        return $this->hasMany('App\chitietbill','mabill','id');        
     } 
 }

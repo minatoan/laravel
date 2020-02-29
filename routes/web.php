@@ -223,7 +223,7 @@ Route::group(['prefix'=>''],function(){
             'as' => 'hien-thi',
             'uses' => 'Ordercontroller@hienthi'
         ]);
-
+        
 
 
         Route::get('ordermenu/{id}', [
