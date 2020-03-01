@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Tên tổ chức</label>
-                        <select class="form-control" name="matc" id="ma_tc">
+                        <select class="form-control" readonly name="matc" id="ma_tc">
                             @foreach($tochuc as $tc)
                             <option @if($tc->id == $lm->matc)
                                 {{"selected"}}

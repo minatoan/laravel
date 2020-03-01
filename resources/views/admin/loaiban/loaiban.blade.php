@@ -28,7 +28,7 @@
                                 <thead class=" text-primary">
                                     <th>STT</th>
                                     <th>Tên loại bàn</th>
-                                    <th>Tên tổ chức bàn</th>
+                                    <th>Tên tổ chức</th>
                                     <th>Thao tác</th>
                                     </th>
                                 </thead>

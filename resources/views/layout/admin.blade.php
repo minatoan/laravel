@@ -131,7 +131,19 @@ $(document).ready(function(){
 </script>
 <!-- thong bao dang toast -->
 
+
 <!-- tìm kiếm trong trang order -->
+<script>
+$(document).ready(function() {
+    $('#tables').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": false,
+      "autoWidth": false,
+    });
+} );</script>
 
 <!-- tìm kiếm trong trang order -->
 </body>

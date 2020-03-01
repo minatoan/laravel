@@ -15,4 +15,8 @@ class ban extends Model
     {
         return $this->belongsTo('App\loaiban','maloaiban','id');        
     } 
+    public function tochuc()
+    {
+        return $this->belongsTo('App\tochuc','matc','id');        
+    } 
 }

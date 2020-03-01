@@ -231,6 +231,12 @@ Route::group(['prefix'=>''],function(){
             'uses' => 'Ordercontroller@hienthimenu'
         ]);
 
+
+        Route::get('add/{id_ban}/{id_sp}', [
+            'as' => 'add',
+            'uses' => 'Ordercontroller@add'
+        ]);
+
         
 
         

@@ -10,6 +10,7 @@ use Brian2694\Toastr\Facades\Toastr;
 
 use App\ban;
 use App\loaiban;
+use App\tochuc;
 use DB;
 class Bancontroller extends Controller
 {
@@ -20,7 +21,8 @@ class Bancontroller extends Controller
     {
         $ban = ban::all();
         $loaibann = loaiban::all();
-        return view('admin.ban.ban',['ban'=>$ban,'loaiban'=>$loaibann]);
+        $tochuc = tochuc::all();
+        return view('admin.ban.ban',['ban'=>$ban,'loaiban'=>$loaibann, 'tochuc' => $tochuc]);
     }
 
     public function postThemBan(Request $request)
@@ -29,6 +31,7 @@ class Bancontroller extends Controller
             [
                 'tenban' => 'required|unique:ban,tenban|min:3|max:100',
                 'maloaiban' => 'required',
+                'matc' => 'required',
             ],
             [
                 'tenban.required' => 'Lỗi rồi! Bạn chưa điền tên bàn',
@@ -39,7 +42,8 @@ class Bancontroller extends Controller
 
             $ban = new ban;
             $ban->tenban = $request->tenban;
-            $ban->maloaiban = $request->maloaiban;           
+            $ban->maloaiban = $request->maloaiban;  
+            $ban->matc = $request->matc;         
             $ban->save();
             
             return redirect()->back()->with(Toastr::success('Thêm thành công'));
@@ -50,7 +54,8 @@ class Bancontroller extends Controller
     {
         $ban = ban::find($id);
         $loaiban = loaiban::all();
-        return view('admin.ban.ban',['ban'=>$ban,'loaiban'=>$loaiban]);
+         $tochuc = tochuc::all();
+        return view('admin.ban.ban',['ban'=>$ban,'loaiban'=>$loaiban,'tochuc'=>$tochuc]);
     }
 
     public function postSua(Request $request, $id)
@@ -61,6 +66,7 @@ class Bancontroller extends Controller
             [
                 'tenban' => 'required|min:3|max:100',
                 'maloaiban' => 'required',
+                'matc' => 'required',
             ],
             [
                 'tenban.required' => 'Bạn chưa điền tên bàn',
@@ -70,6 +76,7 @@ class Bancontroller extends Controller
         $ban->id = $id;
         $ban->tenban = $request->tenban;
         $ban->maloaiban = $request->maloaiban;
+        $ban->matc = $request->matc;
 
         // echo "<pre>";
         // print_r($ban->toArray());

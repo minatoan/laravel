@@ -23,7 +23,7 @@
     <div class="container-fluid">
         <div class="row">
             <!-- /.col -->
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <div class="sticky-top mb-3">
                     <div class="card">
                         <!-- THE CALENDAR -->
@@ -33,7 +33,7 @@
                             <div style="float:left; width: 30px; margin-right:50px; margin-bottom: 10px">
                                 <a href="{{route('hien-thi',$od->id)}}"><button type="button"
                                         class="btn btn-primary">{{ $od->tenban }}</button>
-                                    </a>
+                                </a>
                             </div>
                             @endforeach
                         </div>
@@ -55,18 +55,19 @@
                         <div class="card-body">
                             <span>
                                 <h3 align="center">COFFE GOOD</h3>
-                                <h6 align="center">ĐC: 43/90 Đường 3/2, Phường Xuân Khánh <br> Quận Ninh Kiều, TP Cần Thơ
+                                <h6 align="center">ĐC: 43/90 Đường 3/2, Phường Xuân Khánh <br> Quận Ninh Kiều, TP Cần
+                                    Thơ
                                     <br>ĐT: 0900 000 000 <br>--------------------------------</h6>
-                                <h4 align="center">PHIẾU TẠM TÍNH</h4>                                      
-                                <h5 align="center" >{{$id_ban->tenban}}</h5>
-                                
+                                <h4 align="center">PHIẾU TẠM TÍNH</h4>
+                                <h5 align="center">{{$id_ban->tenban}}</h5>
+
                             </span>
 
                             <label class="col-form-label">Thu ngân:</label>
-                           
+
 
                             <div class="table-responsive">
-                                <table  class="table   table-hover">
+                                <table class="table   table-hover">
                                     <thead class=" text-dark">
                                         <th>Tên</th>
                                         <th>SL</th>
@@ -74,19 +75,29 @@
                                         <th>Thành tiền</th>
                                     </thead>
                                     <tbody>
-                                        <?php 
-                                            $bill = DB::table('bill')->where('maban', $id_ban['id'])->first();  
+                                        @foreach($cart as $value)
+                                        @if($value['attributes']['id_ban'] == $id_ban->id)
+                                        <tr>
+                                            <td>{{$value['name']}}</td>
+                                            <td>{{$value['quantity']}}</td>
+                                            <td>{{$value['price']}}</td>                                            
+                                            
+                                        </tr>
+                                        @endif
+                                        @endforeach
+                                        <!--  <?php 
+                                            $bill = DB::table('bill')->where('maban', $id_ban['id'])->where('tinhtrang', 0)->first();  
                                         ?>
                                         
                                         @if($bill)
                                             <?php 
                                                 $ctb  = DB::table('chitietbill')->where('mabill', $bill->id)->get();
-                                             ?>
+                                            ?>
                                             @foreach($ctb as $value)
                                             <?php
                                                 $food = DB::table('menu')->where('id', $value->mamon)->first();
                                                 $sum = $value->dongia*$value->soluong;
-                                               
+                                            
                                             ?>
                                             <tr>
                                                 <td>{{$food->tenmon}}</td>
@@ -103,12 +114,12 @@
                                             </tr>
                                         @else
                                             <tr>
-                                                <td></td>
+                                                <td>không có bill</td>
                                             </tr>
-                                        @endif
+                                        @endif -->
                                     </tbody>
                                 </table>
-                            </div> 
+                            </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-info">Thanh toán</button>
                             </div>
@@ -118,9 +129,9 @@
                     </div>
                 </div>
             </div>
-         
+
             <!-- /.colllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll -->
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="sticky-top mb-3">
                     <div class="card">
                         <div class="card-header">
@@ -129,43 +140,45 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                
-                                <table id="datatables" class="table" data-page-list="[5, 20, 300]">
+
+                                <table id="tables" class="table" data-page-list="[5, 20, 300]">
                                     <thead class=" text-dark">
                                         <th>Tên</th>
                                         <th>Giá</th>
                                         <th>#</th>
                                     </thead>
-                                    <tbody>         
-                                                         
-                                       @foreach($menu as $mu)
+                                    <tbody>
 
+                                        @foreach($menu as $mu)
                                         <tr>
-                                                <td>{{$mu['tenmon']}}</td>
+                                            <td>{{$mu['tenmon']}}</td>
 
-                                                <td>{{number_format($mu['dongia'],0,",",".")}}</td>
-
-                                                <td class="right"><a ><button type="button"
-                                                    class="btn" data-toggle="modal" data-target="#them{{$mu->id}}"><i class="fa fa-plus"></i></button></a>
+                                            <td>{{number_format($mu['dongia'],0,",",".")}}</td>
+                                            <form action="{{route('add', [$id_ban->id, $mu->id])}}" method="get">
+                                                {{csrf_field()}}
+                                                <td class="right">
+                                                    <button type="submit" class="btn"><i
+                                                            class="fa fa-plus"></i></button>
                                                 </td>
+                                            </form>
                                         </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
                             <!-- /btn-group -->
-                            
+
                             <!-- /input-group -->
                         </div>
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
-                    
+
                 </div>
             </div>
 
         </div>
-                @foreach( $menu as $mu )
+        <!-- @foreach( $menu as $mu )
                 <div class="modal fade" id="them{{$mu->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -202,7 +215,7 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
+                @endforeach -->
         <!-- /.row -->
     </div><!-- /.container-fluid -->
 </section>

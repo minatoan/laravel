@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Loại món</label>
-                        <select class="form-control" name="maloaimon" id="ma_loai_mon">
+                        <select class="form-control" readonly name="maloaimon" id="ma_loai_mon">
                             @foreach($loaimon as $lm)
                             <option @if($lm->id == $mn->maloaimon)
                                 {{"selected"}}

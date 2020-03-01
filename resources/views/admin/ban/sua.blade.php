@@ -27,6 +27,17 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Tên tổ chức</label>
+                        <select class="form-control" name="matc" id="ma_tc" readonly>
+                            @foreach($tochuc as $tc)
+                            <option @if($tc->id == $lb->matc)
+                                {{"selected"}}
+                                @endif
+                                value="{{$tc->id}}">{{$tc->tentc}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Lưu</button>

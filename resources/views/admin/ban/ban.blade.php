@@ -29,6 +29,7 @@
                                     <th>STT</th>
                                     <th>Tên bàn</th>
                                     <th>Tên loại bàn</th>
+                                     <th>Tên tổ chức</th>
                                     <th>Thao tác</th>
                                     </th>
                                 </thead>
@@ -41,6 +42,7 @@
                                         <td>{{++$i}}</td>
                                         <td>{{$b->tenban}}</td>
                                         <td>{{$b->loaiban->tenloaiban}}</td>
+                                        <td>{{$b->tochuc->tentc}}</td>
                                         <td class="left">
                                             <button type="button" class="btn btn-warning" data-toggle="modal"
                                                 data-target="#sua{{$b->id}}"><i class="far fa-edit"
