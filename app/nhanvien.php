@@ -15,10 +15,10 @@ class nhanvien extends Model
         return $this->belongsTo('App\tochuc','matc','id');        
     } 
 
-    // public function bill()
-    // {
-    //     return $this->belongsTo('App\bill','mabill','id');        
-    // } 
+    public function bill()
+    {
+        return $this->hasMany('App\bill','manv','id');        
+    } 
 
 
 }

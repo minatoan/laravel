@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="admin/order" class="brand-link">
         <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
         <span class="brand-text font-weight-light">Admin Coffee</span>
@@ -14,11 +14,11 @@
             
             @if($customer->quyen == '1')
                 <div class="info">
-                <a href="#" class="d-block">Admin: {{$customer->tennv}}</a>
+                <a class="d-block">Admin: {{$customer->tennv}}</a>
                 </div>
             @elseif($customer->quyen == '0')
                 <div class="info">
-                <a href="#" class="d-block">Nhân viên: {{$customer->tennv}}</a>
+                <a  class="d-block">Nhân viên: {{$customer->tennv}}</a>
                 </div>
             @endif
         </div>
@@ -30,7 +30,7 @@
 
                 <li class="nav-item">
                     <a href="admin/tochuc" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-building"></i>                        
                         <p>
                             Tổ chức
                             <span class="right badge badge-danger">New</span>
@@ -39,7 +39,8 @@
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
+                        
+                        <i class="nav-icon fas fa-th"></i>
                         <p>Danh mục
                             <i class="fas fa-angle-left right"></i>
                         </p>
@@ -73,7 +74,7 @@
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
                             Nhân viên
                             <i class="right fas fa-angle-left"></i>
@@ -96,18 +97,33 @@
                 </li>
                 
                 <li class="nav-header">CHỨC NĂNG</li>
-                <li class="nav-item">
-                    <a href="admin/order" class="nav-link">
-                        <i class="nav-icon far fa-calendar-alt"></i>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-warehouse"></i>
                         <p>
-                            Trang chủ                            
+                            Trang chủ
+                            <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="admin/order" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Trang order</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="admin/bill" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Chi tiết bill</p>
+                            </a>
+                        </li>                        
+                    </ul>
                 </li>
                 
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon far fa-envelope"></i>
+                    <i class="nav-icon fas fa-box"></i>
                         <p>
                             Kho
                             <i class="fas fa-angle-left right"></i>

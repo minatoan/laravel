@@ -4,15 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ctbill extends Model
+class chitietbill extends Model
 {
     //
     protected $table = "chitietbill";
     
     public $timestamps = false;
-
     public function bill()
     {
-        return $this->belongsTo('App\bill','mabill','id');        
+        return $this->hasMany('App\bill','mabill','id');        
+    } 
+    public function menu()
+    {
+        return $this->hasMany('App\menu','mamon','id');        
     } 
 }

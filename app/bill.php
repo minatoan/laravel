@@ -15,4 +15,12 @@ class bill extends Model
     {
         return $this->hasMany('App\chitietbill','mabill','id');        
     } 
+    public function nhanvien()
+    {
+        return $this->belongsTo('App\nhanvien','manv','id');        
+    } 
+    public function ban()
+    {
+        return $this->belongsTo('App\ban','maban','id');        
+    }
 }

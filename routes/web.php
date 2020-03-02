@@ -226,9 +226,9 @@ Route::group(['prefix'=>''],function(){
         
 
 
-        Route::get('ordermenu/{id}', [
-            'as' => 'hien-thi-menu',
-            'uses' => 'Ordercontroller@hienthimenu'
+        Route::get('bill', [
+            'as' => 'chi-tiet-bill',
+            'uses' => 'Ordercontroller@getbill'
         ]);
 
 

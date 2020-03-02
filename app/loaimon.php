@@ -11,7 +11,7 @@ class loaimon extends Model
     public $timestamps = false;
     public function menu()
     {
-        return $this->belongsTo('App\menu','maloaiban','id');        
+        return $this->belongsTo('App\menu','maloaimon','id');        
     }
 
     public function tochuc()

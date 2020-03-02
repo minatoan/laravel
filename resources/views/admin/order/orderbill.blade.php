@@ -139,36 +139,68 @@
 
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
+                            <!-- the events -->
+                            <div class="input-group">
+                                @foreach($loaimon as $lm)
+                                <?php 
+                                                    $loaidouong = DB::table('menu')->where('maloaimon', $lm->id)->get();
+                                                    // echo "<pre>";
+                                                    // print_r($loaidouong->toArray());
+                                                    // echo "</pre>";
+                                                    ?>
+                                <nav class="mt-2">
+                                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                                        data-accordion="false">
+                                        <li class="nav-item has-treeview">
+                                            <a class="nav-link">
+                                                <p>
+                                                    <button type="button"
+                                                        class="btn " style="background-color:#6610f2; color:#fff">{{ $lm->tenloaimon }}</button>
 
-                                <table id="tables" class="table" data-page-list="[5, 20, 300]">
-                                    <thead class=" text-dark">
-                                        <th>Tên</th>
-                                        <th>Giá</th>
-                                        <th>#</th>
-                                    </thead>
-                                    <tbody>
+                                                </p>
+                                            </a>
+                                            <ul class="nav nav-treeview">
+                                                <li class="nav-item">
+                                                   
+                                                        <p>
+                                                            <table id="tables" class="table  table-striped">
+                                                                <thead class=" text-dark">
+                                                                    <th>Tên</th>
+                                                                    <th>Giá</th>
+                                                                    <th>#</th>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach($loaidouong as $lmn)
+                                                                    <tr>
+                                                                        <td>{{$lmn->tenmon}}</td>
 
-                                        @foreach($menu as $mu)
-                                        <tr>
-                                            <td>{{$mu['tenmon']}}</td>
+                                                                        <td>{{number_format($lmn->dongia,0,",",".")}}
+                                                                        </td>
 
-                                            <td>{{number_format($mu['dongia'],0,",",".")}}</td>
-                                            <form action="{{route('add', [$id_ban->id, $mu->id])}}" method="get">
-                                                {{csrf_field()}}
-                                                <td class="right">
-                                                    <button type="submit" class="btn"><i
-                                                            class="fa fa-plus"></i></button>
-                                                </td>
-                                            </form>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                                                        <form
+                                                                            action="{{route('add', [$id_ban->id, $lmn->id])}}"
+                                                                            method="get">
+                                                                            {{csrf_field()}}
+                                                                            <td class="right">
+                                                                                <button type="submit" class="btn"><i
+                                                                                        class="fa fa-plus"></i></button>
+                                                                            </td>
+                                                                        </form>
+                                                                    </tr>
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                        </p>
+                                                    
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                                @endforeach
+
                             </div>
-                            <!-- /btn-group -->
-
-                            <!-- /input-group -->
                         </div>
                         <!-- /.card-body -->
                     </div>

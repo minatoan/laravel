@@ -18,7 +18,7 @@
                             <input type="text" name="username"  value="{{$nv->username}}" class="form-control">
                         </div>
                         <div class="col-sm-6 ">
-                            <label class="col-form-label">Tên Nhân Viên</label>
+                            <label class="col-form-label">Tên nhân viên</label>
                             <input type="text" name="tennv" id="ten_nhan_vien" value="{{$nv->tennv}}" class="form-control">
                         </div>
                     </div>
@@ -31,11 +31,10 @@
                         </div>
                         <div class="col-sm-6">
                             <label class="col-form-label">Giới tính</label>                            
-                            <select class="form-control" name="gioitinh"  value="{{$nv->gioitinh}}" > 
-                            @foreach($nhanvien as $nv)
-                            <option  
-                                >{{$nv->gioitinh}}</option>
-                            @endforeach          
+                            <select class="form-control" name="gioitinh"  > 
+                            <option >{{$nv->gioitinh}}</option>
+                                <option >Nam</option>
+                                <option>Nữ</option>
                             </select>
                         </div>
                     </div>

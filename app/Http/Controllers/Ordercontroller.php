@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\ban;
 use App\loaimon;
 use App\menu;
+use App\chitietbill;
+use App\bill;
+use App\nhanvien;
 use Cart;
 use Illuminate\Http\Request;
 
@@ -16,6 +19,15 @@ class Ordercontroller extends Controller
         $loaimon = loaimon::all();
         $tenban  = ban::all();
         return view('admin.order.order', compact('loaimon', 'tenban'));
+    }
+
+    //get chitietbill
+    public function getbill()
+    {
+        $nhanvien = nhanvien::all();
+        $bill  = bill::all();
+        $chitietbill = chitietbill::all();
+        return view('admin.order.bill', compact('bill', 'chitietbill','nhanvien'));
     }
 
     //get ban ra bill
@@ -37,45 +49,8 @@ class Ordercontroller extends Controller
         $loaimon = loaimon::all();
         $id_ban  = ban::find($id);
         $menu    = menu::all();
-
-        // $mabill=DB::table('bill')
-        //         ->where('maban', $id)
-        //         ->where('tinhtrang', 0)
-        //         ->first();
-        //$mabill = bill::where('maban','tinhtrang', $id,0)->first();
-        // if ($mabill==NULL){
-        //     $bill = new bill;
-        //     $bill->maban = $id;
-        //     $bill->manv = "1";
-        //     $bill->ngaytao = "2019-10-10";
-        //     $bill->tongtien = "2019";
-        //     $bill->tinhtrang = "0";
-        //     $bill->save();
-        //     $mabill=DB::table('bill')
-        //         ->where('maban', $id)
-        //         ->where('tinhtrang', 0)
-        //         ->first();
-        //     //dd($mabill);
-
-        // }
-        // print_r(Cart::getContent());
-
         return view('admin.order.orderbill', compact('loaimon', 'tenban', 'id_ban', 'mabill', 'menu', 'cart'));
-
     }
-
-    //
-    // public function hienthimenu($id)
-    // {
-
-    //     $tenban = ban::all();
-    //     $loaimon = loaimon::all();
-    //     $id_ban = ban::find($id);
-    //     $menu = menu::all();
-
-    //     return view('admin.order.orderbill',compact('loaimon','tenban','menu','id_loaimon'));
-
-    // }
 
     public function add($id_ban, $id_sp, Request $req)
     {

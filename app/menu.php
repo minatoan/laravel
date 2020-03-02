@@ -19,4 +19,8 @@ class menu extends Model
     {
         return $this->belongsTo('App\tochuc','matc','id');        
     } 
+    public function chitietbill()
+    {
+        return $this->hasMany('App\chitietbill','mamon','id');        
+    } 
 }
