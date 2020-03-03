@@ -225,10 +225,15 @@ Route::group(['prefix'=>''],function(){
         ]);
         
 
-
+            //get bill
         Route::get('bill', [
             'as' => 'chi-tiet-bill',
             'uses' => 'Ordercontroller@getbill'
+        ]);
+        //get hien chi tiet bill
+        Route::get('bill/{id}', [
+            'as' => 'ct-bill',
+            'uses' => 'Ordercontroller@getctbill'
         ]);
 
 
@@ -236,6 +241,25 @@ Route::group(['prefix'=>''],function(){
             'as' => 'add',
             'uses' => 'Ordercontroller@add'
         ]);
+
+        Route::get('delete-cart/{id_ban}/{id_sp}', [
+            'as' => 'delete-cart',
+            'uses' => 'Ordercontroller@deletecart'
+        ]);
+
+        Route::get('clear-cart', [
+            'as' => 'clear-cart',
+            'uses' => 'Ordercontroller@clearcart'
+        ]);
+
+
+
+        Route::post('save-cart/{id_nv}/{id_ban}', [
+            'as' => 'save-cart',
+            'uses' => 'Ordercontroller@savecart'
+        ]);
+        
+        
 
         
 

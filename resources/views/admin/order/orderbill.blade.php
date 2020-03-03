@@ -54,77 +54,70 @@
                         </div>
                         <div class="card-body">
                             <span>
-                                <h3 align="center">COFFE GOOD</h3>
-                                <h6 align="center">ĐC: 43/90 Đường 3/2, Phường Xuân Khánh <br> Quận Ninh Kiều, TP Cần
-                                    Thơ
-                                    <br>ĐT: 0900 000 000 <br>--------------------------------</h6>
+                                @foreach($tochuc as $tc)
+                                <h3 align="center">{{$tc->tentc}}</h3>
+                                <h6 align="center">ĐC: {{$tc->diachi}}
+                                    <br>--------------------------------</h6>
+                                     @endforeach
                                 <h4 align="center">PHIẾU TẠM TÍNH</h4>
                                 <h5 align="center">{{$id_ban->tenban}}</h5>
-
                             </span>
+                            <label class="col-form-label">
+                                <?php $nv = DB::table('nhanvien')->where('id', $id_nv)->first(); ?>
+                            Thu ngân:  {{$nv->tennv}}
+                            </label>
 
-                            <label class="col-form-label">Thu ngân:</label>
-
-
-                            <div class="table-responsive">
-                                <table class="table   table-hover">
-                                    <thead class=" text-dark">
-                                        <th>Tên</th>
-                                        <th>SL</th>
-                                        <th>Giá</th>
-                                        <th>Thành tiền</th>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($cart as $value)
-                                        @if($value['attributes']['id_ban'] == $id_ban->id)
-                                        <tr>
-                                            <td>{{$value['name']}}</td>
-                                            <td>{{$value['quantity']}}</td>
-                                            <td>{{$value['price']}}</td>                                            
+                            <form action="{{route('save-cart', [$id_nv, $id_ban->id])}}" method="POST">
+                                {{csrf_field()}}
+                                <div class="table-responsive">
+                                    <table class="table   table-hover">
+                                        <thead class=" text-dark">
+                                            <th>Tên</th>
+                                            <th>SL</th>
+                                            <th>Giá</th>                                            
+                                            <th>Thành tiền</th>
+                                            <td></td>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($cart as $value)
+                                            @if($value['attributes']['id_ban'] == $id_ban->id)
                                             
-                                        </tr>
-                                        @endif
-                                        @endforeach
-                                        <!--  <?php 
-                                            $bill = DB::table('bill')->where('maban', $id_ban['id'])->where('tinhtrang', 0)->first();  
-                                        ?>
-                                        
-                                        @if($bill)
-                                            <?php 
-                                                $ctb  = DB::table('chitietbill')->where('mabill', $bill->id)->get();
-                                            ?>
-                                            @foreach($ctb as $value)
-                                            <?php
-                                                $food = DB::table('menu')->where('id', $value->mamon)->first();
-                                                $sum = $value->dongia*$value->soluong;
-                                            
-                                            ?>
                                             <tr>
-                                                <td>{{$food->tenmon}}</td>
-                                                <td><input type="number" style="width:40px" value="{{$value->soluong}}"></td>
-                                                <td>{{number_format($value->dongia,0,",",".")}}</td>
-                                                <td>{{number_format($sum,0,",",".")}}</td>
+                                                <td>{{$value['name']}}</td>
+                                                <td>{{$value['quantity']}}</td>           
+                                                <td>{{number_format($value['price'],0,",",".")}}</td>
+                                                <td>{{number_format($value['price'] * $value['quantity'],0,",",".")}}
+                                                </td>   
+                                                <td class="left">
+                                                     <a href="{{route('delete-cart', [$value['attributes']['id_ban'], $value['id']])}}" class="btn"><i class="fas fa-times"></i></a>
+                                                </td> 
                                             </tr>
-                                            @endforeach
-                                            <tr>                                            
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td >Tổng: {{number_format($bill->tongtien,0,",",".")}} </td>
-                                            </tr>
-                                        @else
-                                            <tr>
-                                                <td>không có bill</td>
-                                            </tr>
-                                        @endif -->
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-info">Thanh toán</button>
-                            </div>
-                            <!-- code ... -->
+                                            @endif
+                                            @endforeach                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <span>
+                                                <?php $sum = 0;  ?>
+                                                @foreach($cart as $value)
+                                                    @if($value['attributes']['id_ban'] == $id_ban->id)
+                                                        <?php 
+                                                        $total = ($value['quantity'] * $value['price']);
+                                                        $sum+= $total;
+                                                         ?>
+                                                    @endif
+                                                @endforeach
 
+                                    <input type="hidden" name="tongtien" value="">
+                                <h5 style="padding-left: 195px;">Tổng: {{number_format($sum,0,",",".")}} VNĐ</h5>
+                                </span>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-danger">Xuất bill</button>
+                                    <button type="submit" class="btn btn-info">Thanh toán</button>
+                                    <!-- <a href="{{route('clear-cart')}}" class="btn btn-info">Xóa hết</a> -->
+                                </div>
+                                <!-- code ... -->
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -210,44 +203,7 @@
             </div>
 
         </div>
-        <!-- @foreach( $menu as $mu )
-                <div class="modal fade" id="them{{$mu->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Thêm vào bill</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form   method="POST">
-                                {{csrf_field()}}
-                                <div class="modal-body">
-                                    <div class="form-group row">
-                                        <div class="col-sm-6 ">
-                                            <label class="col-form-label">Tên món</label>
-                                            <input type="text" name="tenmon" value="{{$mu['tenmon']}}" class="form-control">
-                                        </div>
-                                        <div class="col-sm-6 ">
-                                             <label class="col-form-label">Giá</label>
-                                             <input type="text" name="dongia" value="{{number_format($mu['dongia'],0,",",".")}}" class="form-control">
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-form-label">Số lượng</label>
-                                        <input type="number" name="soluong" value="1" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit"  class="btn btn-primary">Thêm</button>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                @endforeach -->
+       
         <!-- /.row -->
     </div><!-- /.container-fluid -->
 </section>

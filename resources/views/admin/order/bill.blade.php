@@ -36,10 +36,10 @@
                                         <td>{{$bbl->ban->tochuc->tentc}}</td>
                                         
                                         <td class="left">
-                                            <button type="button" class="btn btn-warning" data-toggle="modal"
-                                                data-target="#sua"><i class="fas fa-copy"
-                                                    style="color:black"> Xem chi tiết</i>
-                                            </button>    
+                                        <a href="{{route('ct-bill',$bbl->id)}}">
+                                            <button type="button" class="btn " style="background-color:#605ca8;" ><i class="fas fa-copy"
+                                                    style="color:#ffffff"> Xem chi tiết</i>
+                                            </button> </a>   
                                         </td>
                                     </tr> 
                                     @endforeach                               

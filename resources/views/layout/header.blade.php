@@ -22,7 +22,7 @@
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" href="logout">
-          <i class="fas fa-sign-out-alt"></i>
+          <i class="fas fa-sign-out-alt"> Đăng xuất</i>
           
         </a>
         

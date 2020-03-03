@@ -8,7 +8,8 @@ use App\menu;
 use App\chitietbill;
 use App\bill;
 use App\nhanvien;
-use Cart;
+use App\tochuc;
+use Cart, Auth;
 use Illuminate\Http\Request;
 
 class Ordercontroller extends Controller
@@ -16,18 +17,30 @@ class Ordercontroller extends Controller
     //getban
     public function getOrder()
     {
+        $tochuc = tochuc::all();
         $loaimon = loaimon::all();
         $tenban  = ban::all();
-        return view('admin.order.order', compact('loaimon', 'tenban'));
+        return view('admin.order.order', compact('loaimon', 'tenban','tochuc'));
     }
 
-    //get chitietbill
+    //get bill
     public function getbill()
     {
+        $tochuc = tochuc::all();
         $nhanvien = nhanvien::all();
         $bill  = bill::all();
         $chitietbill = chitietbill::all();
-        return view('admin.order.bill', compact('bill', 'chitietbill','nhanvien'));
+        return view('admin.order.bill', compact('bill', 'chitietbill','nhanvien','tochuc'));
+    }
+    //get ctbill
+    public function getctbill($id)
+    {
+        $tenban = ban::all();
+        $loaimon = loaimon::all();
+        $nhanvien = nhanvien::all();
+        $bill  = bill::find($id);
+        
+        return view('admin.order.chitietbill', compact('bill','nhanvien','loaimon','tenban'));
     }
 
     //get ban ra bill
@@ -44,14 +57,16 @@ class Ordercontroller extends Controller
 
         // return view('admin.order.orderbill',compact('loaimon','tenban','id_ban', 'ctb', 'bill'));
         $cart = Cart::getContent();
-
         $tenban  = ban::all();
         $loaimon = loaimon::all();
         $id_ban  = ban::find($id);
         $menu    = menu::all();
-        return view('admin.order.orderbill', compact('loaimon', 'tenban', 'id_ban', 'mabill', 'menu', 'cart'));
+        $id_nv = Auth::id();
+        $tochuc = tochuc::all();
+        return view('admin.order.orderbill', compact('loaimon', 'tenban', 'id_ban', 'mabill', 'menu', 'cart', 'id_nv','tochuc'));
     }
 
+    //get order ra bill
     public function add($id_ban, $id_sp, Request $req)
     {
         // Cart::clear();
@@ -69,6 +84,70 @@ class Ordercontroller extends Controller
             )
         );
         return redirect()->back();
+    }
+
+
+    public function deletecart($id_ban, $id_sp)
+    {
+        Cart::remove($id_sp);
+        return redirect()->back();
+
+    }
+
+    // public function clearcart($value='')
+    // {
+    //     Cart::clear();
+    //     return redirect()->back();
+    // }
+
+
+    public function savecart($id_nv, $id_ban, Request $req)
+    {
+        
+        // dd($bill);
+        $sum = 0; 
+        foreach (Cart::getContent() as $key => $value) {
+            if($value['attributes']['id_ban'] == $id_ban)
+            {
+                // echo $value['name']; echo "<br>";
+                $total = ($value['quantity'] * $value['price']);
+                $sum+= $total;
+            }
+        }
+
+        $bill = new bill;
+        $bill->manv = $id_nv;
+        $bill->maban = $id_ban;
+        $bill->tongtien = $sum;
+        $bill->tinhtrang = '1';
+        $bill->save();
+
+        foreach (Cart::getContent() as $key => $value) {
+            if($value['attributes']['id_ban'] == $id_ban)
+            {
+                $bill_detail = new  chitietbill;
+                $bill_detail->mabill = $bill->id;
+                $bill_detail->mamon = $value['id'];
+                $bill_detail->soluong = $value['quantity'];
+                $bill_detail->dongia = $value['price'];
+                $bill_detail->save();
+                // echo "<pre>";
+                // print_r($bill_detail->toArray());
+                // echo "</pre>";
+            }
+        }
+
+        foreach (Cart::getContent() as $key => $value) {
+            if($value['attributes']['id_ban'] == $id_ban)
+            {
+                // echo $value['id']; echo "<br>";
+
+                Cart::remove($value['id']);
+                
+            }
+        }
+        return redirect()->back();
+
     }
 
 }

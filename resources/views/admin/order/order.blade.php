@@ -54,15 +54,14 @@
                         </div>
                         <div class="card-body">
                             <span>
-                                <h3 align="center">COFFE GOOD</h3>
-                                <h6 align="center">ĐC: 43/90 Đường 3/2, Phường Xuân Khánh <br> Quận Ninh Kiều, TP Cần Thơ
-                                    <br>ĐT: 0900 000 000 <br>--------------------------------</h6>
-                                <h4 align="center">PHIẾU TẠM TÍNH</h4>
-                                <h5 align="center" ></h5>
+                                @foreach($tochuc as $tc)
+                                <h3 align="center">{{$tc->tentc}}</h3>                                
+                                <h6 align="center">ĐC: {{$tc->diachi}}                                    
+                                   <br>--------------------------------</h6>
+                                @endforeach
+                                <h4 align="center">PHIẾU TẠM TÍNH</h4> 
                             </span>
-
                             <label class="col-form-label">Thu ngân: </label>
-
                             <div class="table-responsive">
                                 <table  class="table table-bordered table-striped table-hover">
                                     <thead class=" text-dark">
