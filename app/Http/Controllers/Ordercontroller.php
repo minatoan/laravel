@@ -11,6 +11,7 @@ use App\nhanvien;
 use App\tochuc;
 use Cart, Auth;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 
 class Ordercontroller extends Controller
 {
@@ -63,6 +64,7 @@ class Ordercontroller extends Controller
         $menu    = menu::all();
         $id_nv = Auth::id();
         $tochuc = tochuc::all();
+        // dd($cart);
         return view('admin.order.orderbill', compact('loaimon', 'tenban', 'id_ban', 'mabill', 'menu', 'cart', 'id_nv','tochuc'));
     }
 
@@ -83,13 +85,14 @@ class Ordercontroller extends Controller
                 ),
             )
         );
+        
         return redirect()->back();
     }
 
 
     public function deletecart($id_ban, $id_sp)
     {
-        Cart::remove($id_sp);
+        Cart::remove($id_sp);       
         return redirect()->back();
 
     }
@@ -99,6 +102,34 @@ class Ordercontroller extends Controller
     //     Cart::clear();
     //     return redirect()->back();
     // }
+    public function updatecart(Request $req)
+    {
+        $menu = Cart::get($req->id);
+        // echo $req->qty;
+		if($req->ajax())
+		{
+			
+            $id = $req->id;
+            $qty = $req->qty;
+            Cart::update($id, array(
+                'quantity' => array(
+                    'relative' => false,
+                    'value' => $qty
+                ),
+            ));
+
+        }
+        
+        // return "basdkand";
+        // if(Request::ajax()){
+        //     $id = Request::get('id');
+        //     $qty = Request::get('qty');
+        //     Cart::update($id,$qty);
+        // }
+        
+        // Cart::update($request->id_sp,$request->qty);
+        
+    }
 
 
     public function savecart($id_nv, $id_ban, Request $req)
@@ -146,7 +177,7 @@ class Ordercontroller extends Controller
                 
             }
         }
-        return redirect()->back();
+        return redirect()->back()->with(Toastr::success('Thành công'));
 
     }
 

@@ -14,12 +14,12 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="col-form-label">Tên loại bàn</label>
-                        <input type="text" name="tenloaiban" id="ten_loai_ban" value="{{$lb->tenloaiban}}"
+                        <input type="text" name="tenloaiban"  value="{{$lb->tenloaiban}}"
                             class="form-control">
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Tên tổ chức</label>
-                        <select class="form-control" name="matc" readonly id="ma_tc">
+                        <select class="form-control" name="matc" readonly >
                             @foreach($tochuc as $tc)
                             <option @if($tc->id == $lb->matc)
                                 {{"selected"}}

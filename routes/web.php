@@ -13,6 +13,7 @@
 
 Route::get('/home', function () {
     return view('welcome');
+
 });
 
 
@@ -136,7 +137,7 @@ Route::group(['prefix'=>''],function(){
     ]);
 
     Route::get('loaimon/{id?}', [
-        'as'=> 'loaiban-sua',
+        'as'=> 'loaimon-sua',
         'uses'=> 'LoaiMoncontroller@getSuaLoaiMon'
     ]);
 
@@ -246,6 +247,10 @@ Route::group(['prefix'=>''],function(){
             'as' => 'delete-cart',
             'uses' => 'Ordercontroller@deletecart'
         ]);
+        Route::GET('update-cart/{id}/{qty}', [
+            'as' => 'update-cart',
+            'uses' => 'Ordercontroller@updatecart'
+        ]);
 
         Route::get('clear-cart', [
             'as' => 'clear-cart',
@@ -259,12 +264,24 @@ Route::group(['prefix'=>''],function(){
             'uses' => 'Ordercontroller@savecart'
         ]);
         
-        
 
         
 
         
 
+        
+
+        
+
+    });
+    Route::group(['prefix'=>''],function()
+    {
+        // Route::get('tochuc','ToChuccontroller@getToChuc');
+        
+        Route::get('pdf', [
+            'as'=> 'pdf',
+            'uses'=> 'ToChuccontroller@pdf'
+        ]);
         
 
     });

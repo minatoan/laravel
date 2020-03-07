@@ -47,21 +47,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="admin/ban" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Bàn</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="admin/loaiban" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Loại bàn</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="admin/menu" class="nav-link">
+                            <a href="admin/ban" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Menu</p>
+                                <p>Bàn</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -69,7 +63,14 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Loại món</p>
                             </a>
+                        </li>                        
+                        <li class="nav-item">
+                            <a href="admin/menu" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Menu</p>
+                            </a>
                         </li>
+                        
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">

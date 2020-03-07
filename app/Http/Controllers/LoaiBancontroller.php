@@ -61,7 +61,7 @@ class LoaiBancontroller extends Controller
             'matc' => 'required',
         ],
         [
-            'tenloaiban.required' => 'Lỗi rồi! Bạn chưa điền tên loai bàn',
+            'tenloaiban.required' => 'Lỗi rồi! Bạn chưa điền tên loại bàn',
             'tenloaiban.min' => 'Tên loại bàn phải có ít nhất 3 ký tự',
             
         

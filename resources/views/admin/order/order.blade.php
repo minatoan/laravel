@@ -68,7 +68,7 @@
                                         <th>Tên</th>
                                         <th>SL</th>
                                         <th>Giá</th>
-                                        <th>Thành tiền</th>
+                                        <th>T.Tiền</th>
                                     </thead>
                                     <tbody>
                                         
