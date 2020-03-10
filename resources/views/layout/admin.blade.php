@@ -7,6 +7,8 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
+      <base href="{{asset('')}}">
+
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
   
@@ -14,7 +16,9 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bbootstrap 4 -->
- <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+ <!-- <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css"> -->
+ <link rel="stylesheet" href="{{asset('plugins/tr/toastr.min.css')}}">
+
   <!-- iCheck -->
   <link rel="stylesheet" href="{{asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
   <!-- JQVMap -->
@@ -95,7 +99,7 @@
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
+<!-- <script src="{{asset('dist/js/pages/dashboard.js')}}"></script> -->
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -104,11 +108,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script src="http://www.position-absolute.com/creation/print/jquery.printPage.js"></script>
+      <script>
+        $(document).ready(function() {
+            $(".btnPrint").printPage();
+        });
+      </script>
 
+<script src="{{asset('plugins/tr/toastr.min.js')}}"></script>
 
-
-<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-        {!! Toastr::message() !!}
+<!-- <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>-->
+        {!! Toastr::message() !!} 
 <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 <script>
 $('#myModal').on('shown.bs.modal', function () {
@@ -125,11 +135,11 @@ $(document).ready(function() {
 
 
 <!-- thong bao dang toast -->
-<script>
+<!-- <script>
 $(document).ready(function(){
     $("#myToast").toast('show');
 });
-</script>
+</script> -->
 <!-- thong bao dang toast -->
 
 
@@ -166,7 +176,6 @@ $(document).ready(function() {
           location.reload();
 				}
 			});
-
 		});
 	});
 </script>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ban;
+use App\loaiban;
 use App\loaimon;
 use App\menu;
 use App\chitietbill;
@@ -21,7 +22,8 @@ class Ordercontroller extends Controller
         $tochuc = tochuc::all();
         $loaimon = loaimon::all();
         $tenban  = ban::all();
-        return view('admin.order.order', compact('loaimon', 'tenban','tochuc'));
+        $loaiban = loaiban::all();
+        return view('admin.order.order', compact('loaimon', 'tenban','tochuc','loaiban'));
     }
 
     //get bill
@@ -57,6 +59,7 @@ class Ordercontroller extends Controller
         // $ctb  = ctbill::where('mabill', $bill->id)->get();
 
         // return view('admin.order.orderbill',compact('loaimon','tenban','id_ban', 'ctb', 'bill'));
+        $loaiban = loaiban::all();
         $cart = Cart::getContent();
         $tenban  = ban::all();
         $loaimon = loaimon::all();
@@ -65,7 +68,7 @@ class Ordercontroller extends Controller
         $id_nv = Auth::id();
         $tochuc = tochuc::all();
         // dd($cart);
-        return view('admin.order.orderbill', compact('loaimon', 'tenban', 'id_ban', 'mabill', 'menu', 'cart', 'id_nv','tochuc'));
+        return view('admin.order.orderbill', compact('loaimon', 'tenban', 'id_ban', 'mabill', 'menu', 'cart', 'id_nv','tochuc','loaiban'));
     }
 
     //get order ra bill
@@ -89,7 +92,7 @@ class Ordercontroller extends Controller
         return redirect()->back();
     }
 
-
+    //xoa món trong bill
     public function deletecart($id_ban, $id_sp)
     {
         Cart::remove($id_sp);       
@@ -102,13 +105,14 @@ class Ordercontroller extends Controller
     //     Cart::clear();
     //     return redirect()->back();
     // }
+
+    //update so luong
     public function updatecart(Request $req)
     {
         $menu = Cart::get($req->id);
         // echo $req->qty;
 		if($req->ajax())
-		{
-			
+		{			
             $id = $req->id;
             $qty = $req->qty;
             Cart::update($id, array(
@@ -117,20 +121,24 @@ class Ordercontroller extends Controller
                     'value' => $qty
                 ),
             ));
-
         }
-        
-        // return "basdkand";
-        // if(Request::ajax()){
-        //     $id = Request::get('id');
-        //     $qty = Request::get('qty');
-        //     Cart::update($id,$qty);
-        // }
-        
-        // Cart::update($request->id_sp,$request->qty);
-        
     }
 
+    //in hoa don
+        public function print($id)
+            {
+                
+                $loaiban = loaiban::all();
+                $cart = Cart::getContent();
+                $tenban  = ban::all();
+                $loaimon = loaimon::all();
+                $id_ban  = ban::find($id);
+                $menu    = menu::all();
+                $id_nv = Auth::id();
+                $tochuc = tochuc::all();
+                // dd($cart);
+                return view('admin.order.print', compact('loaimon', 'tenban', 'id_ban', 'mabill', 'menu', 'cart', 'id_nv','tochuc','loaiban'));
+            }
 
     public function savecart($id_nv, $id_ban, Request $req)
     {

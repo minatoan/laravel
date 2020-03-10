@@ -31,13 +31,19 @@
                         <!-- THE CALENDAR -->
                         <div class="card-body">
                             <!-- code ..... -->
+                            <!-- @foreach($loaiban as $lb)
+                            
+                            <h3 >{{$lb->tenloaiban}}: <br></h3>
+                            @endforeach -->
                             @foreach($tenban as $od)
-                            <div style="float:left; width: 30px; margin-right:50px; margin-bottom: 10px">
+                            <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
                                 <a href="{{route('hien-thi',$od->id)}}"><button type="button"
                                         class="btn btn-primary">{{ $od->tenban }}</button>
                                 </a>
                             </div>
                             @endforeach
+
+
                         </div>
                         <!-- code ..... -->
                     </div>
@@ -72,7 +78,7 @@
                             <form action="{{route('save-cart', [$id_nv, $id_ban->id])}}" method="POST">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="table-responsive">
-                                    <table class="table   table-hover">
+                                    <table class="table   table-hover" id="table">
                                         <thead class=" text-dark">
                                             <th>Tên</th>
                                             <th>SL</th>
@@ -81,30 +87,30 @@
                                             <td></td>
                                         </thead>
                                         <tbody>
-                                                <form action="" method="GET">
-                                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
-
-                                                    @foreach($cart as $value)
-                                                    @if($value['attributes']['id_ban'] == $id_ban->id)
-                                                    <tr>
-                                                        <td>{{$value['name']}}</td>
-                                                        <!-- <td>{{$value['quantity']}}</td> -->
-                                                        <td>
+                                            <form action="" method="GET">
+                                                <input type="hidden" name="_token" value="{{csrf_token()}}">                                                
+                                                @foreach($cart as $value)
+                                                @if($value['attributes']['id_ban'] == $id_ban->id)
+                                                <tr>
+                                                    <td>{{$value['name']}}</td>                                                    
+                                                    <td>
                                                         <div>
-                                                            <input id="{{$value['id']}}" type="number"style="width:45px;" value="{{$value->quantity}}" MIN="1" class="update"></div>
-                                                        </td>
-                                                        
-                                                        <td>{{number_format($value['price'],0,",",".")}}</td>
-                                                        <td>{{number_format($value['price'] * $value['quantity'],0,",",".")}}
-                                                        </td>
-                                                        <td class="left">
-                                                            <a href="{{route('delete-cart', [$value['attributes']['id_ban'], $value['id']])}}"
-                                                                class="btn"><i class="fas fa-times"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                    @endif
-                                                    @endforeach
-                                                </form>
+                                                            <input id="{{$value['id']}}" type="number" style="width:45px;" 
+                                                            value="{{$value->quantity}}" MIN="1" class="update">
+                                                        </div>
+                                                    </td>
+                                                    <td>{{number_format($value['price'],0,",",".")}}</td>
+                                                    <td>{{number_format($value['price'] * $value['quantity'],0,",",".")}}</td>
+                                                    <td class="left">
+                                                        <a href="{{route('delete-cart', [$value['attributes']['id_ban'], $value['id']])}}"
+                                                            class="btn"><i class="fas fa-times"></i></a>
+                                                    </td>
+                                                </tr>                                                
+                                                @endif
+                                                @endforeach
+                                                
+
+                                            </form>
                                         </tbody>
                                     </table>
                                 </div>
@@ -120,14 +126,19 @@
                                     @endforeach
 
                                     <input type="hidden" name="tongtien" value="">
-                                    <h5 style="padding-left: 195px;">Tổng: {{number_format($sum,0,",",".")}} VNĐ</h5>
+                                    <h5 style="padding-left: 200px;">Tổng tiền: {{number_format($sum,0,",",".")}} VNĐ
+                                    </h5>
                                 </span>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default"><i class="fas fa-exchange-alt"></i>
+                                    <button type="button" class="btn btn-default" data-toggle="modal"
+                                        data-target="#chuyenban"><i class="fas fa-exchange-alt"></i>
                                         Chuyển bàn</button>
-                                    <a href="" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Xuất bill</a>
-                                    <button type="submit" class="btn btn-default"><i class="fas fa-donate"></i> Thanh toán</button>
-                                    <!-- <a href="{{route('clear-cart')}}" class="btn btn-info">Xóa hết</a> -->
+                                    <a href="{{route('print-cart',$id_ban->id)}}" class="btnPrint"><button type="button"
+                                            class="btn btn-default" data-toggle="modal" data-target="#showhd">
+                                            <i class="fas fa-print"></i> Xuất bill</button></a>
+                                    <button type="submit" class="btn btn-default"><i class="fas fa-donate"></i> Thanh
+                                        toán</button>
+
 
                                 </div>
                                 <!-- code ... -->
@@ -136,7 +147,41 @@
                     </div>
                 </div>
             </div>
-
+            <!-- code chuyen ban -->
+            <div class="modal fade" id="chuyenban">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Detail</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <form action="" method="POST">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <div class="col-sm-6 ">
+                                    <label class="col-form-label">Bàn hiện tại</label>
+                                    <input type="text" readonly name="" style="width: 160px;" class="form-control"
+                                        value="{{$id_ban->tenban}}">
+                                </div>
+                                <div class="col-sm-6 ">
+                                    <label class="col-form-label">Bàn chuyển đến</label>
+                                    <select class="form-control"  name=""  style="width: 160px;">
+                                        @foreach($tenban as $b)     
+                                        <option value="{{$b->id}}">{{$b->tenban}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-danger">Chuyển</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- /.colllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll -->
             <div class="col-md-3">
                 <div class="sticky-top mb-3">
@@ -167,7 +212,8 @@
                                             </a>
                                             <ul class="nav nav-treeview">
                                                 <li class="nav-item">
-                                                    <p>
+
+                                                    <div class="table-responsive">
                                                         <table id="tables" class="table  table-striped">
                                                             <thead class=" text-dark">
                                                                 <th>Tên</th>
@@ -186,14 +232,15 @@
                                                                         {{csrf_field()}}
                                                                         <td class="right">
                                                                             <button type="submit" class="btn"><i
-                                                                                class="fa fa-plus"></i></button>
+                                                                                    class="fa fa-plus"></i></button>
                                                                         </td>
                                                                     </form>
                                                                 </tr>
                                                                 @endforeach
                                                             </tbody>
                                                         </table>
-                                                    </p>
+                                                    </div>
+
                                                 </li>
                                             </ul>
                                         </li>
@@ -211,6 +258,7 @@
         </div>
         <!-- /.row -->
     </div><!-- /.container-fluid -->
+
 </section>
 
 

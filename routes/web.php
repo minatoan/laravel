@@ -256,6 +256,10 @@ Route::group(['prefix'=>''],function(){
             'as' => 'clear-cart',
             'uses' => 'Ordercontroller@clearcart'
         ]);
+        Route::get('print-cart/{id}', [
+            'as' => 'print-cart',
+            'uses' => 'Ordercontroller@print'
+        ]);
 
 
 
@@ -263,28 +267,9 @@ Route::group(['prefix'=>''],function(){
             'as' => 'save-cart',
             'uses' => 'Ordercontroller@savecart'
         ]);
-        
-
-        
-
-        
-
-        
-
-        
 
     });
-    Route::group(['prefix'=>''],function()
-    {
-        // Route::get('tochuc','ToChuccontroller@getToChuc');
-        
-        Route::get('pdf', [
-            'as'=> 'pdf',
-            'uses'=> 'ToChuccontroller@pdf'
-        ]);
-        
-
-    });
+    
     
     
 });
