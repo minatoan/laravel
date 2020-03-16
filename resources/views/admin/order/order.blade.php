@@ -24,18 +24,35 @@
         <div class="row">
             <!-- /.col -->
             <div class="col-md-5">
-                <div class="card card-primary">
+                <div class="card card-primary card-outline">
                     <div class="card-body p-0">
                         <!-- THE CALENDAR -->
                         <div class="card-body">
                             <!-- code ..... -->
+                            <span>
+                            @foreach($loaiban as $lb)
+                                <h5  style="float:left; padding-right:70%; margin-bottom: 10px">Bàn {{$lb->tenloaiban}}
+                                <br></h5>
+                            <!-- <h3 >{{$lb->tenloaiban}}: <br></h3> -->
+                                    <?php 
+                                    $tenban = DB::table('ban')->where('maloaiban', $lb->id)->get();   
+                                    ?>
                             @foreach($tenban as $od)
-                            <div style="float:left; width: 30px; margin-right:50px; margin-bottom: 10px">
+                            <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
                                 <a href="{{route('hien-thi',$od->id)}}"><button type="button"
                                         class="btn btn-primary">{{ $od->tenban }}</button>
-                                    </a>
+                                </a>
                             </div>
                             @endforeach
+                            @endforeach
+                            </span>
+                            <!-- @foreach($tenban as $od)
+                            <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
+                                <a href="{{route('hien-thi',$od->id)}}"><button type="button"
+                                        class="btn btn-primary" >{{ $od->tenban }}</button>
+                                </a>
+                            </div>
+                            @endforeach -->
                         </div>
                         <!-- code ..... -->
                     </div>
@@ -48,22 +65,23 @@
             <div class="col-md-4">
                 <div class="sticky-top mb-3">
                     <!-- /.card -->
-                    <div class="card">
+                    <div class="card card-outline card-success">
+
                         <div class="card-header">
                             <h3 class="card-title">Bill</h3>
                         </div>
                         <div class="card-body">
                             <span>
                                 @foreach($tochuc as $tc)
-                                <h3 align="center">{{$tc->tentc}}</h3>                                
-                                <h6 align="center">ĐC: {{$tc->diachi}}                                    
-                                   <br>--------------------------------</h6>
+                                <h3 align="center">{{$tc->tentc}}</h3>
+                                <h6 align="center">ĐC: {{$tc->diachi}}
+                                    <br>--------------------------------</h6>
                                 @endforeach
-                                <h4 align="center">PHIẾU TẠM TÍNH</h4> 
+                                <h4 align="center">PHIẾU TẠM TÍNH</h4>
                             </span>
                             <label class="col-form-label">Thu ngân: </label>
                             <div class="table-responsive">
-                                <table  class="table table-bordered table-striped table-hover">
+                                <table class="table table-bordered table-striped table-hover">
                                     <thead class=" text-dark">
                                         <th>Tên</th>
                                         <th>SL</th>
@@ -71,7 +89,7 @@
                                         <th>T.Tiền</th>
                                     </thead>
                                     <tbody>
-                                        
+
                                     </tbody>
                                 </table>
                             </div>
@@ -86,10 +104,9 @@
             <!-- /.colllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll -->
             <div class="col-md-3">
                 <div class="sticky-top mb-3">
-                    <div class="card">
+                    <div class="card card-outline card-success">
                         <div class="card-header">
                             <h4 class="card-title">Đồ uống</h4>
-
                         </div>
                         <div class="card-body">
                             <!-- the events -->
@@ -107,43 +124,34 @@
                                         <li class="nav-item has-treeview">
                                             <a class="nav-link">
                                                 <p>
-                                                    <button type="button"
-                                                        class="btn " style="background-color:#6610f2; color:#fff">{{ $lm->tenloaimon }}</button>
-
+                                                    <button type="button" class="btn btn-success">{{ $lm->tenloaimon }}</button>
                                                 </p>
                                             </a>
                                             <ul class="nav nav-treeview">
                                                 <li class="nav-item">
-                                                   
-                                                        <p>
-                                                            <table id="tables" class="table  table-striped">
-                                                                <thead class=" text-dark">
-                                                                    <th>Tên</th>
-                                                                    <th>Giá</th>
-                                                                    <th>#</th>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach($loaidouong as $lmn)
-                                                                    <tr>
-                                                                        <td>{{$lmn->tenmon}}</td>
-
-                                                                        <td>{{number_format($lmn->dongia,0,",",".")}}
-                                                                        </td>
-
-                                                                        
-                                                                            <td class="right">
-                                                                                <button type="submit" class="btn"><i
-                                                                                        class="fa fa-plus"></i></button>
-                                                                            </td>
-                                                                        
-                                                                    </tr>
-                                                                    @endforeach
-                                                                </tbody>
-                                                            </table>
-                                                        </p>
-                                                    
+                                                    <p>
+                                                        <table id="tables" class="table  table-striped">
+                                                            <thead class=" text-dark">
+                                                                <th>Tên</th>
+                                                                <th>Giá</th>
+                                                                <th>#</th>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach($loaidouong as $lmn)
+                                                                <tr>
+                                                                    <td>{{$lmn->tenmon}}</td>
+                                                                    <td>{{number_format($lmn->dongia,0,",",".")}}
+                                                                    </td>
+                                                                    <td class="right">
+                                                                        <button type="submit" class="btn"><i
+                                                                                class="fa fa-plus"></i></button>
+                                                                    </td>
+                                                                </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </p>
                                                 </li>
-
                                             </ul>
                                         </li>
                                     </ul>

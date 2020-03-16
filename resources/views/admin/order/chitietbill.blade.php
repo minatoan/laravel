@@ -11,11 +11,18 @@
                         <h4 class="card-title ">COFFE GOOD</h4>
                     </div>
                     <div class="form-group">
-                        <span>
                             <BR>
                             <h4 align="center">CHI TIẾT BILL</h4>
-                            <h5 align="center">Tổng tiền: {{number_format($bill->tongtien,0,",",".")}} VNĐ</h5>
-                        </span>
+                            <?php 
+                                $ctb  = DB::table('chitietbill')->where('mabill', $bill->id)->get();
+                                $sl = 0;
+                            ?>
+                                @foreach($ctb as $value)
+                                    <?php                                                 
+                                        $sl +=  $value->soluong ;?>                                    
+                                @endforeach   
+                            <h5 align="center">Tổng số lượng: {{($sl)}}</h5>
+                            <h5 align="center">Tổng tiền: {{number_format($bill->tongtien,0,",",".")}} VNĐ</h5>                            
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -34,11 +41,14 @@
                                     @endphp
                                         <?php 
                                             $ctb  = DB::table('chitietbill')->where('mabill', $bill->id)->get();
+                                            $sl = 0;
                                         ?>
+
                                     @foreach($ctb as $value)
                                     <?php
                                                 $food = DB::table('menu')->where('id', $value->mamon)->first();
-                                                $sum = $value->dongia*$value->soluong;
+                                                $sum = ($value->dongia*$value->soluong);                                            
+                                                $sl +=  $value->soluong ;
                                             
                                             ?>
                                     <tr>
@@ -48,7 +58,7 @@
                                         <td>{{number_format($value->dongia,0,",",".")}} VNĐ</td>
                                         <td>{{number_format($sum,0,",",".")}} VNĐ</td>
                                     </tr>
-                                    @endforeach
+                                    @endforeach                                   
 
                                     
                                 </tbody>

@@ -27,23 +27,28 @@
             <!-- /.col -->
             <div class="col-md-5">
                 <div class="sticky-top mb-3">
-                    <div class="card">
+                    <div class="card card-primary card-outline">
+
                         <!-- THE CALENDAR -->
                         <div class="card-body">
                             <!-- code ..... -->
-                            <!-- @foreach($loaiban as $lb)
-                            
-                            <h3 >{{$lb->tenloaiban}}: <br></h3>
-                            @endforeach -->
-                            @foreach($tenban as $od)
-                            <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
-                                <a href="{{route('hien-thi',$od->id)}}"><button type="button"
-                                        class="btn btn-primary">{{ $od->tenban }}</button>
-                                </a>
-                            </div>
+                            <span>
+                            @foreach($loaiban as $lb)
+                                <h5  style="float:left; padding-right:70%; margin-bottom: 10px">Bàn {{$lb->tenloaiban}}
+                                <br></h5>
+                                    <?php 
+                                        $tenban = DB::table('ban')->where('maloaiban', $lb->id)->get();   
+                                        foreach (Cart::getContent() as $key => $value)
+                                    ?>  
+                                @foreach($tenban as $od)
+                                <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
+                                    <a href="{{route('hien-thi',$od->id)}}"><button type="button"
+                                            class="btn btn-info">{{ $od->tenban }}</button>
+                                    </a>
+                                </div>
+                                @endforeach
                             @endforeach
-
-
+                            </span>
                         </div>
                         <!-- code ..... -->
                     </div>
@@ -56,7 +61,7 @@
             <div class="col-md-4">
                 <div class="sticky-top mb-3">
                     <!-- /.card -->
-                    <div class="card">
+                    <div class="card card-outline card-primary">
                         <div class="card-header">
                             <h3 class="card-title">Bill</h3>
                         </div>
@@ -88,28 +93,29 @@
                                         </thead>
                                         <tbody>
                                             <form action="" method="GET">
-                                                <input type="hidden" name="_token" value="{{csrf_token()}}">                                                
+                                                <input type="hidden" name="_token" value="{{csrf_token()}}">
                                                 @foreach($cart as $value)
                                                 @if($value['attributes']['id_ban'] == $id_ban->id)
                                                 <tr>
-                                                    <td>{{$value['name']}}</td>                                                    
+                                                    <td>{{$value['name']}}</td>
                                                     <td>
                                                         <div>
-                                                            <input id="{{$value['id']}}" type="number" style="width:45px;" 
-                                                            value="{{$value->quantity}}" MIN="1" class="update">
+                                                            <input id="{{$value['id']}}" type="number"
+                                                                style="width:45px;" value="{{$value->quantity}}" MIN="1"
+                                                                class="update">
                                                         </div>
                                                     </td>
                                                     <td>{{number_format($value['price'],0,",",".")}}</td>
-                                                    <td>{{number_format($value['price'] * $value['quantity'],0,",",".")}}</td>
+                                                    <td>{{number_format($value['price'] * $value['quantity'],0,",",".")}}
+                                                    </td>
                                                     <td class="left">
                                                         <a href="{{route('delete-cart', [$value['attributes']['id_ban'], $value['id']])}}"
                                                             class="btn"><i class="fas fa-times"></i></a>
                                                     </td>
-                                                </tr>                                                
+                                                </tr>
+
                                                 @endif
                                                 @endforeach
-                                                
-
                                             </form>
                                         </tbody>
                                     </table>
@@ -126,7 +132,8 @@
                                     @endforeach
 
                                     <input type="hidden" name="tongtien" value="">
-                                    <h5 style="padding-left: 200px;">Tổng tiền: {{number_format($sum,0,",",".")}} VNĐ
+                                    <h5 style="padding-left: 200px;">Tổng tiền: {{number_format($sum,0,",",".")}}
+                                        VNĐ
                                     </h5>
                                 </span>
                                 <div class="modal-footer">
@@ -136,10 +143,9 @@
                                     <a href="{{route('print-cart',$id_ban->id)}}" class="btnPrint"><button type="button"
                                             class="btn btn-default" data-toggle="modal" data-target="#showhd">
                                             <i class="fas fa-print"></i> Xuất bill</button></a>
-                                    <button type="submit" class="btn btn-default"><i class="fas fa-donate"></i> Thanh
-                                        toán</button>
-
-
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-donate"></i> Thanh toán</button>
+                                    <!-- <a href="{{route('clear-cart')}}" class="btn btn-info">Xóa hết</a> -->
                                 </div>
                                 <!-- code ... -->
                             </form>
@@ -148,44 +154,48 @@
                 </div>
             </div>
             <!-- code chuyen ban -->
+            @foreach($cart as $value)
             <div class="modal fade" id="chuyenban">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Detail</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Chuyển bàn</h4>
                         </div>
-                        <form action="" method="POST">
-                        <input type="hidden" name="_token" value="{{csrf_token()}}">
-                        <div class="modal-body">
-                            <div class="form-group row">
-                                <div class="col-sm-6 ">
-                                    <label class="col-form-label">Bàn hiện tại</label>
-                                    <input type="text" readonly name="" style="width: 160px;" class="form-control"
-                                        value="{{$id_ban->tenban}}">
-                                </div>
-                                <div class="col-sm-6 ">
-                                    <label class="col-form-label">Bàn chuyển đến</label>
-                                    <select class="form-control"  name=""  style="width: 160px;">
-                                        @foreach($tenban as $b)     
-                                        <option value="{{$b->id}}">{{$b->tenban}}</option>
-                                        @endforeach
-                                    </select>
+                        <form action="{{route('chuyen-ban', $id_ban->id)}}" method="POST">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 ">
+                                        <label class="col-form-label">Bàn hiện tại</label>
+                                        <input type="text" readonly name="id_ban_hientai" style="width: 160px;"
+                                            class="form-control" value="{{$id_ban->tenban}}">
+                                    </div>
+                                    <div class="col-sm-6 ">
+                                        <label class="col-form-label">Bàn chuyển đến</label>
+                                        <select class="form-control" name="id_ban_den" style="width: 160px;">
+                                            <?php 
+                                                $bann = DB::table('ban')->get();   
+                                            ?> 
+                                            @foreach($bann as $bannn)
+                                            <option value="{{$bannn->id}}">{{$bannn->tenban}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger">Chuyển</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
                         </form>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-danger">Chuyển</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
                     </div>
                 </div>
             </div>
+            @endforeach
             <!-- /.colllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll -->
             <div class="col-md-3">
                 <div class="sticky-top mb-3">
-                    <div class="card">
+                    <div class="card card-outline card-success">
                         <div class="card-header">
                             <h4 class="card-title">Đồ uống</h4>
 
@@ -206,8 +216,8 @@
                                         <li class="nav-item has-treeview">
                                             <a class="nav-link">
                                                 <p>
-                                                    <button type="button" class="btn "
-                                                        style="background-color:#6610f2; color:#fff">{{ $lm->tenloaimon }}</button>
+                                                    <button type="button"
+                                                        class="btn btn-success">{{ $lm->tenloaimon }}</button>
                                                 </p>
                                             </a>
                                             <ul class="nav nav-treeview">

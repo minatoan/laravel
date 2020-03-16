@@ -23,6 +23,8 @@ class Ordercontroller extends Controller
         $loaimon = loaimon::all();
         $tenban  = ban::all();
         $loaiban = loaiban::all();
+        // Cart::clear();
+        // dd(Cart::getContent());
         return view('admin.order.order', compact('loaimon', 'tenban','tochuc','loaiban'));
     }
 
@@ -31,9 +33,19 @@ class Ordercontroller extends Controller
     {
         $tochuc = tochuc::all();
         $nhanvien = nhanvien::all();
-        $bill  = bill::all();
+        $bill  = bill::orderBy('id', 'DESC')->get();
         $chitietbill = chitietbill::all();
+        
+
         return view('admin.order.bill', compact('bill', 'chitietbill','nhanvien','tochuc'));
+    }
+
+    public function likebill(Request $req)
+    {
+        $dateform = $req->dateform;
+        $dateto = $req->dateto;
+        $bill  = bill::orderBy('id', 'DESC')->whereBetween('ngaytao', [$dateform, date('Y-m-d', strtotime($dateto. '+1 days'))])->get();
+        return view('admin.order.bill' ,compact('bill'));
     }
     //get ctbill
     public function getctbill($id)
@@ -79,16 +91,18 @@ class Ordercontroller extends Controller
 
         Cart::add(
             array(
-                'id'         => $id_sp,
+                'id'         => time(),
                 'name'       => $product->tenmon,
                 'quantity'   => 1,
                 'price'      => $product->dongia,
                 'attributes' => array(
+                    'id_sp' => $id_sp,
                     'id_ban' => $id_ban,
                 ),
             )
         );
-        
+                // dd(Cart::getContent());
+
         return redirect()->back();
     }
 
@@ -100,11 +114,11 @@ class Ordercontroller extends Controller
 
     }
 
-    // public function clearcart($value='')
-    // {
-    //     Cart::clear();
-    //     return redirect()->back();
-    // }
+    public function clearcart($value='')
+    {
+        Cart::clear();
+        return redirect()->back();
+    }
 
     //update so luong
     public function updatecart(Request $req)
@@ -185,7 +199,24 @@ class Ordercontroller extends Controller
                 
             }
         }
-        return redirect()->back()->with(Toastr::success('Thành công'));
+        return redirect()->back()->with(Toastr::success('Thanh toán thành công'));
+
+    }
+    //chuyen ban
+    public function chuyenban($id_ban,Request $request)
+    {
+        foreach (Cart::getContent() as $key => $value) {
+            if($value['attributes']['id_ban'] == $id_ban)
+            {
+                Cart::update($value->id, array(
+                        'attributes' => array(
+                            'id_ban' => $request->id_ban_den
+                        )
+                    ));
+                // dd(Cart::getContent());
+            }
+        }
+        return redirect()->back()->with(Toastr::success('Chuyển bàn thành công'));
 
     }
 

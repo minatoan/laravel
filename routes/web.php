@@ -231,6 +231,14 @@ Route::group(['prefix'=>''],function(){
             'as' => 'chi-tiet-bill',
             'uses' => 'Ordercontroller@getbill'
         ]);
+
+        Route::get('likebill', [
+            'as' => 'likebill',
+            'uses' => 'Ordercontroller@likebill'
+        ]);
+        
+
+
         //get hien chi tiet bill
         Route::get('bill/{id}', [
             'as' => 'ct-bill',
@@ -260,14 +268,44 @@ Route::group(['prefix'=>''],function(){
             'as' => 'print-cart',
             'uses' => 'Ordercontroller@print'
         ]);
-
-
-
         Route::post('save-cart/{id_nv}/{id_ban}', [
             'as' => 'save-cart',
             'uses' => 'Ordercontroller@savecart'
         ]);
 
+        Route::post('chuyen-ban/{id_ban}', [
+            'as' => 'chuyen-ban',
+            'uses' => 'Ordercontroller@chuyenban'
+        ]);
+
+    });
+
+    //admin/hanghoa
+    Route::group(['prefix'=>''],function(){
+
+        Route::get('hanghoa', [
+            'as'=> 'hanghoa-them',
+            'uses'=> 'HangHoacontroller@getHangHoa'
+        ]);
+        Route::post('hanghoa', [
+            'as'=> 'hanghoa-them',
+            'uses'=> 'HangHoacontroller@postThemHangHoa'
+        ]);
+
+        Route::get('hanghoa/{id?}', [
+            'as'=> 'hanghoa-sua',
+            'uses'=> 'HangHoacontroller@getSuaHangHoa'
+        ]);
+
+        Route::post('hanghoa/{id?}', [
+            'as'=> 'hanghoa-sua',
+            'uses'=> 'HangHoacontroller@postSuaHangHoa'
+        ]);
+
+        Route::get('xoahanghoa/{id?}', [
+            'as'=> 'hanghoa-xoa',
+            'uses'=> 'HangHoacontroller@getXoaHangHoa'
+        ]);
     });
     
     
