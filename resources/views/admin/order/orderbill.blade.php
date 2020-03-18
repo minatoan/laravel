@@ -33,13 +33,13 @@
                         <div class="card-body">
                             <!-- code ..... -->
                             <span>
-                            @foreach($loaiban as $lb)
-                                <h5  style="float:left; padding-right:70%; margin-bottom: 10px">Bàn {{$lb->tenloaiban}}
-                                <br></h5>
-                                    <?php 
+                                @foreach($loaiban as $lb)
+                                <h5 style="float:left; padding-right:70%; margin-bottom: 10px">Bàn {{$lb->tenloaiban}}
+                                    <br></h5>
+                                <?php 
                                         $tenban = DB::table('ban')->where('maloaiban', $lb->id)->get();   
                                         foreach (Cart::getContent() as $key => $value)
-                                    ?>  
+                                    ?>
                                 @foreach($tenban as $od)
                                 <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
                                     <a href="{{route('hien-thi',$od->id)}}"><button type="button"
@@ -47,7 +47,7 @@
                                     </a>
                                 </div>
                                 @endforeach
-                            @endforeach
+                                @endforeach
                             </span>
                         </div>
                         <!-- code ..... -->
@@ -97,7 +97,7 @@
                                                 @foreach($cart as $value)
                                                 @if($value['attributes']['id_ban'] == $id_ban->id)
                                                 <tr>
-                                                    <td>{{$value['name']}}</td>
+                                                <td>{{$value['name']}}</td>
                                                     <td>
                                                         <div>
                                                             <input id="{{$value['id']}}" type="number"
@@ -174,8 +174,8 @@
                                         <label class="col-form-label">Bàn chuyển đến</label>
                                         <select class="form-control" name="id_ban_den" style="width: 160px;">
                                             <?php 
-                                                $bann = DB::table('ban')->get();   
-                                            ?> 
+                                                $bann = DB::table('ban')->get();                                               
+                                            ?>
                                             @foreach($bann as $bannn)
                                             <option value="{{$bannn->id}}">{{$bannn->tenban}}</option>
                                             @endforeach

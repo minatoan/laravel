@@ -37,13 +37,12 @@ class LoginController extends Controller
             // Nếu dữ liệu hợp lệ sẽ kiểm tra trong csdl
             $username = $request->input('username');
             $password = $request->input('password');
-     
             if( Auth::attempt(['username' => $username, 'password' =>$password])) {
                 // Kiểm tra đúng tài khoản và mật khẩu sẽ chuyển trang
-               
+            
             } else {
                 // Kiểm tra không đúng sẽ hiển thị thông báo lỗi
-               
+            
             }
         }
         if(Auth::attempt(array('username' => $request->username,'password' => $request->password), false, true))

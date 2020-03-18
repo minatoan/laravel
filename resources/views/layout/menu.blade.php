@@ -132,6 +132,12 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="admin/hanghoa" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Nguyên liệu</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="pages/mailbox/mailbox.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Nhập kho</p>

@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Auth;
 use App\nhanvien;
+use App\tochuc;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**

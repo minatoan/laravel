@@ -11,22 +11,22 @@
                         <h4 class="card-title ">Chi tiết bill</h4>
                     </div>
                     <div class="card-body">
+                        <div class="panel-body">
+                            <form action="{{route('likebill')}}" method="get">
+                                <div class="form-group row">
+                                    <div style="padding-right:7px">
+                                        <input type="date" name="dateform"  class="form-control">
+                                    </div>
+                                    <div style="padding-right:7px">
+                                        <input type="date" name="dateto" class="form-control">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Tìm</button>
+                                </div>
+                            </form>
+                        </div>
                         <div class="table-responsive">
                             <table id="datatables" class="table table-bordered table-striped table-hover">
-                                <div class="panel-body">
-                                    <form action="{{route('likebill')}}" method="get">
-                                        <div class="form-group row">
-                                            <div style="padding-right:7px">
-                                                <input type="date" name="dateform" class="form-control">
-                                            </div>
-                                            <div style="padding-right:7px">
-                                                <input type="date" name="dateto" class="form-control">
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Tìm</button>
-                                        </div>
-                                        </form>
 
-                                </div>
                                 <thead class=" text-primary">
                                     <th>STT</th>
                                     <th>Tên nhân viên</th>

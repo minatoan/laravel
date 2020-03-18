@@ -16,16 +16,13 @@
                         <label class="col-form-label">Tên nguyên liệu</label>
                         <input type="text" name="tenhang" id="ten_hang" value="{{$hh->tenhang}}" class="form-control">
                     </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6 ">
+                    <div class="form-group " hidden="">
                             <label class="col-form-label">Số lượng</label>
-                            <input type="number" name="soluong" min="0.1" step=".01" id="so_luong" value="{{$hh->soluong}}"
-                                class="form-control">
-                        </div>
-                        <div class="col-sm-6 ">
+                            <input type="number" name="soluong"  id="so_luong" value="{{$hh->soluong}}" class="form-control">
+                    </div>
+                    <div class="form-group>
                             <label class="col-form-label">Đơn vị tính</label>
                             <input type="text" name="dvt" id="dvt" value="{{$hh->dvt}}" class="form-control">
-                        </div>
                     </div>
 
                     <div class="form-group">
