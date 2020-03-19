@@ -17,19 +17,21 @@ class Bancontroller extends Controller
     //   
 
 // ------------------------------------------Thêm bàn
-    public function getThemBan()
+    public function getThemBan($id)
     {
-        $ban = ban::all();
-        $loaibann = loaiban::all();
-        $tochuc = tochuc::all();
+        $ban = ban::where('matc', $id)->get();
+        $loaibann = loaiban::where('matc', $id)->get();
+        $tochuc = tochuc::where('id', $id)->get();
+        // dd($ban);
         return view('admin.ban.ban',['ban'=>$ban,'loaiban'=>$loaibann, 'tochuc' => $tochuc]);
     }
 
     public function postThemBan(Request $request)
     {
+        
         $this->validate($request,
             [
-                'tenban' => 'required|unique:ban,tenban|min:3|max:100',
+                'tenban' => "required|min:3|max:100|",
                 'maloaiban' => 'required',
                 'matc' => 'required',
             ],
@@ -37,8 +39,9 @@ class Bancontroller extends Controller
                 'tenban.required' => 'Lỗi rồi! Bạn chưa điền tên bàn',
                 'tenban.min' => 'Tên bàn phải có ít nhất 3 ký tự',
                 'tenban.unique' => 'Lỗi rồi! Tên bàn đã tồn tại',
-                                
             ]);
+
+        
 
             $ban = new ban;
             $ban->tenban = $request->tenban;
@@ -54,7 +57,7 @@ class Bancontroller extends Controller
     {
         $ban = ban::find($id);
         $loaiban = loaiban::all();
-         $tochuc = tochuc::all();
+        $tochuc = tochuc::all();
         return view('admin.ban.ban',['ban'=>$ban,'loaiban'=>$loaiban,'tochuc'=>$tochuc]);
     }
 

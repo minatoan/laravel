@@ -39,8 +39,8 @@ Route::group(['prefix'=>'admin'],function()
         // Route::get('ban','BanController@getThemBan');
         // Route::post('ban','BanController@postThemBan');
 
-        Route::get('ban', [
-            'as'=> 'ban-them',
+        Route::get('get-ban-theo-tochuc/{idtc}/{idnv}', [
+            'as'=> 'get-ban-theo-tochuc',
             'uses'=> 'BanController@getThemBan'
         ]);
         Route::post('ban', [
@@ -67,8 +67,8 @@ Route::group(['prefix'=>'admin'],function()
 	//admin/loaiban/
     Route::group(['prefix'=>''],function(){
 
-        Route::get('loaiban', [
-            'as'=> 'loaiban-them',
+        Route::get('get-loaiban-theo-tochuc/{idtc}/{idnv}', [
+            'as'=> 'get-loaiban-theo-tochuc',
             'uses'=> 'LoaiBancontroller@getThemLoaiBan'
         ]);
         Route::post('loaiban', [
@@ -99,8 +99,8 @@ Route::group(['prefix'=>'admin'],function()
 	{
         // Route::get('menu','Menucontroller@getMenu');
         
-        Route::get('menu', [
-            'as'=> 'menu-them',
+        Route::get('get-menu-theo-tochuc/{idtc}/{idnv}', [
+            'as'=> 'get-menu-theo-tochuc',
             'uses'=> 'Menucontroller@getThemMenu'
         ]);
         Route::post('menu', [
@@ -127,8 +127,8 @@ Route::group(['prefix'=>'admin'],function()
 //admin/loaimon/
 Route::group(['prefix'=>''],function(){
 
-    Route::get('loaimon', [
-        'as'=> 'loaimon-them',
+    Route::get('get-loaimon-theo-tochuc/{idtc}/{idnv}', [
+        'as'=> 'get-loaimon-theo-tochuc',
         'uses'=> 'LoaiMoncontroller@getThemLoaiMon'
     ]);
     Route::post('loaimon', [
@@ -155,8 +155,8 @@ Route::group(['prefix'=>''],function(){
     //admin/nhanvien/nhanvien
     Route::group(['prefix'=>''],function(){
 
-        Route::get('nhanvien', [
-            'as'=> 'nhanvien-them',
+        Route::get('get-nhanvien-theo-tochuc/{idtc}/{idnv}', [
+            'as'=> 'get-nhanvien-theo-tochuc',
             'uses'=> 'NhanViencontroller@getThemNhanVien'
         ]);
         Route::post('nhanvien', [
@@ -214,21 +214,21 @@ Route::group(['prefix'=>''],function(){
 	{
         // Route::get('tochuc','ToChuccontroller@getToChuc');
         
-        Route::get('order', [
+        Route::get('order/{id_tc}', [
             'as'=> 'order-get',
             'uses'=> 'Ordercontroller@getOrder'
         ]);
         
         
-        Route::get('hien-thi/{id}', [
+        Route::get('hien-thi/{id_tc}/{id_ban}', [
             'as' => 'hien-thi',
             'uses' => 'Ordercontroller@hienthi'
         ]);
         
 
             //get bill
-        Route::get('bill', [
-            'as' => 'chi-tiet-bill',
+        Route::get('get-bill-theo-tochuc/{idtc}/{idnv}', [
+            'as' => 'get-bill-theo-tochuc',
             'uses' => 'Ordercontroller@getbill'
         ]);
 
@@ -264,11 +264,11 @@ Route::group(['prefix'=>''],function(){
             'as' => 'clear-cart',
             'uses' => 'Ordercontroller@clearcart'
         ]);
-        Route::get('print-cart/{id}', [
+        Route::get('print-cart/{id_tc}/{id_ban}', [
             'as' => 'print-cart',
             'uses' => 'Ordercontroller@print'
         ]);
-        Route::post('save-cart/{id_nv}/{id_ban}', [
+        Route::post('save-cart/{id_tc}/{id_nv}/{id_ban}', [
             'as' => 'save-cart',
             'uses' => 'Ordercontroller@savecart'
         ]);
@@ -283,8 +283,8 @@ Route::group(['prefix'=>''],function(){
     //admin/hanghoa
     Route::group(['prefix'=>''],function(){
 
-        Route::get('hanghoa', [
-            'as'=> 'hanghoa-them',
+        Route::get('get-hanghoa-theo-tochuc/{idtc}/{idnv}', [
+            'as'=> 'get-hanghoa-theo-tochuc',
             'uses'=> 'HangHoacontroller@getHangHoa'
         ]);
         Route::post('hanghoa', [
@@ -309,5 +309,60 @@ Route::group(['prefix'=>''],function(){
     });
     
     
+        //admin/phieunhap
+        Route::group(['prefix'=>''],function(){
+
+            Route::get('nhaphang', [
+                'as'=> 'nhaphang-them',
+                'uses'=> 'PhieunhapController@getPhieunhap'
+            ]);
+            // Route::post('hanghoa', [
+            //     'as'=> 'hanghoa-them',
+            //     'uses'=> 'HangHoacontroller@postThemHangHoa'
+            // ]);
+    
+            // Route::get('hanghoa/{id?}', [
+            //     'as'=> 'hanghoa-sua',
+            //     'uses'=> 'HangHoacontroller@getSuaHangHoa'
+            // ]);
+    
+            // Route::post('hanghoa/{id?}', [
+            //     'as'=> 'hanghoa-sua',
+            //     'uses'=> 'HangHoacontroller@postSuaHangHoa'
+            // ]);
+    
+            // Route::get('xoahanghoa/{id?}', [
+            //     'as'=> 'hanghoa-xoa',
+            //     'uses'=> 'HangHoacontroller@getXoaHangHoa'
+            // ]);
+        });
+
+         //admin/nhacungcap
+    Route::group(['prefix'=>''],function(){
+
+        Route::get('get-ncc-theo-tochuc/{idtc}/{idnv}', [
+            'as'=> 'get-ncc-theo-tochuc',
+            'uses'=> 'NCCcontroller@getNCC'
+        ]);
+        Route::post('ncc', [
+            'as'=> 'ncc-them',
+            'uses'=> 'NCCcontroller@postThemNCC'
+        ]);
+
+        Route::get('ncc/{id?}', [
+            'as'=> 'ncc-sua',
+            'uses'=> 'NCCcontroller@getSuaNCC'
+        ]);
+
+        Route::post('ncc/{id?}', [
+            'as'=> 'ncc-sua',
+            'uses'=> 'NCCcontroller@postSuaNCC'
+        ]);
+
+        Route::get('xoancc/{id?}', [
+            'as'=> 'ncc-xoa',
+            'uses'=> 'NCCcontroller@getXoaNCC'
+        ]);
+    });
     
 });

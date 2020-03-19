@@ -15,10 +15,10 @@ use App\tochuc;
 class LoaiMoncontroller extends Controller
 {
     // ------------------------------------------Thêm loại món
-    public function getThemLoaiMon()
+    public function getThemLoaiMon($id)
     {
-        $loaimon = loaimon::all();
-        $tochuc = tochuc::all();
+        $loaimon = loaimon::where('matc', $id)->get();
+        $tochuc = tochuc::where('id', $id)->get();
         return view('admin.loaimon.loaimon',['loaimon' => $loaimon, 'tochuc' => $tochuc]);
     }
 
@@ -26,7 +26,7 @@ class LoaiMoncontroller extends Controller
     {
         $this->validate($request,
             [
-                'tenloaimon' => 'required|unique:loaimon,tenloaimon|min:3|max:100',
+                'tenloaimon' => 'required|min:3|max:100',
                 'matc' => 'required',
             ],
             [

@@ -23,10 +23,10 @@ class NhanViencontroller extends Controller
     // }
     
     //Hiện nv
-    public function getThemNhanVien()
+    public function getThemNhanVien($id)
     {
-        $nhanvien = nhanvien::all();  
-        $tochuc = tochuc::all();
+        $nhanvien = nhanvien::where('matc', $id)->get();
+        $tochuc = tochuc::where('id', $id)->get();
         return view('admin.nhanvien.nhanvien',['nhanvien' => $nhanvien, 'tochuc' => $tochuc]);
     }
 

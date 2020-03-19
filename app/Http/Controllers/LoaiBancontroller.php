@@ -17,10 +17,10 @@ class LoaiBancontroller extends Controller
 
 
 // ------------------------------------------Thêm loại bàn
-    public function getThemLoaiBan()
+    public function getThemLoaiBan($id)
     {
-        $loaiban = loaiban::all();
-        $tochuc = tochuc::all();
+        $loaiban = loaiban::where('matc', $id)->get();
+        $tochuc = tochuc::where('id', $id)->get();
         return view('admin.loaiban.loaiban',['loaiban' => $loaiban, 'tochuc' => $tochuc]);
     }
 
@@ -28,7 +28,7 @@ class LoaiBancontroller extends Controller
     {
         $this->validate($request,
             [
-                'tenloaiban' => 'required|unique:loaiban,tenloaiban|min:3|max:100',
+                'tenloaiban' => 'required|min:3|max:100',
                 'matc' => 'required',
             ],
             [

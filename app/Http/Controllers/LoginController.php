@@ -47,7 +47,12 @@ class LoginController extends Controller
         }
         if(Auth::attempt(array('username' => $request->username,'password' => $request->password), false, true))
         {
-            return redirect('admin/order');
+            // return redirect()->back();
+            $user = Auth::check();
+            $id = Auth::user()['id'];
+            $customer = nhanvien::where('id',$id)->first();
+            return redirect('order-get', $customer->matc);
+
         }
         else
         {

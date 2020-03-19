@@ -31,28 +31,20 @@
                             <!-- code ..... -->
                             <span>
                             @foreach($loaiban as $lb)
-                                <h5  style="float:left; padding-right:70%; margin-bottom: 10px">Bàn {{$lb->tenloaiban}}
+                                <h5  style="float:left; padding-right:75%; margin-bottom: 10px">Bàn {{$lb->tenloaiban}}
                                 <br></h5>
-                            <!-- <h3 >{{$lb->tenloaiban}}: <br></h3> -->
                                     <?php 
                                     $tenban = DB::table('ban')->where('maloaiban', $lb->id)->get();   
                                     ?>
                             @foreach($tenban as $od)
                             <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
-                                <a href="{{route('hien-thi',$od->id)}}"><button type="button"
+                                <a href="{{route('hien-thi',[$customer->matc, $od->id])}}"><button type="button"
                                         class="btn btn-primary">{{ $od->tenban }}</button>
                                 </a>
                             </div>
                             @endforeach
                             @endforeach
                             </span>
-                            <!-- @foreach($tenban as $od)
-                            <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
-                                <a href="{{route('hien-thi',$od->id)}}"><button type="button"
-                                        class="btn btn-primary" >{{ $od->tenban }}</button>
-                                </a>
-                            </div>
-                            @endforeach -->
                         </div>
                         <!-- code ..... -->
                     </div>
@@ -72,11 +64,10 @@
                         </div>
                         <div class="card-body">
                             <span>
-                                @foreach($tochuc as $tc)
-                                <h3 align="center">{{$tc->tentc}}</h3>
-                                <h6 align="center">ĐC: {{$tc->diachi}}
+
+                                <h3 align="center">{{$tochuc->tentc}}</h3>
+                                <h6 align="center">ĐC: {{$tochuc->diachi}}
                                     <br>--------------------------------</h6>
-                                @endforeach
                                 <h4 align="center">PHIẾU TẠM TÍNH</h4>
                             </span>
                             <label class="col-form-label">Thu ngân: </label>

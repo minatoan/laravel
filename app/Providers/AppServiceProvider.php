@@ -33,5 +33,28 @@ class AppServiceProvider extends ServiceProvider
             // dd($customer);
             $view->with(['customer' => $customer]);
         });
+
+        view()->composer('admin.order.order', function($view){
+            $user = Auth::check();
+            $id = Auth::user()['id'];
+            $customer = nhanvien::where('id',$id)->first();
+            // dd($customer);
+            $view->with(['customer' => $customer]);
+        });
+
+        view()->composer('admin.order.orderbill', function($view){
+            $user = Auth::check();
+            $id = Auth::user()['id'];
+            $customer = nhanvien::where('id',$id)->first();
+            // dd($customer);
+            $view->with(['customer' => $customer]);
+        });
+        view()->composer('admin.order.print', function($view){
+            $user = Auth::check();
+            $id = Auth::user()['id'];
+            $customer = nhanvien::where('id',$id)->first();
+            // dd($customer);
+            $view->with(['customer' => $customer]);
+        });
     }
 }

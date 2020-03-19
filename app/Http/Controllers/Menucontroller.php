@@ -16,19 +16,20 @@ class Menucontroller extends Controller
 
 
 // ------------------------------------------Thêm menu
-    public function getThemMenu()
+    public function getThemMenu($id)
     {
-        $menu = menu::all();
-        $loaimon = loaimon::all();
-        $tochuc = tochuc::all();
+        $menu = menu::where('matc', $id)->get();
+        $loaimon = loaimon::where('matc', $id)->get();
+        $tochuc = tochuc::where('id', $id)->get();
         return view('admin.menu.menu',['menu' => $menu, 'loaimon' => $loaimon,'tochuc' => $tochuc]);
+        // dd($tochuc);
     }
 
     public function postThemMenu(Request $request)
     {
         $this->validate($request,
             [
-                'tenmon' => 'required|unique:menu,tenmon|min:3|max:100',
+                'tenmon' => 'required|min:3|max:100',
                 'maloaimon' => 'required',
                 'dongia' => 'required',
                 'matc' => 'required',

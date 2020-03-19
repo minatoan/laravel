@@ -34,7 +34,7 @@
                             <!-- code ..... -->
                             <span>
                                 @foreach($loaiban as $lb)
-                                <h5 style="float:left; padding-right:70%; margin-bottom: 10px">Bàn {{$lb->tenloaiban}}
+                                <h5 style="float:left; padding-right:75%; margin-bottom: 10px">Bàn {{$lb->tenloaiban}}
                                     <br></h5>
                                 <?php 
                                         $tenban = DB::table('ban')->where('maloaiban', $lb->id)->get();   
@@ -42,7 +42,7 @@
                                     ?>
                                 @foreach($tenban as $od)
                                 <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
-                                    <a href="{{route('hien-thi',$od->id)}}"><button type="button"
+                                    <a href="{{route('hien-thi',[$customer->matc, $od->id])}}"><button type="button"
                                             class="btn btn-info">{{ $od->tenban }}</button>
                                     </a>
                                 </div>
@@ -63,24 +63,27 @@
                     <!-- /.card -->
                     <div class="card card-outline card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Bill</h3>
+                            <h3 class="card-title">Bill </h3>
+
                         </div>
                         <div class="card-body">
                             <span>
-                                @foreach($tochuc as $tc)
-                                <h3 align="center">{{$tc->tentc}}</h3>
-                                <h6 align="center">ĐC: {{$tc->diachi}}
+                                <h3 align="center">{{$tochuc->tentc}}</h3>
+                                <h6 align="center">ĐC: {{$tochuc->diachi}}
                                     <br>--------------------------------</h6>
-                                @endforeach
                                 <h4 align="center">PHIẾU TẠM TÍNH</h4>
                                 <h5 align="center">{{$id_ban->tenban}}</h5>
+                                <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+                                    <input style="text-align: center;border: none" class="form-control" type="text">
+                                    <span class="input-group-addon"></span>
+                                </div>
                             </span>
+
                             <label class="col-form-label">
                                 <?php $nv = DB::table('nhanvien')->where('id', $id_nv)->first(); ?>
                                 Thu ngân: {{$nv->tennv}}
                             </label>
-
-                            <form action="{{route('save-cart', [$id_nv, $id_ban->id])}}" method="POST">
+                            <form action="{{route('save-cart', [$id_tc, $id_nv, $id_ban->id])}}" method="POST">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="table-responsive">
                                     <table class="table   table-hover" id="table">
@@ -97,7 +100,7 @@
                                                 @foreach($cart as $value)
                                                 @if($value['attributes']['id_ban'] == $id_ban->id)
                                                 <tr>
-                                                <td>{{$value['name']}}</td>
+                                                    <td>{{$value['name']}}</td>
                                                     <td>
                                                         <div>
                                                             <input id="{{$value['id']}}" type="number"
@@ -140,7 +143,7 @@
                                     <button type="button" class="btn btn-default" data-toggle="modal"
                                         data-target="#chuyenban"><i class="fas fa-exchange-alt"></i>
                                         Chuyển bàn</button>
-                                    <a href="{{route('print-cart',$id_ban->id)}}" class="btnPrint"><button type="button"
+                                    <a href="{{route('print-cart',[$customer->matc, $id_ban->id])}}" class="btnPrint"><button type="button"
                                             class="btn btn-default" data-toggle="modal" data-target="#showhd">
                                             <i class="fas fa-print"></i> Xuất bill</button></a>
                                     <button type="submit" class="btn btn-default">
@@ -174,7 +177,7 @@
                                         <label class="col-form-label">Bàn chuyển đến</label>
                                         <select class="form-control" name="id_ban_den" style="width: 160px;">
                                             <?php 
-                                                $bann = DB::table('ban')->get();                                               
+                                                $bann = DB::table('ban')->where('matc', $id_tc)->where('id', '<>', $id_ban->id)->get();                                               
                                             ?>
                                             @foreach($bann as $bannn)
                                             <option value="{{$bannn->id}}">{{$bannn->tenban}}</option>

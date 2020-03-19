@@ -17,22 +17,23 @@ use Brian2694\Toastr\Facades\Toastr;
 class Ordercontroller extends Controller
 {
     //getban
-    public function getOrder()
+    public function getOrder($id)
     {
-        $tochuc = tochuc::all();
-        $loaimon = loaimon::all();
-        $tenban  = ban::all();
-        $loaiban = loaiban::all();
-        // dd(Cart::getContent());
+        $tochuc = tochuc::where('id', $id)->first();
+        $loaimon = loaimon::where('matc', $id)->get();
+        $tenban  = ban::where('matc', $id)->get();
+        $loaiban = loaiban::where('matc', $id)->get();
+        // dd($loaiban);
+
         return view('admin.order.order', compact('loaimon', 'tenban','tochuc','loaiban'));
     }
 
     //get bill
-    public function getbill()
+    public function getbill($id)
     {
-        $tochuc = tochuc::all();
-        $nhanvien = nhanvien::all();
-        $bill  = bill::orderBy('id', 'DESC')->get();
+        $tochuc = tochuc::where('id', $id)->first();
+        $nhanvien = nhanvien::where('matc', $id)->get();
+        $bill  = bill::where('matc', $id)->orderBy('id', 'DESC')->get();
         $chitietbill = chitietbill::all();
         
 
@@ -49,39 +50,28 @@ class Ordercontroller extends Controller
     //get ctbill
     public function getctbill($id)
     {
-        $tenban = ban::all();
-        $loaimon = loaimon::all();
-        $nhanvien = nhanvien::all();
+        $tenban = ban::where('matc', $id)->get();
+        $loaimon = loaimon::where('matc', $id)->get();
+        $nhanvien = nhanvien::where('matc', $id)->get();
         $bill  = bill::find($id);
         
         return view('admin.order.chitietbill', compact('bill','nhanvien','loaimon','tenban'));
     }
 
     //get ban ra bill
-    public function hienthi($id)
-    {
-        // $tenban = ban::all();
-        // $loaimon = loaimon::all();
-        // $id_ban = ban::find($id);
-
-        // // ket noi bill va ban lay ra bill cua cai ban do
-        // $bill = bill::where('maban', $id_ban->id)->first();
-        // //  ket noi ctb de lay tat ca san pham của bill
-        // $ctb  = ctbill::where('mabill', $bill->id)->get();
-
-        // return view('admin.order.orderbill',compact('loaimon','tenban','id_ban', 'ctb', 'bill'));
-        $loaiban = loaiban::all();
+    public function hienthi($id_tc, $id_ban)
+    {     
+        $loaiban = loaiban::where('matc', $id_tc)->get();
         $cart = Cart::getContent();
-        $tenban  = ban::all();
-        $loaimon = loaimon::all();
-        $id_ban  = ban::find($id);
+        $tenban  = ban::where('matc', $id_tc)->get();
+        $loaimon = loaimon::where('matc', $id_tc)->get();
+        $id_ban  = ban::find($id_ban);
         $menu    = menu::all();
         $id_nv = Auth::id();
         $id_tc = Auth::id();
-
-        $tochuc = tochuc::all();
+        $tochuc = tochuc::where('id', $id_tc)->first();
         // Cart::clear();
-                // dd(Cart::getContent());
+                // dd($tochuc);
 
         return view('admin.order.orderbill', compact('loaimon', 'tenban', 'id_ban', 'mabill', 'menu', 'cart', 'id_nv','id_tc','tochuc','loaiban'));
     }
@@ -121,17 +111,18 @@ class Ordercontroller extends Controller
     }
 
     //in hoa don
-        public function print($id)
+        public function print($id_tc, $id_ban)
             {
                 
-                $loaiban = loaiban::all();
-                $cart = Cart::getContent();
-                $tenban  = ban::all();
-                $loaimon = loaimon::all();
-                $id_ban  = ban::find($id);
-                $menu    = menu::all();
-                $id_nv = Auth::id();
-                $tochuc = tochuc::all();
+                $loaiban = loaiban::where('matc', $id_tc)->get();
+        $cart = Cart::getContent();
+        $tenban  = ban::where('matc', $id_tc)->get();
+        $loaimon = loaimon::where('matc', $id_tc)->get();
+        $id_ban  = ban::find($id_ban);
+        $menu    = menu::all();
+        $id_nv = Auth::id();
+        $id_tc = Auth::id();
+        $tochuc = tochuc::where('id', $id_tc)->first();
                 // dd($cart);
                 return view('admin.order.print', compact('loaimon', 'tenban', 'id_ban', 'mabill', 'menu', 'cart', 'id_nv','tochuc','loaiban'));
             }
@@ -161,7 +152,7 @@ class Ordercontroller extends Controller
         return redirect()->back();
     }
 
-    public function savecart($id_nv, $id_ban, Request $req)
+    public function savecart($id_tc, $id_nv, $id_ban, Request $req)
     {
         
         // // dd($bill);
@@ -183,6 +174,7 @@ class Ordercontroller extends Controller
                 $bill->maban = $id_ban;
                 $bill->tongtien = $sum;
                 $bill->tinhtrang = '1';
+                $bill->matc = $id_tc;
                 $bill->save();
         
             foreach (Cart::getContent() as $key => $value) {

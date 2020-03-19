@@ -14,10 +14,10 @@ use DB;
 class HangHoacontroller extends Controller
 {
     //------------------------------------------Thêm hàng hóa
-    public function getHangHoa()
+    public function getHangHoa($id)
     {
-        $hanghoa = hanghoa::all();
-        $tochuc = tochuc::all();
+        $hanghoa = hanghoa::where('matc', $id)->get();
+        $tochuc = tochuc::where('id', $id)->get();
         return view('admin.hanghoa.hanghoa',['hanghoa'=>$hanghoa, 'tochuc' => $tochuc]);
     }
 

@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title ">Danh sách bàn</h4>
+                        <h4 class="card-title ">Danh sách nhà cung cấp</h4>
                     </div>
                     @if(count($errors)>0)
                     <div class="alert alert-danger">
@@ -27,8 +27,9 @@
                                 data-page-list="[10, 50, 300]" data-sort-order="desc" data-search="true">
                                 <thead class=" text-primary">
                                     <th>STT</th>
-                                    <th>Tên bàn</th>
-                                    <th>Tên loại bàn</th>
+                                    <th>Tên NCC</th>
+                                    <th>Địa chỉ </th>
+                                    <th>SĐT</th>
                                     <th>Tên tổ chức</th>
                                     <th>Thao tác</th>
                                     </th>
@@ -37,20 +38,22 @@
                                     @php
                                     $i=0;
                                     @endphp
-                                    @foreach($ban as $b)
+                                    @foreach($ncc as $nc)
                                     <tr>
                                         <td>{{++$i}}</td>
-                                        <td>{{$b->tenban}}</td>
-                                        <td>{{$b->loaiban->tenloaiban}}</td>
-                                        <td>{{$b->tochuc->tentc}}</td>
+                                        <td>{{$nc->tenncc}}</td>
+                                        <td>{{$nc->diachi}}</td>
+                                        <td>{{$nc->sdt}}</td>
+                                        <td>{{$nc->tochuc->tentc}}</td>
                                         <td class="left">
                                             <button type="button" class="btn btn-warning" data-toggle="modal"
-                                                data-target="#sua{{$b->id}}"><i class="far fa-edit"
+                                                data-target="#sua{{$nc->id}}"><i class="far fa-edit"
                                                     style="color:black"></i>
                                             </button>
-                                            <a href="{{route('ban-xoa',$b->id)}}"><button type="button"
+                                            <a href="{{route('ncc-xoa',$nc->id)}}"><button type="button"
                                                     class="btn btn-danger"><i class="far fa-trash-alt"></i>
                                                 </button>
+                                            </a>
 
                                         </td>
                                     </tr>
@@ -63,12 +66,12 @@
                 </div>
             </div>
             <!-- Sửa -->
-            @include('admin.ban.sua')
+            @include('admin.ncc.sua')
             <!-- Đóng sửa -->
         </div>
         <!-- đóng card shadow mb-4 -->
         <!-- thêm -->
-        @include('admin.ban.them')
+        @include('admin.ncc.them')
     </div>
 </div>
 

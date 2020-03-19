@@ -3,32 +3,32 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thêm bàn</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Thêm nhà cung cấp</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{route('ban-them')}}" method="POST">
+            <form action="{{route('ncc-them')}}" method="POST">
                 {{csrf_field()}}
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="col-form-label">Tên bàn</label>
-                        <input type="text" name="tenban" id="ten_ban" class="form-control">
+                        <label class="col-form-label">Tên nhà cung cấp</label>
+                        <input type="text" name="tenncc" id="ten_ncc" class="form-control">
+                    </div>
+                    <div class="form-group " >                        
+                        <label class="col-form-label">Địa chỉ</label>
+                        <input type="text" name="diachi"  id="dia_chi" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label class="col-form-label">Loại bàn</label>
-                        <select class="form-control" name="maloaiban" id="loai_ban">
-                            @foreach($loaiban as $lb)
-                            <option value="{{$lb->id}}">{{$lb->tenloaiban}}</option>
-                            @endforeach
-                        </select>
+                        <label class="col-form-label">Số điện thoại</label>
+                        <input type="text" name="sdt" class="form-control">                        
                     </div>
+
                     <div class="form-group">
                         <label class="col-form-label">Tổ chức</label>
                         <select class="form-control" readonly name="matc" id="ma_tc">
                             @foreach($tochuc as $tc)
-                            <option                                
-                                value="{{$tc->id}}">{{$tc->tentc}}</option>
+                            <option value="{{$tc->id}}">{{$tc->tentc}}</option>
                             @endforeach
                         </select>
                     </div>

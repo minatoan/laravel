@@ -122,6 +122,17 @@
 <!-- <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>-->
         {!! Toastr::message() !!} 
 <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+<link rel="stylesheet prefetch" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+
+<script type="text/javascript">
+$(function () {  
+$("#datepicker").datepicker({         
+autoclose: true,         
+todayHighlight: true 
+}).datepicker('update', new Date());
+});
+</script>
 <script>
 $('#myModal').on('shown.bs.modal', function () {
   $('#myInput').trigger('focus')

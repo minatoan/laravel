@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Loại món</label>
-                        <select class="form-control" readonly name="maloaimon" id="ma_loai_mon">
+                        <select class="form-control"  name="maloaimon" id="ma_loai_mon">
                             @foreach($loaimon as $lm)
                             <option @if($lm->id == $mn->maloaimon)
                                 {{"selected"}}
@@ -33,11 +33,9 @@
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Tên tổ chức</label>
-                        <select class="form-control" name="matc" id="ma_tc">
+                        <select class="form-control" re name="matc" readonly>
                             @foreach($tochuc as $tc)
-                            <option @if($tc->id == $mn->matc)
-                                {{"selected"}}
-                                @endif
+                            <option                                
                                 value="{{$tc->id}}">{{$tc->tentc}}</option>
                             @endforeach
                         </select>
