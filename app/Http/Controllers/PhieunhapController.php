@@ -15,13 +15,14 @@ use Cart, Auth;
 use DB;
 class PhieunhapController extends Controller
 {
-    public function getPhieunhap()
+    public function getPhieunhap($id)
     {
         $id_nv = Auth::id();
         $phieunhap = phieunhap::all();
         $tochuc = tochuc::all();
-        $ncc = ncc::all();
+        $ncc = ncc::where('matc', $id)->get();
+        $hanghoa = hanghoa::where('matc', $id)->get();
 
-        return view('admin.nhaphang.nhaphang',compact( 'id_nv','phieunhap','tochuc','ncc'));
+        return view('admin.nhaphang.nhaphang',compact( 'id_nv','phieunhap','tochuc','ncc','hanghoa'));
     }
 }

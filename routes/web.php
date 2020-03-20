@@ -312,8 +312,8 @@ Route::group(['prefix'=>''],function(){
         //admin/phieunhap
         Route::group(['prefix'=>''],function(){
 
-            Route::get('nhaphang', [
-                'as'=> 'nhaphang-them',
+            Route::get('get-nhaphang-theo-tochuc/{idtc}/{idnv}', [
+                'as'=> 'get-nhaphang-theo-tochuc',
                 'uses'=> 'PhieunhapController@getPhieunhap'
             ]);
             // Route::post('hanghoa', [

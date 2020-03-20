@@ -50,6 +50,9 @@
                                     <label>Sản phẩm</label>
                                     <select class="form-control ">
                                         <option value="" disabled selected>Chọn sản phẩm</option>
+                                        @foreach($hanghoa as $hh)
+                                    <option value="{{$hh->id}}">{{$hh->tenhang}}</option>
+                                    @endforeach
                                     </select>
                                 </div>
                                 <div class="col-sm-2 ">
