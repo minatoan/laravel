@@ -110,7 +110,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-<script src="http://www.position-absolute.com/creation/print/jquery.printPage.js"></script>
+<!-- <script src="http://www.position-absolute.com/creation/print/jquery.printPage.js"></script> -->
+<script src="{{asset('dist/js/jquery.printPage.js')}}"></script>
+
       <script>
         $(document).ready(function() {
             $(".btnPrint").printPage();
@@ -122,8 +124,12 @@
 <!-- <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>-->
         {!! Toastr::message() !!} 
 <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
-<link rel="stylesheet prefetch" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+<!-- <link rel="stylesheet prefetch" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css"> -->
+<!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script> -->
+<script src="{{asset('dist/css/datepicker.css')}}"></script>
+
+<script src="{{asset('dist/js/bootstrap-datepicker.js')}}"></script>
+
 
 <script type="text/javascript">
 $(function () {  

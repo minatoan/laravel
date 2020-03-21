@@ -316,25 +316,9 @@ Route::group(['prefix'=>''],function(){
                 'as'=> 'get-nhaphang-theo-tochuc',
                 'uses'=> 'PhieunhapController@getPhieunhap'
             ]);
-            // Route::post('hanghoa', [
-            //     'as'=> 'hanghoa-them',
-            //     'uses'=> 'HangHoacontroller@postThemHangHoa'
-            // ]);
+        
     
-            // Route::get('hanghoa/{id?}', [
-            //     'as'=> 'hanghoa-sua',
-            //     'uses'=> 'HangHoacontroller@getSuaHangHoa'
-            // ]);
-    
-            // Route::post('hanghoa/{id?}', [
-            //     'as'=> 'hanghoa-sua',
-            //     'uses'=> 'HangHoacontroller@postSuaHangHoa'
-            // ]);
-    
-            // Route::get('xoahanghoa/{id?}', [
-            //     'as'=> 'hanghoa-xoa',
-            //     'uses'=> 'HangHoacontroller@getXoaHangHoa'
-            // ]);
+            
         });
 
          //admin/nhacungcap

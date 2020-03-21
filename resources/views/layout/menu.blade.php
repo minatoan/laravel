@@ -33,7 +33,7 @@
                         <i class="nav-icon fas fa-building"></i>                        
                         <p>
                             Tổ chức
-                            <span class="right badge badge-danger">New</span>
+                            {{-- <span class="right badge badge-danger">New</span> --}}
                         </p>
                     </a>
                 </li>

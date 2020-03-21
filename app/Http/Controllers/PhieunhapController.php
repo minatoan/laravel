@@ -25,4 +25,5 @@ class PhieunhapController extends Controller
 
         return view('admin.nhaphang.nhaphang',compact( 'id_nv','phieunhap','tochuc','ncc','hanghoa'));
     }
+    
 }
