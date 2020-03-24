@@ -18,4 +18,8 @@ class chitietbill extends Model
     {
         return $this->hasMany('App\menu','mamon','id');        
     } 
+    public function ban()
+    {
+        return $this->hasManyThrough('App\ban','App\bill','mabill','maban','id');        
+    }
 }

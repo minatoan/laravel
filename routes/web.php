@@ -232,8 +232,8 @@ Route::group(['prefix'=>''],function(){
             'uses' => 'Ordercontroller@getbill'
         ]);
 
-        Route::get('likebill', [
-            'as' => 'likebill',
+        Route::get('get-likebill-theo-tochuc/{idtc}/{idnv}', [
+            'as' => 'get-likebill-theo-tochuc',
             'uses' => 'Ordercontroller@likebill'
         ]);
         
@@ -306,6 +306,7 @@ Route::group(['prefix'=>''],function(){
             'as'=> 'hanghoa-xoa',
             'uses'=> 'HangHoacontroller@getXoaHangHoa'
         ]);
+        
     });
     
     
@@ -315,6 +316,17 @@ Route::group(['prefix'=>''],function(){
             Route::get('get-nhaphang-theo-tochuc/{idtc}/{idnv}', [
                 'as'=> 'get-nhaphang-theo-tochuc',
                 'uses'=> 'PhieunhapController@getPhieunhap'
+            ]);
+
+
+            Route::post('get-nhaphang-theo-tochuc-to-cart/{idtc}/{idnv}', [
+                'as'=> 'get-nhaphang-theo-tochuc-to-cart',
+                'uses'=> 'PhieunhapController@getPhieunhapcart'
+            ]);
+
+            Route::post('add-nhaphang-theo-tochuc-to-cart/{idtc}/{idnv}', [
+                'as'=> 'add-nhaphang-theo-tochuc-to-cart',
+                'uses'=> 'PhieunhapController@addPhieunhapcart'
             ]);
         
     

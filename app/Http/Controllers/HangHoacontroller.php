@@ -20,12 +20,13 @@ class HangHoacontroller extends Controller
         $tochuc = tochuc::where('id', $id)->get();
         return view('admin.hanghoa.hanghoa',['hanghoa'=>$hanghoa, 'tochuc' => $tochuc]);
     }
+    
 
     public function postThemHangHoa(Request $request)
     {
         $this->validate($request,
             [
-                'tenhang' => 'required|unique:hanghoa,tenhang|min:3|max:100',
+                'tenhang' => 'required|min:3|max:100',
                 'soluong' => 'required',
                 'dvt' => 'required',
                 'matc' => 'required',

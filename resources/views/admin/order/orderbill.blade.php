@@ -38,14 +38,17 @@
                                     <br></h5>
                                 <?php 
                                         $tenban = DB::table('ban')->where('maloaiban', $lb->id)->get();   
-                                        foreach (Cart::getContent() as $key => $value)
+                                        foreach (Cart::getContent() as $key => $value){
+                                        }
                                     ?>
                                 @foreach($tenban as $od)
                                 <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
                                     <a href="{{route('hien-thi',[$customer->matc, $od->id])}}"><button type="button"
-                                            class="btn btn-info">{{ $od->tenban }}</button>
+                                            class="btn btn-info a">{{ $od->tenban }}</button>
                                     </a>
                                 </div>
+                                
+
                                 @endforeach
                                 @endforeach
                             </span>
@@ -143,8 +146,9 @@
                                     <button type="button" class="btn btn-default" data-toggle="modal"
                                         data-target="#chuyenban"><i class="fas fa-exchange-alt"></i>
                                         Chuyển bàn</button>
-                                    <a href="{{route('print-cart',[$customer->matc, $id_ban->id])}}" class="btnPrint"><button type="button"
-                                            class="btn btn-default" data-toggle="modal" data-target="#showhd">
+                                    <a href="{{route('print-cart',[$customer->matc, $id_ban->id])}}"
+                                        class="btnPrint"><button type="button" class="btn btn-default"
+                                            data-toggle="modal" data-target="#showhd">
                                             <i class="fas fa-print"></i> Xuất bill</button></a>
                                     <button type="submit" class="btn btn-default">
                                         <i class="fas fa-donate"></i> Thanh toán</button>
@@ -188,7 +192,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-danger">Chuyển</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                             </div>
                         </form>
                     </div>

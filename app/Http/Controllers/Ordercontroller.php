@@ -35,28 +35,29 @@ class Ordercontroller extends Controller
         $nhanvien = nhanvien::where('matc', $id)->get();
         $bill  = bill::where('matc', $id)->orderBy('id', 'DESC')->get();
         $chitietbill = chitietbill::all();
-        
+        $ban = ban::find($id);
 
-        return view('admin.order.bill', compact('bill', 'chitietbill','nhanvien','tochuc'));
+        // dd($bill);
+
+        return view('admin.order.bill', compact('bill', 'chitietbill','nhanvien','tochuc','ban'));
     }
 
-    public function likebill(Request $req)
+    public function likebill($id, Request $req)
     {
+
         $dateform = $req->dateform;
         $dateto = $req->dateto;
-        $bill  = bill::orderBy('id', 'DESC')->whereBetween('ngaytao', [$dateform, date('Y-m-d', strtotime($dateto. '+1 days'))])->get();
+        $bill  = bill::where('matc', $id)->orderBy('id', 'DESC')->whereBetween('ngaytao', [$dateform, date('Y-m-d', strtotime($dateto. '+1 days'))])->get();
         return view('admin.order.bill' ,compact('bill'));
     }
     //get ctbill
-    public function getctbill($id)
-    {
-        $tenban = ban::where('matc', $id)->get();
-        $loaimon = loaimon::where('matc', $id)->get();
-        $nhanvien = nhanvien::where('matc', $id)->get();
-        $bill  = bill::find($id);
-        
-        return view('admin.order.chitietbill', compact('bill','nhanvien','loaimon','tenban'));
-    }
+    // public function getctbill($id)
+    // {
+    
+    //     $bill  = bill::find($id);
+    //     $ban = ban::find($id);
+    //     return view('admin.order.bill', compact('bill','ban'));
+    // }
 
     //get ban ra bill
     public function hienthi($id_tc, $id_ban)
@@ -142,8 +143,7 @@ class Ordercontroller extends Controller
                 'price'      => $product->dongia,
                 'attributes' => array(
                     'id_ban' => $id_ban,
-                    'id_sp' => $id_sp,
-
+                    'id_sp' => $id_sp,  
                 ),
             )
         );
