@@ -16,9 +16,9 @@ use Cart, Auth;
 use DB;
 class PhieunhapController extends Controller
 {
+    
     public function getPhieunhap($id)
     {
-        // Cart::clear();
 
         $id_nv = Auth::id();
         $phieunhap = phieunhap::all();
@@ -30,9 +30,12 @@ class PhieunhapController extends Controller
 
     public function getPhieunhapcart($id_tc, $id_nv, Request $req)
     {
-        // Cart::clear();
-
-        Cart::add(array(
+        
+        $data_list = $req->session()->get('data');
+        if ($data_list==null){
+            $data_list=array();
+        }
+        $data = array(
             'id' => time(), // inique row ID
             'name' => $req->tensp,
             'price' => $req->dongia,
@@ -44,52 +47,61 @@ class PhieunhapController extends Controller
                 'ncc' => $req->ncc,
                 'id_nhanvien' => $id_nv,
                 'id_tc' => $id_tc,
-                'id_sp' => $req->tensp,
             )
-        ));
-        
-        // var_dump(Cart::getContent());
+        );
+        array_push($data_list, $data);
+        $req->session()->put('data', $data_list);
+
+
+
+        // var_dump($data_list);
         $id_nv = Auth::id();
         $phieunhap = phieunhap::all();
         $tochuc = tochuc::all();
         $ncc = ncc::where('matc', $id_tc)->get();
         $hanghoa = hanghoa::where('matc', $id_tc)->get();
-        return redirect()->back()->with(Toastr::success('Thêm thành công'));;
+        // var_dump($data);
+        return redirect()->back();
         return view('admin.nhaphang.nhaphang',compact( 'id_nv','phieunhap','tochuc','ncc','hanghoa'));
     }
 
     public function addPhieunhapcart($id_tc, $id_nv, Request $req)
     {
-        $cart = Cart::getContent();
+        // $cart = Cart::getContent();
         // dd($cart->toArray());
-        // Cart::clear();
 
+        $data = $req->session()->get('data');
+        $summ=0;
+    foreach ($data as $value) {
+        $total = ($value['quantity'] * $value['price']);
+        $summ+= $total;
+    }
         $phieunhap = new phieunhap;
         $phieunhap->manv = $id_nv;
         $phieunhap->ncc = $req->ncc;
-        $phieunhap->tongtien = Cart::getTotal();
+        $phieunhap->tongtien = $summ;
         $phieunhap->ghichu = $req->ghichu;
         $phieunhap->matc = $id_tc;
         $phieunhap->save();
-
-        foreach ($cart as $value) {
+        
+        foreach ($data as $value) {
             $ctphieunhap = new ctphieunhap;
             $ctphieunhap->maphieunhap = $phieunhap->id;
-            $ctphieunhap->mahang = $value['attributes']['id_sp'];
-            $ctphieunhap->soluong = $value->quantity;
+            $ctphieunhap->mahang = $value['name'];
+            $ctphieunhap->soluong = $value['quantity'];
             $ctphieunhap->dvt = $value['attributes']['donvitinh'];
-            $ctphieunhap->dongia = $value->price;
+            $ctphieunhap->dongia = $value['price'];
             $ctphieunhap->save();
 
 
-            $hanghoa = hanghoa::where('id', $value['attributes']['id_sp'])->first();
-            $hanghoa->soluong = $hanghoa->soluong + $value->quantity;
+            $hanghoa = hanghoa::where('id', $value['name'])->first();
+            $hanghoa->soluong = $hanghoa['soluong'] + $value['quantity'];
             $hanghoa->save();
         }
 
 
-        Cart::clear();
-        return redirect()->back()->with(Toastr::success('Nhập hàng thành công'));;
+        $req->session()->forget('data');
+        return redirect()->back()->with(Toastr::success('Nhập hàng thành công'));
 
     }
     

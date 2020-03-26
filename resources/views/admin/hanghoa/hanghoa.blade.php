@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#them">Thêm
                                 mới</button>
-                            <a href="admin/nhaphang"><button type="button" class="btn btn-success">Nhập hàng</button></a>
+                            <a href="{{route('get-nhaphang-theo-tochuc', [$customer->matc, $customer->id])}}"><button type="button" class="btn btn-success">Nhập hàng</button></a>
                             <a href="admin/xuathang"><button type="button" class="btn btn-danger">Xuất hàng</button></a>
 
                         </div>

@@ -282,6 +282,10 @@ Route::group(['prefix'=>''],function(){
 
     //admin/hanghoa
     Route::group(['prefix'=>''],function(){
+        Route::get('get-nhaphang-theo-tochuc/{idtc}/{idnv}', [
+            'as'=> 'get-nhaphang-theo-tochuc',
+            'uses'=> 'HangHoacontroller@getPhieunhaphanghoa'
+        ]);
 
         Route::get('get-hanghoa-theo-tochuc/{idtc}/{idnv}', [
             'as'=> 'get-hanghoa-theo-tochuc',
@@ -312,6 +316,7 @@ Route::group(['prefix'=>''],function(){
     
         //admin/phieunhap
         Route::group(['prefix'=>''],function(){
+            
 
             Route::get('get-nhaphang-theo-tochuc/{idtc}/{idnv}', [
                 'as'=> 'get-nhaphang-theo-tochuc',
@@ -328,7 +333,9 @@ Route::group(['prefix'=>''],function(){
                 'as'=> 'add-nhaphang-theo-tochuc-to-cart',
                 'uses'=> 'PhieunhapController@addPhieunhapcart'
             ]);
-        
+
+            
+
     
             
         });
