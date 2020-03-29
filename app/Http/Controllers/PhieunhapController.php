@@ -11,21 +11,44 @@ use App\phieunhap;
 use App\ctphieunhap;
 use App\nhanvien;
 use App\tochuc;
-use App\ncc;
+use App\nhacungcap;
 use Cart, Auth;
 use DB;
 class PhieunhapController extends Controller
 {
     
-    public function getPhieunhap($id)
+    public function getPhieunhap($id,Request $req)
     {
-
+        // $req->session()->forget('data');
         $id_nv = Auth::id();
         $phieunhap = phieunhap::all();
         $tochuc = tochuc::all();
-        $ncc = ncc::where('matc', $id)->get();
+        $ncc = nhacungcap::where('matc', $id)->get();
         $hanghoa = hanghoa::where('matc', $id)->get();
         return view('admin.nhaphang.nhaphang',compact( 'id_nv','phieunhap','tochuc','ncc','hanghoa'));
+    }
+
+    //get lichsu nhap
+    public function getdonnhap($id)
+    {
+        $tochuc = tochuc::where('id', $id)->first();
+        $nhanvien = nhanvien::where('matc', $id)->get();
+        $phieunhap  = phieunhap::where('matc', $id)->orderBy('id', 'DESC')->get();
+        $ctphieunhap = ctphieunhap::all();
+        $hanghoa = hanghoa::all();
+        $ncc = nhacungcap::where('matc', $id)->get();
+
+
+        return view('admin.nhaphang.lichsunhap', compact('phieunhap', 'ctphieunhap','nhanvien','tochuc','hanghoa','ncc'));
+    }
+
+    public function likenhap($id, Request $req)
+    {
+
+        $dateform = $req->dateform;
+        $dateto = $req->dateto;
+        $phieunhap  = phieunhap::where('matc', $id)->orderBy('id', 'DESC')->whereBetween('ngaynhap', [$dateform, date('Y-m-d', strtotime($dateto. '+1 days'))])->get();
+        return view('admin.nhaphang.lichsunhap' ,compact('phieunhap'));
     }
 
     public function getPhieunhapcart($id_tc, $id_nv, Request $req)
@@ -35,6 +58,20 @@ class PhieunhapController extends Controller
         if ($data_list==null){
             $data_list=array();
         }
+        $this->validate($req,
+        [
+            'tensp' => "required",
+            'soluong' => "required",            
+            'dongia' => "required",            
+
+            
+        ]
+        ,
+        [
+            'tensp.required' => 'Lỗi rồi! Bạn chưa chọn tên sản phẩm ',
+            'soluong.required' => 'Lỗi rồi! Bạn chưa chọn số lượng ',          
+            'dongia.required' => 'Lỗi rồi! Bạn chưa chọn đơn giá ',
+        ]);
         $data = array(
             'id' => time(), // inique row ID
             'name' => $req->tensp,
@@ -58,17 +95,30 @@ class PhieunhapController extends Controller
         $id_nv = Auth::id();
         $phieunhap = phieunhap::all();
         $tochuc = tochuc::all();
-        $ncc = ncc::where('matc', $id_tc)->get();
+        $ncc = nhacungcap::where('matc', $id_tc)->get();
         $hanghoa = hanghoa::where('matc', $id_tc)->get();
         // var_dump($data);
         return redirect()->back();
         return view('admin.nhaphang.nhaphang',compact( 'id_nv','phieunhap','tochuc','ncc','hanghoa'));
     }
+   
 
     public function addPhieunhapcart($id_tc, $id_nv, Request $req)
     {
-        // $cart = Cart::getContent();
-        // dd($cart->toArray());
+        $this->validate($req,
+            [
+                'ncc' => "required",
+                'tongtien' => "required|min:1",
+
+
+            ]
+            ,
+            [
+                'ncc.required' => 'Lỗi rồi! Bạn chưa chọn nhà cung cấp',
+                'tongtien.required' => 'Lỗi rồi! Bạn chưa có sản phẩm',
+
+
+            ]);
 
         $data = $req->session()->get('data');
         $summ=0;
@@ -76,6 +126,7 @@ class PhieunhapController extends Controller
         $total = ($value['quantity'] * $value['price']);
         $summ+= $total;
     }
+
         $phieunhap = new phieunhap;
         $phieunhap->manv = $id_nv;
         $phieunhap->ncc = $req->ncc;
@@ -102,6 +153,15 @@ class PhieunhapController extends Controller
 
         $req->session()->forget('data');
         return redirect()->back()->with(Toastr::success('Nhập hàng thành công'));
+
+    }
+    //xóa hàng trong nhaphang
+    public function xoacart($id, Request $req)
+    {   
+        
+        Session::forget('id');
+        return redirect()->back();
+        
 
     }
     

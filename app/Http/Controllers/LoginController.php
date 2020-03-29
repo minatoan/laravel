@@ -49,9 +49,10 @@ class LoginController extends Controller
         {
             // return redirect()->back();
             $user = Auth::check();
-            $id = Auth::user()['id'];
-            $customer = nhanvien::where('id',$id)->first();
-            return redirect('order-get', $customer->matc);
+            $id = Auth::id();
+            return redirect()->route('order-get', $id);
+            // $customer = nhanvien::where('id',$id)->first();
+            // return redirect('order-get', $customer->matc);
 
         }
         else

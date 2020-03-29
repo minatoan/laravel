@@ -8,10 +8,10 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title ">Lịch sử bill</h4>
+                        <h4 class="card-title ">Lịch sử nhập hàng</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('get-likebill-theo-tochuc',[$customer->matc, $customer->id])}}"
+                        <form action="{{route('get-donnhaphang-theo-tochuc',[$customer->matc, $customer->id])}}"
                             method="get">
                             <div class="form-group row">
                                 <div class="col-sm-1.5" style="padding-right: 7px">
@@ -26,45 +26,44 @@
                                     <label class="col-form-label" style="color: #ffffff">.</label>
                                     <button type="submit" class="btn btn-primary form-control">Tìm</button>
                                 </div>
-                        </form>                        
+                        </form>
                     </div>
-                            
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover" style="width:290px">
-                                    <thead class=" text-primary">
-                                        <th>Tổng số bill</th>
-                                        <th>Tổng tiền bán ra</th>
-                                        </th>
-                                    </thead>
-                                    <tbody>
-                                        @php
-                                        $ttt = 0;
-                                        $tongbill = 0;
-                                        @endphp
-                                        @foreach($bill as $bi)
-                                        <?php                                        
-                                        $ttt +=  $bi->tongtien ;
-                                        $tsl[0] =  $bi->id;
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover" style="width:290px">
+                                <thead class=" text-primary">
+                                    <th>Tổng số đơn</th>
+                                    <th>Tổng tiền nhập vào</th>
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    @php
+                                    $ttt = 0;
+                                    $tongdon = 0;
+                                    @endphp
+                                    @foreach($phieunhap as $pnhap)
+                                    <?php                                        
+                                        $ttt +=  $pnhap->tongtien ;
+                                        $tsl[0] =  $pnhap->id;
                                         count($tsl);
-                                        $tongbill += count($tsl);
+                                        $tongdon += count($tsl);
                                         ?>
-                                        @endforeach
-                                        <tr>
-                                            <td>{{($tongbill)}} bill</td>
-                                            <td>{{number_format($ttt,0,",",".")}} VNĐ</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    @endforeach
+                                    <tr>
+                                        <td>{{($tongdon)}} đơn</td>
+                                        <td>{{number_format($ttt,0,",",".")}} VNĐ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     <div class="table-responsive">
                         <table id="datatables" class="table table-bordered table-striped table-hover">
 
                             <thead class=" text-primary">
                                 <th>STT</th>
                                 <th>Tên nhân viên</th>
-                                <th>Ngày tạo</th>
-                                <th>Bàn</th>
+                                <th>Ngày nhập</th>                                
                                 <th>Tổ chức</th>
+                                <th>Nhà cung cấp</th>
                                 <th>Thao tác</th>
                                 </th>
                             </thead>
@@ -72,18 +71,18 @@
                                 @php
                                 $i=0;
                                 @endphp
-                                @foreach($bill as $bbl)
+                                @foreach($phieunhap as $pnhap)
                                 <tr>
                                     <td>{{++$i}}</td>
-                                    <td>{{$bbl->nhanvien->tennv}}</td>
-                                    <td>{{$bbl->ngaytao}}</td>
-                                    <td>{{$bbl->ban->tenban}}</td>
-                                    <td>{{$bbl->ban->tochuc->tentc}}</td>
-
+                                    <td>{{$pnhap->nhanvien->tennv}}</td>
+                                    <td>{{$pnhap->ngaynhap}}</td>
+                                    <td>{{$pnhap->tochuc->tentc}}</td>
+                                    <td>{{$pnhap->nhacungcap->tenncc}}</td>
+                                    
                                     <td class="left">
                                         <a>
                                             <button type="button" class="btn " data-toggle="modal"
-                                                data-target="#showct{{$bbl->id}}" style="background-color:#605ca8;"><i
+                                                data-target="#showct{{$pnhap->id}}" style="background-color:#605ca8;"><i
                                                     class="fas fa-copy" style="color:#ffffff"> Xem chi tiết</i>
                                             </button> </a>
                                     </td>
@@ -94,15 +93,16 @@
                     </div>
                     </form>
                     <br>
-
+                    <!-- bang thong ke -->
+                    
                 </div>
 
             </div>
         </div>
         <!-- Sửa -->
         <!-- Modal -->
-        @include('admin.order.chitietbill')
-
+        
+        @include('admin.nhaphang.chitietnhap')
         <!-- Đóng sửa -->
     </div>
 </div>

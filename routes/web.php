@@ -334,10 +334,23 @@ Route::group(['prefix'=>''],function(){
                 'uses'=> 'PhieunhapController@addPhieunhapcart'
             ]);
 
+            Route::get('xoa-cart/{idtc}/{idnv}/{idsp}', [
+                'as' => 'xoa-cart',
+                'uses' => 'PhieunhapController@xoacart'
+            ]);
+
+            //get don nhap hang
+            Route::get('get-donnhap-theo-tochuc/{idtc}/{idnv}', [
+                'as' => 'get-donnhap-theo-tochuc',
+                'uses' => 'PhieunhapController@getdonnhap'
+            ]);
+
+            Route::get('get-donnhaphang-theo-tochuc/{idtc}/{idnv}', [
+                'as' => 'get-donnhaphang-theo-tochuc',
+                'uses' => 'PhieunhapController@likenhap'
+            ]);
             
 
-    
-            
         });
 
          //admin/nhacungcap

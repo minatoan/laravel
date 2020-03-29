@@ -9,6 +9,7 @@ class ctphieuxuat extends Model
     //
     protected $table = "ctphieuxuat";
     public $timestamps = false;
+    
     public function hanghoa()
     {
         return $this->hasMany('App\hanghoa','mahang','id');        

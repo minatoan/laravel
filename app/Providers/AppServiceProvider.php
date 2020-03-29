@@ -63,6 +63,20 @@ class AppServiceProvider extends ServiceProvider
             // dd($customer);
             $view->with(['customer' => $customer]);
         });
+        view()->composer('admin.nhaphang.lichsunhap', function($view){
+            $user = Auth::check();
+            $id = Auth::user()['id'];
+            $customer = nhanvien::where('id',$id)->first();
+            // dd($customer);
+            $view->with(['customer' => $customer]);
+        });
+        view()->composer('admin.xuathang.xuathang', function($view){
+            $user = Auth::check();
+            $id = Auth::user()['id'];
+            $customer = nhanvien::where('id',$id)->first();
+            // dd($customer);
+            $view->with(['customer' => $customer]);
+        });
         view()->composer('admin.order.bill', function($view){
             $user = Auth::check();
             $id = Auth::user()['id'];
@@ -71,6 +85,13 @@ class AppServiceProvider extends ServiceProvider
             $view->with(['customer' => $customer]);
         });
         view()->composer('admin.hanghoa.hanghoa', function($view){
+            $user = Auth::check();
+            $id = Auth::user()['id'];
+            $customer = nhanvien::where('id',$id)->first();
+            // dd($customer);
+            $view->with(['customer' => $customer]);
+        });
+        view()->composer('admin.nhaphang.lichsunhap', function($view){
             $user = Auth::check();
             $id = Auth::user()['id'];
             $customer = nhanvien::where('id',$id)->first();

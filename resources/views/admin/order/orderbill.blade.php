@@ -1,9 +1,6 @@
 @extends('layout.admin')
 @extends('layout.menu')
 @section('content')
-
-
-
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
@@ -19,7 +16,6 @@
     </div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
-
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
@@ -28,7 +24,6 @@
             <div class="col-md-5">
                 <div class="sticky-top mb-3">
                     <div class="card card-primary card-outline">
-
                         <!-- THE CALENDAR -->
                         <div class="card-body">
                             <!-- code ..... -->
@@ -39,18 +34,25 @@
                                 <?php 
                                         $tenban = DB::table('ban')->where('maloaiban', $lb->id)->get();   
                                         foreach (Cart::getContent() as $key => $value){
+                                        
                                         }
                                     ?>
+                                    <!-- <style>
+                                        .b{
+                                            color:red;
+                                        }
+                                    </style>  -->
                                 @foreach($tenban as $od)
-                                <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
+                                <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px" >
                                     <a href="{{route('hien-thi',[$customer->matc, $od->id])}}"><button type="button"
-                                            class="btn btn-info a">{{ $od->tenban }}</button>
+                                            class="btn btn-info b">{{ $od->tenban }}</button>
                                     </a>
                                 </div>
+                                @endforeach
+                                @endforeach
                                 
 
-                                @endforeach
-                                @endforeach
+                            
                             </span>
                         </div>
                         <!-- code ..... -->
@@ -67,7 +69,6 @@
                     <div class="card card-outline card-primary">
                         <div class="card-header">
                             <h3 class="card-title">Bill </h3>
-
                         </div>
                         <div class="card-body">
                             <span>

@@ -16,6 +16,9 @@
                 @endforeach
                 <br>
                 <h5 align="left">Ngày: {{($bbl->ngaytao)}}</h5>
+                <h5 align="left">Thu ngân: {{$bbl->nhanvien->tennv}}</h5>
+
+                
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover">
                         <thead class=" text-primary">

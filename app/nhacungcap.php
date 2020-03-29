@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ncc extends Model
+class nhacungcap extends Model
 {
        //
-protected $table = "ncc";
+protected $table = "nhacungcap";
     
 public $timestamps = false;
 

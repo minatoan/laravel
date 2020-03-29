@@ -16,4 +16,8 @@ public function tochuc()
 {
     return $this->belongsTo('App\tochuc','matc','id');        
 } 
+public function ctphieunhap()
+{
+    return $this->hasMany('App\ctphieunhap','mahang','id');        
+}
 }

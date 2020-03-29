@@ -10,6 +10,13 @@
                     <div class="card-header card-header-primary">
                         <h4 class="card-title ">Nhập hàng</h4>
                     </div>
+                    @if(count($errors)>0)
+                    <div class="alert alert-warning">
+                        @foreach($errors->all() as $err)
+                        {{$err}}<br>
+                        @endforeach
+                    </div>
+                    @endif
                     <div class="card-body">
                         <form action="{{route('get-nhaphang-theo-tochuc-to-cart', [$customer->matc, $customer->id])}}"
                             method="post" enctype="multipart/form-data">
@@ -32,7 +39,8 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <label>Đơn vị tính</label>
-                                    <select name="donvitinh" class="form-control">
+                                    <select name="donvitinh"  class="form-control">
+                                    <option value="" disabled selected>Chọn đơn vị tính</option>
                                         <option value="Két">Két</option>
                                         <option value="Chai">Chai</option>
                                         <option value="Lon">Lon</option>
@@ -58,14 +66,64 @@
                             {{csrf_field()}}
                             <?php $data = Request::session()->get('data');
                                         $summ=0;  ?>
-                            @if($data)                            
+                            @if($data)
                             @foreach($data as $value)
                             <?php                                        
                                         $total = ($value['quantity'] * $value['price']);
                                         $summ+= $total;
                                         ?>
                             @endforeach
-                            @endif  
+                            @endif
+
+                            <div class="table-responsive">
+                                <table id="tablee" class="table table-bordered table-striped table-hover">
+                                    <thead class=" text-primary">
+                                        <th>STT</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn vị tính</th>
+                                        <th>Đơn giá</th>
+                                        <th>Thành tiền</th>
+                                        <th>Thao tác</th>
+
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                        $i=0;
+                                        $sum = 0;
+                                        $data = Request::session()->get('data');
+                                        @endphp
+                                        @if($data)
+
+                                        @foreach($data as $value)
+                                        @php
+                                        $sp = DB::table('hanghoa')->where('id', $value['name'])->first();
+                                        // var_dump($sp);
+                                        $total = ($value['quantity'] * $value['price']);
+                                        $sum+= $total;
+                                        @endphp
+                                        <tr>
+                                            <td>{{++$i}}</td>
+                                            <td>{{$sp->tenhang}}</td>
+                                            <td>{{$value['quantity']}}</td>
+                                            <td>{{$value['attributes']['donvitinh']}}</td>
+                                            <td>{{number_format($value['price'],0,",",".")}}</td>
+                                            <td>{{number_format($value['price']*$value['quantity'],0,",",".")}}</td>
+                                            <td class="left">
+                                                <a href="{{route('xoa-cart', [$customer->matc, $customer->id, $value['id']])}}"
+                                                    class="btn"><i class="fas fa-times"></i></a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+
+
+                                        @endif
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br>
                             <div class="col-md-12">
                                 <div class="form-group row">
                                     <div class="col-sm-2 ">
@@ -94,8 +152,8 @@
                                     </div>
                                     <div class="col-sm-2 ">
                                         <label>Tổng tiền</label>
-                                        <input type="text" readonly  name="tongtien" class="form-control"
-                                            value="{{number_format($summ,0,",",".")}}" >
+                                        <input type="text" readonly name="tongtien" class="form-control"
+                                            value="{{number_format($summ,0,",",".")}}">
                                     </div>
                                     <div class="col-sm-4 ">
                                         <label>Ghi chú</label>
@@ -103,56 +161,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="table-responsive">
-                                <table id="tablee" class="table table-bordered table-striped table-hover">
-                                    <thead class=" text-primary">
-                                        <th>STT</th>
-                                        <th>Sản phẩm</th>
-                                        <th>Số lượng</th>
-                                        <th>Đơn vị tính</th>
-                                        <th>Đơn giá</th>
-                                        <th>Thành tiền</th>
-                                        <th>Thao tác</th>
-
-                                        </th>
-                                    </thead>
-                                    <tbody>
-                                        @php
-                                        $i=0;
-                                        $sum = 0;
-                                        $data = Request::session()->get('data');
-                                        @endphp
-                                        @if($data)
-                                        
-                                        @foreach($data as $value)
-                                        @php
-                                        $sp = DB::table('hanghoa')->where('id', $value['name'])->first();
-                                        // var_dump($sp);
-                                        $total = ($value['quantity'] * $value['price']);
-                                        $sum+= $total;
-                                        @endphp
-                                        <tr>
-                                            <td>{{++$i}}</td>
-                                            <td>{{$sp->tenhang}}</td>
-                                            <td>{{$value['quantity']}}</td>
-                                            <td>{{$value['attributes']['donvitinh']}}</td>
-
-                                            <td>{{number_format($value['price'],0,",",".")}}</td>
-                                            <td>{{number_format($value['price']*$value['quantity'],0,",",".")}}</td>
-                                            <td class="left">
-                                                        <a href=""
-                                                            class="btn"><i class="fas fa-times"></i></a>
-                                                    </td>
-                                        </tr>
-                                        @endforeach
-                                        
-
-                                        @endif
-
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
+                            <div align="center">
                                 <button class="btn btn-success">
                                     Lưu</button>
                             </div>

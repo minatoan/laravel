@@ -12,10 +12,10 @@ class ctphieunhap extends Model
 
     public function hanghoa()
     {
-        return $this->hasMany('App\hanghoa','mahang','id');        
+        return $this->belongsTocó ('App\hanghoa','mahang','id');        
     }
-    public function phieuxuat()
+    public function phieunhap()
     {
-        return $this->belongsTo('App\phieuxuat','maphieunhap','id');        
+        return $this->belongsTo('App\phieunhap','maphieunhap','id');        
     }
 }

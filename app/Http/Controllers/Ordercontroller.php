@@ -74,7 +74,7 @@ class Ordercontroller extends Controller
         // Cart::clear();
                 // dd($tochuc);
 
-        return view('admin.order.orderbill', compact('loaimon', 'tenban', 'id_ban', 'mabill', 'menu', 'cart', 'id_nv','id_tc','tochuc','loaiban'));
+        return view('admin.order.orderbill', compact('loaimon', 'tenban', 'id_ban', 'menu', 'cart', 'id_nv','id_tc','tochuc','loaiban'));
     }
 
     

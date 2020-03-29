@@ -150,11 +150,23 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/mailbox/compose.html" class="nav-link">
+                            <a href="{{route('get-donnhap-theo-tochuc', [$customer->matc, $customer->id])}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Lịch sử nhập kho</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Xuất kho</p>
                             </a>
-                        </li>                        
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Lịch sử xuất kho</p>
+                            </a>
+                        </li>                    
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">
