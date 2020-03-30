@@ -16,27 +16,38 @@ use DB;
 
 class PhieuxuatController extends Controller
 {
-    public function getPhieuxuat($id)
+   //xuat hang
+    public function getPhieuxuathang($id,Request $req)
     {
-
+        // $req->session()->forget('dataxuat');
         $id_nv = Auth::id();
         $phieuxuat = phieuxuat::all();
         $tochuc = tochuc::all();
         $hanghoa = hanghoa::where('matc', $id)->get();
-        return view('admin.xuathang.xuathang',compact( 'id_nv','phieuxuat','tochuc','hanghoa'));
+        return view('admin.nhaphang.xuathang',compact( 'id_nv','phieuxuat','tochuc','hanghoa'));
     }
 
     public function getPhieuxuatcart($id_tc, $id_nv, Request $req)
     {
         
-        $data_list = $req->session()->get('data');
-        if ($data_list==null){
-            $data_list=array();
+        $data_listxuat = $req->session()->get('dataxuat');
+        if ($data_listxuat==null){
+            $data_listxuat=array();
         }
-        $data = array(
+        $this->validate($req,
+        [
+            'tensp' => "required",
+            'soluong' => "required", 
+        ]
+        ,
+        [
+            'tensp.required' => 'Lỗi rồi! Bạn chưa chọn tên sản phẩm ',
+            'soluong.required' => 'Lỗi rồi! Bạn chưa chọn số lượng ',          
+        ]);
+        
+        $dataxuat = array(
             'id' => time(), // inique row ID
             'name' => $req->tensp,
-            'price' => $req->dongia,
             'quantity' => $req->soluong,
             'attributes' => array(
                 'ngaynhap' => $req->ngaynhap,
@@ -46,64 +57,72 @@ class PhieuxuatController extends Controller
                 'id_tc' => $id_tc,
             )
         );
-        array_push($data_list, $data);
-        $req->session()->put('data', $data_list);
-
-
+        array_push($data_listxuat, $dataxuat);
+        $req->session()->put('dataxuat', $data_listxuat);
+        //bat loi xuat hang
+        $dataxuat = $req->session()->get('dataxuat');
+        foreach ($dataxuat as $value) {
+            $hanghoa = hanghoa::where('id', $value['name'])->first();
+        }
+        if(($value['quantity'] )  >= ($hanghoa['soluong'])){
+            $req->session()->forget('dataxuat');
+            return redirect()->back()->with(Toastr::error('Số lượng vượt quá kho'));
+        }
 
         // var_dump($data_list);
         $id_nv = Auth::id();
         $phieuxuat = phieuxuat::all();
         $tochuc = tochuc::all();
-       
         $hanghoa = hanghoa::where('matc', $id_tc)->get();
         // var_dump($data);
         return redirect()->back();
-        return view('admin.xuathang.xuathang',compact( 'id_nv','phieuxuat','tochuc','hanghoa'));
+        return view('admin.nhaphang.xuathang',compact( 'id_nv','phieuxuat','tochuc','hanghoa'));
     }
 
     public function addPhieuxuatcart($id_tc, $id_nv, Request $req)
     {
-        // $cart = Cart::getContent();
-        // dd($cart->toArray());
-
-        $data = $req->session()->get('data');
-        $summ=0;
-    foreach ($data as $value) {
-        $total = ($value['quantity'] * $value['price']);
-        $summ+= $total;
-    }
-
+        $dataxuat = $req->session()->get('dataxuat');        
         $phieuxuat = new phieuxuat;
         $phieuxuat->manv = $id_nv;
         $phieuxuat->ghichu = $req->ghichu;
         $phieuxuat->matc = $id_tc;
         $phieuxuat->save();
         
-        foreach ($data as $value) {
+        foreach ($dataxuat as $value) {
             $ctphieuxuat = new ctphieuxuat;
             $ctphieuxuat->maphieuxuat = $phieuxuat->id;
             $ctphieuxuat->mahang = $value['name'];
             $ctphieuxuat->soluong = $value['quantity'];
             $ctphieuxuat->dvt = $value['attributes']['donvitinh'];
             $ctphieuxuat->save();
-
             $hanghoa = hanghoa::where('id', $value['name'])->first();
             $hanghoa->soluong = $hanghoa['soluong'] - $value['quantity'];
             $hanghoa->save();
         }
-
-
-        $req->session()->forget('data');
-        return redirect()->back()->with(Toastr::success('Xuất hàng thành công'));
+    
+    $req->session()->forget('dataxuat');
+    return redirect()->back()->with(Toastr::success('Xuất hàng thành công'));
+    
 
     }
-    //xóa hàng trong xuathang
-    public function xoacart( Request $req)
-    {   Session::forget('id');
-        // $req->session()->forget('id');  
-        return redirect()->back();
+    //get lichsu xuat
+    public function getdonxuat($id)
+    {
+        $tochuc = tochuc::where('id', $id)->first();
+        $nhanvien = nhanvien::where('matc', $id)->get();
+        $phieuxuat  = phieuxuat::where('matc', $id)->orderBy('id', 'DESC')->get();
+        $ctphieuxuat = ctphieuxuat::all();
+        $hanghoa = hanghoa::all();
+        // dd($phieuxuat);
+        return view('admin.nhaphang.lichsuxuat', compact('phieuxuat', 'ctphieuxuat','nhanvien','tochuc','hanghoa'));
+    }
 
+    public function likexuat($id, Request $req)
+    {
+        $dateform = $req->dateform;
+        $dateto = $req->dateto;
+        $phieuxuat  = phieuxuat::where('matc', $id)->orderBy('id', 'DESC')->whereBetween('ngayxuat', [$dateform, date('Y-m-d', strtotime($dateto. '+1 days'))])->get();
+        return view('admin.nhaphang.lichsuxuat' ,compact('phieuxuat'));
     }
     
 }

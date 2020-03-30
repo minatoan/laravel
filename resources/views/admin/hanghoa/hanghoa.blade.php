@@ -52,12 +52,7 @@
                                             <button type="button" class="btn btn-warning" data-toggle="modal"
                                                 data-target="#sua{{$hh->id}}"><i class="far fa-edit"
                                                     style="color:black"></i>
-                                            </button>
-                                            <a href=""><button type="button"
-                                                    class="btn btn-info"><i class="fas fa-copy"> Xem</i>
-                                                </button>
-                                            </a>
-
+                                            </button> 
                                         </td>
                                     </tr>
                                     @endforeach

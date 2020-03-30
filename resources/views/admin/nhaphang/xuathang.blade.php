@@ -47,7 +47,7 @@
                                 <div class="col-sm-2">
                                     <label>Đơn vị tính</label>
                                     <select name="donvitinh"  class="form-control">
-                                    <option value="" disabled selected>Chọn đơn vị tính</option>
+                                    <option value="" disabled selected>Chọn đơn vị tính</option>                                    
                                         <option value="Két">Két</option>
                                         <option value="Chai">Chai</option>
                                         <option value="Lon">Lon</option>

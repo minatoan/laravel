@@ -317,7 +317,7 @@ Route::group(['prefix'=>''],function(){
         //admin/phieunhap
         Route::group(['prefix'=>''],function(){
             
-
+            //trang nhap hang
             Route::get('get-nhaphang-theo-tochuc/{idtc}/{idnv}', [
                 'as'=> 'get-nhaphang-theo-tochuc',
                 'uses'=> 'PhieunhapController@getPhieunhap'
@@ -328,7 +328,7 @@ Route::group(['prefix'=>''],function(){
                 'as'=> 'get-nhaphang-theo-tochuc-to-cart',
                 'uses'=> 'PhieunhapController@getPhieunhapcart'
             ]);
-
+                //nhap hang vao csdl
             Route::post('add-nhaphang-theo-tochuc-to-cart/{idtc}/{idnv}', [
                 'as'=> 'add-nhaphang-theo-tochuc-to-cart',
                 'uses'=> 'PhieunhapController@addPhieunhapcart'
@@ -339,12 +339,12 @@ Route::group(['prefix'=>''],function(){
                 'uses' => 'PhieunhapController@xoacart'
             ]);
 
-            //get don nhap hang
+            //get lich su don nhap hang
             Route::get('get-donnhap-theo-tochuc/{idtc}/{idnv}', [
                 'as' => 'get-donnhap-theo-tochuc',
                 'uses' => 'PhieunhapController@getdonnhap'
             ]);
-
+            //tim kiem trong ls nhap
             Route::get('get-donnhaphang-theo-tochuc/{idtc}/{idnv}', [
                 'as' => 'get-donnhaphang-theo-tochuc',
                 'uses' => 'PhieunhapController@likenhap'
@@ -352,25 +352,25 @@ Route::group(['prefix'=>''],function(){
             //xuathang
             Route::get('get-xuathang-theo-tochuc/{idtc}/{idnv}', [
                 'as'=> 'get-xuathang-theo-tochuc',
-                'uses'=> 'PhieunhapController@getPhieuxuathang'
+                'uses'=> 'PhieuxuatController@getPhieuxuathang'
             ]);
             Route::post('get-xuathang-theo-tochuc-to-cart/{idtc}/{idnv}', [
                 'as'=> 'get-xuathang-theo-tochuc-to-cart',
-                'uses'=> 'PhieunhapController@getPhieuxuatcart'
+                'uses'=> 'PhieuxuatController@getPhieuxuatcart'
             ]);
             Route::post('add-xuathang-theo-tochuc-to-cart/{idtc}/{idnv}', [
                 'as'=> 'add-xuathang-theo-tochuc-to-cart',
-                'uses'=> 'PhieunhapController@addPhieuxuatcart'
+                'uses'=> 'PhieuxuatController@addPhieuxuatcart'
             ]);
-            //get don xuat hang
+             //get ls don xuat hang
             Route::get('get-donxuat-theo-tochuc/{idtc}/{idnv}', [
                 'as' => 'get-donxuat-theo-tochuc',
-                'uses' => 'PhieunhapController@getdonxuat'
+                'uses' => 'PhieuxuatController@getdonxuat'
             ]);
-
+            //tim kiem trong ls xuat
             Route::get('get-donxuathang-theo-tochuc/{idtc}/{idnv}', [
                 'as' => 'get-donxuathang-theo-tochuc',
-                'uses' => 'PhieunhapController@likexuat'
+                'uses' => 'PhieuxuatController@likexuat'
             ]);
 
         });

@@ -15,13 +15,22 @@
                         <label class="col-form-label">Tên nguyên liệu</label>
                         <input type="text" name="tenhang" id="ten_hang" class="form-control">
                     </div>
-                    <div class="form-group " hidden="">                        
+                    <div class="form-group " hidden="">
                         <label class="col-form-label">Số lượng</label>
-                        <input type="number" name="soluong"  id="so_luong" value="0"  readonly class="form-control">
+                        <input type="number" name="soluong" id="so_luong" value="0" readonly class="form-control">
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Đơn vị tính</label>
-                        <input type="text" name="dvt" class="form-control">                        
+                        <select name="dvt" class="form-control">
+                            <option value="" disabled selected>Chọn đơn vị tính</option>
+                            <option value="Két">Két</option>
+                            <option value="Chai">Chai</option>
+                            <option value="Lon">Lon</option>
+                            <option value="Thùng">Thùng</option>
+                            <option value="Bịch">Bịch</option>
+                            <option value="Hộp">Hộp</option>
+                            <option value="Kilogram">Kilogram</option>
+                        </select>
                     </div>
 
                     <div class="form-group">

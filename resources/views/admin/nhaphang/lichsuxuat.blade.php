@@ -32,12 +32,11 @@
                             <table class="table table-bordered table-striped table-hover" style="width:290px">
                                 <thead class=" text-primary">
                                     <th>Tổng số đơn</th>
-                                    
                                     </th>
                                 </thead>
                                 <tbody>
                                     @php
-                                    // $ttt = 0;
+                                   
                                     $tongdon = 0;
                                     @endphp
                                     @foreach($phieuxuat as $pxuat)
@@ -50,7 +49,6 @@
                                     @endforeach
                                     <tr>
                                         <td>{{($tongdon)}} đơn</td>
-                                       
                                     </tr>
                                 </tbody>
                             </table>
@@ -61,8 +59,8 @@
                             <thead class=" text-primary">
                                 <th>STT</th>
                                 <th>Tên nhân viên</th>
-                                <th>Ngày nhập</th>                                
-                                <th>Tổ chức</th>                              
+                                <th>Ngày xuất</th>                                
+                                <th>Tổ chức</th>
                                 <th>Thao tác</th>
                                 </th>
                             </thead>
@@ -76,8 +74,7 @@
                                     <td>{{$pxuat->nhanvien->tennv}}</td>
                                     <td>{{$pxuat->ngayxuat}}</td>
                                     <td>{{$pxuat->tochuc->tentc}}</td>
-                                  
-                                    
+
                                     <td class="left">
                                         <a>
                                             <button type="button" class="btn " data-toggle="modal"
