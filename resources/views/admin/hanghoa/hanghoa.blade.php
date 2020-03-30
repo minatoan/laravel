@@ -22,7 +22,7 @@
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#them">Thêm
                                 mới</button>
                             <a href="{{route('get-nhaphang-theo-tochuc', [$customer->matc, $customer->id])}}"><button type="button" class="btn btn-success">Nhập hàng</button></a>
-                            <a href="admin/xuathang"><button type="button" class="btn btn-danger">Xuất hàng</button></a>
+                            <a href="{{route('get-xuathang-theo-tochuc', [$customer->matc, $customer->id])}}"><button type="button" class="btn btn-danger">Xuất hàng</button></a>
 
                         </div>
                         <div class="table-responsive">

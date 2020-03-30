@@ -349,6 +349,19 @@ Route::group(['prefix'=>''],function(){
                 'as' => 'get-donnhaphang-theo-tochuc',
                 'uses' => 'PhieunhapController@likenhap'
             ]);
+            //xuathang
+            Route::get('get-xuathang-theo-tochuc/{idtc}/{idnv}', [
+                'as'=> 'get-xuathang-theo-tochuc',
+                'uses'=> 'PhieunhapController@getPhieuxuathang'
+            ]);
+            Route::post('get-xuathang-theo-tochuc-to-cart/{idtc}/{idnv}', [
+                'as'=> 'get-xuathang-theo-tochuc-to-cart',
+                'uses'=> 'PhieunhapController@getPhieuxuatcart'
+            ]);
+            Route::post('add-xuathang-theo-tochuc-to-cart/{idtc}/{idnv}', [
+                'as'=> 'add-xuathang-theo-tochuc-to-cart',
+                'uses'=> 'PhieunhapController@addPhieuxuatcart'
+            ]);
             
 
         });

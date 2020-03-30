@@ -12,7 +12,7 @@ class ctphieunhap extends Model
 
     public function hanghoa()
     {
-        return $this->belongsTocó ('App\hanghoa','mahang','id');        
+        return $this->belongsTo('App\hanghoa','mahang','id');        
     }
     public function phieunhap()
     {

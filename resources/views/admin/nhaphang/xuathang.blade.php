@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title ">Nhập hàng</h4>
+                        <h4 class="card-title ">Xuất hàng</h4>
                     </div>
                     @if(count($errors)>0)
                     <div class="alert alert-warning">
@@ -18,12 +18,19 @@
                     </div>
                     @endif
                     <div class="card-body">
-                        <form action="{{route('get-nhaphang-theo-tochuc-to-cart', [$customer->matc, $customer->id])}}"
+                        <form action="{{route('get-xuathang-theo-tochuc-to-cart', [$customer->matc, $customer->id])}}"
                             method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
 
                             <div class="form-group row">
-                                <div class="col-sm-4 ">
+                            <div class="col-sm-2 ">
+                                        <?php $nv = DB::table('nhanvien')->where('id', $id_nv)->first(); ?>
+
+                                        <label>Nhân viên</label>
+                                        <input type="text" value="{{$nv->tennv}}" class="form-control">
+                                        <input type="hidden" value="{{$nv->id}}" class="form-control" name="id_nv">
+                                    </div>
+                                <div class="col-sm-2 ">
                                     <label>Sản phẩm</label>
                                     <select class="form-control " name="tensp">
                                         <option value="" disabled selected>Chọn sản phẩm</option>
@@ -37,7 +44,7 @@
                                     <input type="number" min="0.1" step=".01" placeholder="Số lượng phải lớn hơn 0"
                                         class="form-control" name="soluong">
                                 </div>
-                                <div class="col-sm-2">
+                                <!-- <div class="col-sm-2">
                                     <label>Đơn vị tính</label>
                                     <select name="donvitinh"  class="form-control">
                                     <option value="" disabled selected>Chọn đơn vị tính</option>
@@ -49,11 +56,18 @@
                                         <option value="Hộp">Hộp</option>
                                         <option value="Kilogram">Kilogram</option>
                                     </select>
-                                </div>
-                                <div class="col-sm-3 ">
-                                    <label>Đơn giá</label>
-                                    <input type="text" class="form-control" name="dongia">
-                                </div>
+                                </div> -->
+                                <div class="col-md-2 ">
+                                        <label>Ngày xuất</label>
+                                        <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+                                            <input class="form-control" readonly type="text" name="ngaynhap">
+                                            <span class="input-group-addon"></span>
+                                        </div>
+                                    </div>
+                                <div class="col-sm-2 ">
+                                        <label>Ghi chú</label>
+                                        <input type="text" class="form-control" name="ghichu">
+                                    </div>
                                 <div class="col-sd-1.5 ">
                                     <label style="color: #ffffff">. </label>
                                     <button class="btn btn-primary form-control"><i
@@ -61,109 +75,52 @@
                                 </div>
                             </div>
                         </form>
-                        <form action="{{route('add-nhaphang-theo-tochuc-to-cart', [$customer->matc, $customer->id])}}"
-                            method="post">
+                        <form action="{{route('add-xuathang-theo-tochuc-to-cart', [$customer->matc, $customer->id])}}" method="post">
                             {{csrf_field()}}
-                            <?php $data = Request::session()->get('data');
-                                        $summ=0;  ?>
-                            @if($data)
-                            @foreach($data as $value)
-                            <?php                                        
-                                        $total = ($value['quantity'] * $value['price']);
-                                        $summ+= $total;
+                            <?php $dataxuat = Request::session()->get('dataxuat');
                                         ?>
-                            @endforeach
-                            @endif
-
+                            <br>
+                            
                             <div class="table-responsive">
                                 <table id="tablee" class="table table-bordered table-striped table-hover">
                                     <thead class=" text-primary">
                                         <th>STT</th>
                                         <th>Sản phẩm</th>
                                         <th>Số lượng</th>
-                                        <th>Đơn vị tính</th>
-                                        <th>Đơn giá</th>
-                                        <th>Thành tiền</th>
                                         <th>Thao tác</th>
-
                                         </th>
                                     </thead>
                                     <tbody>
                                         @php
                                         $i=0;
                                         $sum = 0;
-                                        $data = Request::session()->get('data');
+                                        $dataxuat = Request::session()->get('dataxuat');
                                         @endphp
-                                        @if($data)
+                                        @if($dataxuat)
 
-                                        @foreach($data as $value)
+                                        @foreach($dataxuat as $value)
                                         @php
                                         $sp = DB::table('hanghoa')->where('id', $value['name'])->first();
                                         // var_dump($sp);
-                                        $total = ($value['quantity'] * $value['price']);
-                                        $sum+= $total;
                                         @endphp
+
                                         <tr>
                                             <td>{{++$i}}</td>
                                             <td>{{$sp->tenhang}}</td>
                                             <td>{{$value['quantity']}}</td>
-                                            <td>{{$value['attributes']['donvitinh']}}</td>
-                                            <td>{{number_format($value['price'],0,",",".")}}</td>
-                                            <td>{{number_format($value['price']*$value['quantity'],0,",",".")}}</td>
                                             <td class="left">
-                                                <a href="{{route('xoa-cart', [$customer->matc, $customer->id, $value['id']])}}"
-                                                    class="btn"><i class="fas fa-times"></i></a>
+                                                <a href="" class="btn"><i class="fas fa-times"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach
-
-
                                         @endif
-
                                     </tbody>
                                 </table>
                             </div>
-                            <br>
-                            <div class="col-md-12">
-                                <div class="form-group row">
-                                    <div class="col-sm-2 ">
-                                        <?php $nv = DB::table('nhanvien')->where('id', $id_nv)->first(); ?>
-
-                                        <label>Nhân viên</label>
-                                        <input type="text" value="{{$nv->tennv}}" class="form-control">
-                                        <input type="hidden" value="{{$nv->id}}" class="form-control" name="id_nv">
-                                    </div>
-                                    <div class="col-md-2 ">
-                                        <label>Ngày nhập</label>
-                                        <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-                                            <input class="form-control" readonly type="text" name="ngaynhap">
-                                            <span class="input-group-addon"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2 ">
-                                        <label>Nhà cung cấp</label>
-                                        <select class="form-control " name="ncc">
-                                            <option value="" disabled selected>Chọn nhà cung cấp</option>
-                                            @foreach($ncc as $nc)
-                                            <option value="{{$nc->id}}">{{$nc->tenncc}}</option>
-                                            @endforeach
-                                        </select>
-
-                                    </div>
-                                    <div class="col-sm-2 ">
-                                        <label>Tổng tiền</label>
-                                        <input type="text" readonly name="tongtien" class="form-control"
-                                            value="{{number_format($summ,0,",",".")}}">
-                                    </div>
-                                    <div class="col-sm-4 ">
-                                        <label>Ghi chú</label>
-                                        <input type="text" class="form-control" name="ghichu">
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <div align="center">
                                 <button class="btn btn-success">
-                                    Nhập hàng</button>
+                                    Xuất hàng</button>
                             </div>
                         </form>
                     </div>

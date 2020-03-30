@@ -20,4 +20,8 @@ public function ctphieunhap()
 {
     return $this->hasMany('App\ctphieunhap','mahang','id');        
 }
+public function ctphieuxuat()
+{
+    return $this->hasMany('App\ctphieuxuat','mahang','id');        
+}
 }

@@ -115,7 +115,7 @@ class Ordercontroller extends Controller
         public function print($id_tc, $id_ban)
             {
                 
-                $loaiban = loaiban::where('matc', $id_tc)->get();
+        $loaiban = loaiban::where('matc', $id_tc)->get();
         $cart = Cart::getContent();
         $tenban  = ban::where('matc', $id_tc)->get();
         $loaimon = loaimon::where('matc', $id_tc)->get();

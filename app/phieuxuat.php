@@ -17,5 +17,9 @@ class phieuxuat extends Model
     {
         return $this->belongsTo('App\nhanvien','manv','id');        
     } 
+    public function tochuc()
+    {
+        return $this->belongsTo('App\tochuc','matc','id');           
+    } 
     
 }

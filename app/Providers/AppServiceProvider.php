@@ -70,7 +70,7 @@ class AppServiceProvider extends ServiceProvider
             // dd($customer);
             $view->with(['customer' => $customer]);
         });
-        view()->composer('admin.xuathang.xuathang', function($view){
+        view()->composer('admin.nhaphang.xuathang', function($view){
             $user = Auth::check();
             $id = Auth::user()['id'];
             $customer = nhanvien::where('id',$id)->first();
@@ -91,12 +91,6 @@ class AppServiceProvider extends ServiceProvider
             // dd($customer);
             $view->with(['customer' => $customer]);
         });
-        view()->composer('admin.nhaphang.lichsunhap', function($view){
-            $user = Auth::check();
-            $id = Auth::user()['id'];
-            $customer = nhanvien::where('id',$id)->first();
-            // dd($customer);
-            $view->with(['customer' => $customer]);
-        });
+        
     }
 }

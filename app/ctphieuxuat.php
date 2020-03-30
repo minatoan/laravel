@@ -12,7 +12,7 @@ class ctphieuxuat extends Model
     
     public function hanghoa()
     {
-        return $this->hasMany('App\hanghoa','mahang','id');        
+        return $this->belongsTo('App\hanghoa','mahang','id');        
     }
     public function phieuxuat()
     {

@@ -156,7 +156,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{route('get-xuathang-theo-tochuc', [$customer->matc, $customer->id])}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Xuất kho</p>
                             </a>
