@@ -362,7 +362,16 @@ Route::group(['prefix'=>''],function(){
                 'as'=> 'add-xuathang-theo-tochuc-to-cart',
                 'uses'=> 'PhieunhapController@addPhieuxuatcart'
             ]);
-            
+            //get don xuat hang
+            Route::get('get-donxuat-theo-tochuc/{idtc}/{idnv}', [
+                'as' => 'get-donxuat-theo-tochuc',
+                'uses' => 'PhieunhapController@getdonxuat'
+            ]);
+
+            Route::get('get-donxuathang-theo-tochuc/{idtc}/{idnv}', [
+                'as' => 'get-donxuathang-theo-tochuc',
+                'uses' => 'PhieunhapController@likexuat'
+            ]);
 
         });
 

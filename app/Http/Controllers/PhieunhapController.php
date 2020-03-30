@@ -175,7 +175,7 @@ class PhieunhapController extends Controller
         $phieuxuat = phieuxuat::all();
         $tochuc = tochuc::all();
         $hanghoa = hanghoa::where('matc', $id)->get();
-        return view('admin.nhaphang.xuathang',compact( 'id_nv','phieunhap','tochuc','hanghoa'));
+        return view('admin.nhaphang.xuathang',compact( 'id_nv','phieuxuat','tochuc','hanghoa'));
     }
 
     public function getPhieuxuatcart($id_tc, $id_nv, Request $req)
@@ -204,6 +204,7 @@ class PhieunhapController extends Controller
             'attributes' => array(
                 'ngaynhap' => $req->ngaynhap,
                 'ghichu' => $req->ghichu,
+                'donvitinh' => $req->donvitinh,
                 'id_nhanvien' => $id_nv,
                 'id_tc' => $id_tc,
             )
@@ -238,9 +239,9 @@ class PhieunhapController extends Controller
             $ctphieuxuat->maphieuxuat = $phieuxuat->id;
             $ctphieuxuat->mahang = $value['name'];
             $ctphieuxuat->soluong = $value['quantity'];
+            $ctphieuxuat->dvt = $value['attributes']['donvitinh'];
+
             $ctphieuxuat->save();
-
-
             $hanghoa = hanghoa::where('id', $value['name'])->first();
             $hanghoa->soluong = $hanghoa['soluong'] - $value['quantity'];
             $hanghoa->save();
@@ -250,6 +251,28 @@ class PhieunhapController extends Controller
         $req->session()->forget('dataxuat');
         return redirect()->back()->with(Toastr::success('Xuất hàng thành công'));
 
+    }
+    //get lichsu xuat
+    public function getdonxuat($id)
+    {
+        $tochuc = tochuc::where('id', $id)->first();
+        $nhanvien = nhanvien::where('matc', $id)->get();
+        $phieuxuat  = phieuxuat::where('matc', $id)->orderBy('id', 'DESC')->get();
+        $ctphieuxuat = ctphieuxuat::all();
+        $hanghoa = hanghoa::all();
+        $ncc = nhacungcap::where('matc', $id)->get();
+
+
+        return view('admin.nhaphang.lichsuxuat', compact('phieuxuat', 'ctphieuxuat','nhanvien','tochuc','hanghoa'));
+    }
+
+    public function likexuat($id, Request $req)
+    {
+
+        $dateform = $req->dateform;
+        $dateto = $req->dateto;
+        $phieuxuat  = phieuxuat::where('matc', $id)->orderBy('id', 'DESC')->whereBetween('ngaynhap', [$dateform, date('Y-m-d', strtotime($dateto. '+1 days'))])->get();
+        return view('admin.nhaphang.lichsuxuat' ,compact('phieuxuat'));
     }
     
 }

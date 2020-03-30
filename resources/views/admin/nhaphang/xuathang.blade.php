@@ -39,12 +39,12 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-sm-2 ">
+                                <div class="col-sm-1.5 ">
                                     <label>Số lượng</label>
-                                    <input type="number" min="0.1" step=".01" placeholder="Số lượng phải lớn hơn 0"
+                                    <input type="number" min="0.1" step=".01" placeholder="Số lượng lớn hơn 0"
                                         class="form-control" name="soluong">
                                 </div>
-                                <!-- <div class="col-sm-2">
+                                <div class="col-sm-2">
                                     <label>Đơn vị tính</label>
                                     <select name="donvitinh"  class="form-control">
                                     <option value="" disabled selected>Chọn đơn vị tính</option>
@@ -56,7 +56,7 @@
                                         <option value="Hộp">Hộp</option>
                                         <option value="Kilogram">Kilogram</option>
                                     </select>
-                                </div> -->
+                                </div>
                                 <div class="col-md-2 ">
                                         <label>Ngày xuất</label>
                                         <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
@@ -87,6 +87,7 @@
                                         <th>STT</th>
                                         <th>Sản phẩm</th>
                                         <th>Số lượng</th>
+                                        <th>Đơn vị tính</th>
                                         <th>Thao tác</th>
                                         </th>
                                     </thead>
@@ -97,17 +98,17 @@
                                         $dataxuat = Request::session()->get('dataxuat');
                                         @endphp
                                         @if($dataxuat)
-
                                         @foreach($dataxuat as $value)
                                         @php
                                         $sp = DB::table('hanghoa')->where('id', $value['name'])->first();
                                         // var_dump($sp);
                                         @endphp
-
                                         <tr>
                                             <td>{{++$i}}</td>
                                             <td>{{$sp->tenhang}}</td>
                                             <td>{{$value['quantity']}}</td>
+                                            <td>{{$value['attributes']['donvitinh']}}</td>
+
                                             <td class="left">
                                                 <a href="" class="btn"><i class="fas fa-times"></i></a>
                                             </td>
