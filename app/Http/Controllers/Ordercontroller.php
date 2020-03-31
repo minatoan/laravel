@@ -19,6 +19,7 @@ class Ordercontroller extends Controller
     //getban
     public function getOrder($id)
     {
+
         $tochuc = tochuc::where('id', $id)->first();
         $loaimon = loaimon::where('matc', $id)->get();
         $tenban  = ban::where('matc', $id)->get();
@@ -34,7 +35,7 @@ class Ordercontroller extends Controller
         $tochuc = tochuc::where('id', $id)->first();
         $nhanvien = nhanvien::where('matc', $id)->get();
         $bill  = bill::where('matc', $id)->orderBy('id', 'DESC')->get();
-        $chitietbill = chitietbill::all();
+        $chitietbill = chitietbill::where('matc', $id)->get();
         $ban = ban::find($id);
 
         // dd($bill);
@@ -144,6 +145,7 @@ class Ordercontroller extends Controller
                 'attributes' => array(
                     'id_ban' => $id_ban,
                     'id_sp' => $id_sp,  
+
                 ),
             )
         );
@@ -185,6 +187,8 @@ class Ordercontroller extends Controller
                 $bill_detail->mamon = $value['attributes']['id_sp'];
                 $bill_detail->soluong = $value['quantity'];
                 $bill_detail->dongia = $value['price'];
+                $bill_detail->matc = $id_tc;
+
                 $bill_detail->save();
             }
         }

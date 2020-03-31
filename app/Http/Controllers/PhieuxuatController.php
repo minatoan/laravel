@@ -22,7 +22,7 @@ class PhieuxuatController extends Controller
         // $req->session()->forget('dataxuat');
         $id_nv = Auth::id();
         $phieuxuat = phieuxuat::all();
-        $tochuc = tochuc::all();
+        $tochuc = tochuc::where('id', $id)->first();
         $hanghoa = hanghoa::where('matc', $id)->get();
         return view('admin.nhaphang.xuathang',compact( 'id_nv','phieuxuat','tochuc','hanghoa'));
     }
@@ -94,6 +94,7 @@ class PhieuxuatController extends Controller
             $ctphieuxuat->mahang = $value['name'];
             $ctphieuxuat->soluong = $value['quantity'];
             $ctphieuxuat->dvt = $value['attributes']['donvitinh'];
+            $ctphieuxuat->matc = $id_tc;
             $ctphieuxuat->save();
             $hanghoa = hanghoa::where('id', $value['name'])->first();
             $hanghoa->soluong = $hanghoa['soluong'] - $value['quantity'];
@@ -111,7 +112,7 @@ class PhieuxuatController extends Controller
         $tochuc = tochuc::where('id', $id)->first();
         $nhanvien = nhanvien::where('matc', $id)->get();
         $phieuxuat  = phieuxuat::where('matc', $id)->orderBy('id', 'DESC')->get();
-        $ctphieuxuat = ctphieuxuat::all();
+        $ctphieuxuat = ctphieuxuat::where('matc', $id)->get();
         $hanghoa = hanghoa::all();
         // dd($phieuxuat);
         return view('admin.nhaphang.lichsuxuat', compact('phieuxuat', 'ctphieuxuat','nhanvien','tochuc','hanghoa'));
@@ -121,8 +122,10 @@ class PhieuxuatController extends Controller
     {
         $dateform = $req->dateform;
         $dateto = $req->dateto;
+        $ctphieuxuat = where('matc', $id)->get();
+
         $phieuxuat  = phieuxuat::where('matc', $id)->orderBy('id', 'DESC')->whereBetween('ngayxuat', [$dateform, date('Y-m-d', strtotime($dateto. '+1 days'))])->get();
-        return view('admin.nhaphang.lichsuxuat' ,compact('phieuxuat'));
+        return view('admin.nhaphang.lichsuxuat' ,compact('phieuxuat','ctphieuxuat'));
     }
     
 }

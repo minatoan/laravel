@@ -24,7 +24,7 @@ class PhieunhapController extends Controller
         // $req->session()->forget('data');
         $id_nv = Auth::id();
         $phieunhap = phieunhap::all();
-        $tochuc = tochuc::all();
+        $tochuc = tochuc::where('id', $id)->first();
         $ncc = nhacungcap::where('matc', $id)->get();
         $hanghoa = hanghoa::where('matc', $id)->get();
         return view('admin.nhaphang.nhaphang',compact( 'id_nv','phieunhap','tochuc','ncc','hanghoa'));
@@ -36,7 +36,7 @@ class PhieunhapController extends Controller
         $tochuc = tochuc::where('id', $id)->first();
         $nhanvien = nhanvien::where('matc', $id)->get();
         $phieunhap  = phieunhap::where('matc', $id)->orderBy('id', 'DESC')->get();
-        $ctphieunhap = ctphieunhap::all();
+        $ctphieunhap = ctphieunhap::where('matc', $id)->get();
         $hanghoa = hanghoa::all();
         $ncc = nhacungcap::where('matc', $id)->get();
 
@@ -49,8 +49,9 @@ class PhieunhapController extends Controller
 
         $dateform = $req->dateform;
         $dateto = $req->dateto;
+        $ctphieunhap = ctphieunhap::where('matc', $id)->get();
         $phieunhap  = phieunhap::where('matc', $id)->orderBy('id', 'DESC')->whereBetween('ngaynhap', [$dateform, date('Y-m-d', strtotime($dateto. '+1 days'))])->get();
-        return view('admin.nhaphang.lichsunhap' ,compact('phieunhap'));
+        return view('admin.nhaphang.lichsunhap' ,compact('phieunhap','ctphieunhap'));
     }
 
     public function getPhieunhapcart($id_tc, $id_nv, Request $req)
@@ -144,6 +145,8 @@ class PhieunhapController extends Controller
             $ctphieunhap->soluong = $value['quantity'];
             $ctphieunhap->dvt = $value['attributes']['donvitinh'];
             $ctphieunhap->dongia = $value['price'];
+            $ctphieunhap->matc = $id_tc;
+
             $ctphieunhap->save();
 
 

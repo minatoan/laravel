@@ -39,6 +39,7 @@
                                     @php
                                     $ttt = 0;
                                     $tongdon = 0;
+                                    $tongsospkho = 0;
                                     @endphp
                                     @foreach($phieunhap as $pnhap)
                                     <?php                                        
@@ -48,8 +49,10 @@
                                         $tongdon += count($tsl);
                                         ?>
                                     @endforeach
+                                    
                                     <tr>
                                         <td>{{($tongdon)}} đơn</td>
+
                                         <td>{{number_format($ttt,0,",",".")}} VNĐ</td>
                                     </tr>
                                 </tbody>

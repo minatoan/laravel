@@ -402,5 +402,15 @@ Route::group(['prefix'=>''],function(){
             'uses'=> 'NCCcontroller@getXoaNCC'
         ]);
     });
+
+    //admin/THONGKE
+    Route::group(['prefix'=>''],function(){
+
+        Route::get('get-thongke-theo-tochuc/{idtc}/{idnv}', [
+            'as'=> 'get-thongke-theo-tochuc',
+            'uses'=> 'Thongkecontroller@getthongke'
+        ]);
+        
+    });
     
 });

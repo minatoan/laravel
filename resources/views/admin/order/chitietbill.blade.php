@@ -6,14 +6,7 @@
             <div class="modal-body">
                 <br>
                 <h4 align="center">CHI TIẾT BILL {{$bbl->ban->tenban}}</h4>
-                <?php 
-                                $ctb  = DB::table('chitietbill')->where('mabill', $bbl->id)->get();
-                                $sl = 0;
-                            ?>
-                @foreach($ctb as $value)
-                <?php                                                 
-                            $sl +=  $value->soluong ;?>
-                @endforeach
+                
                 <br>
                 <h5 align="left">Ngày: {{($bbl->ngaytao)}}</h5>
                 <h5 align="left">Thu ngân: {{$bbl->nhanvien->tennv}}</h5>
