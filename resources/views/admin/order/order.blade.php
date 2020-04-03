@@ -39,7 +39,7 @@
                             @foreach($tenban as $od)
                             <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
                                 <a href="{{route('hien-thi',[$customer->matc, $od->id])}}"><button type="button"
-                                        class="btn btn-primary">{{ $od->tenban }}</button>
+                                        class="btn btn-info">{{ $od->tenban }}</button>
                                 </a>
                             </div>
                             @endforeach

@@ -144,7 +144,8 @@ class Ordercontroller extends Controller
                 'price'      => $product->dongia,
                 'attributes' => array(
                     'id_ban' => $id_ban,
-                    'id_sp' => $id_sp,  
+                    'id_sp' => $id_sp, 
+                    'trang_thai' => 1,
 
                 ),
             )

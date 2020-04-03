@@ -8,7 +8,7 @@
       </li>
       <li class="nav-item d-none d-sm-inline-block">
       <base href="{{asset('')}}">
-        <a href="admin/order/{{$customer->matc}}" class="nav-link">Trang chủ</a>
+        <a href="" class="nav-link">Trang chủ</a>
       </li>   
          
     </ul>

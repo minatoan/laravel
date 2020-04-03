@@ -37,22 +37,32 @@
                                         
                                         }
                                     ?>
-                                    <!-- <style>
-                                        .b{
+                                <!-- <style>
+                                        button[id="61"] {
                                             color:red;
                                         }
                                     </style>  -->
                                 @foreach($tenban as $od)
-                                <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px" >
-                                    <a href="{{route('hien-thi',[$customer->matc, $od->id])}}"><button type="button"
-                                            class="btn btn-info b">{{ $od->tenban }}</button>
+                                <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
+                                    <a href="{{route('hien-thi',[$customer->matc, $od->id])}}" ><button
+                                            type="button" class="btn btn-info b" id="{{$od->id}}">{{ $od->tenban }}</button>
                                     </a>
-                                </div>
-                                @endforeach
-                                @endforeach
-                                
+                                </div>  
+                                @foreach($cart as $value)
+                                    @if(($value['attributes']['id_ban'] == $od->id))
+                                    <style>
+                                        button[id|="{{$id_ban->id}}"] {
+                                            background-color:red;
+                                        }
+                                    </style>                                    
+                                    @endif
+                                    @endforeach                              
+                                @endforeach  
 
-                            
+                                @endforeach
+
+
+
                             </span>
                         </div>
                         <!-- code ..... -->
