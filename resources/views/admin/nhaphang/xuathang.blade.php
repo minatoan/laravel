@@ -96,12 +96,14 @@
                                         $i=0;
                                         $sum = 0;
                                         $dataxuat = Request::session()->get('dataxuat');
+                                        $index=-1;
                                         @endphp
                                         @if($dataxuat)
                                         @foreach($dataxuat as $value)
                                         @php
                                         $sp = DB::table('hanghoa')->where('id', $value['name'])->first();
                                         // var_dump($sp);
+                                        $index++;
                                         @endphp
                                         <tr>
                                             <td>{{++$i}}</td>
@@ -110,7 +112,8 @@
                                             <td>{{$value['attributes']['donvitinh']}}</td>
 
                                             <td class="left">
-                                                <a href="" class="btn"><i class="fas fa-times"></i></a>
+                                                <a href="{{route('xoa-items', [$value['id']])}}"
+                                                    class="btn"><i class="fas fa-times"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach

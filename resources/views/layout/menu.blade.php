@@ -95,9 +95,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/charts/flot.html" class="nav-link">
+                            <a href="{{route('get-lichsuluong-theo-tochuc', [$customer->matc, $customer->id])}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Tính lương</p>
+                                <p>Lương nhân viên</p>
                             </a>
                         </li>
                     </ul>
@@ -108,7 +108,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-warehouse"></i>
                         <p>
-                            Trang chủ
+                            Bán hàng
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>

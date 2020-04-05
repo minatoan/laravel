@@ -27,7 +27,7 @@
                                     <th>Giới tính</th>
                                     <th>SĐT</th>
                                     <th>Địa chỉ</th>
-                                    <th>Lương</th>
+                                    <th>Ca làm</th>
                                     <th>Tổ chức</th>
                                     <th>Ghi chú</th>
                                     <th>Thao tác</th>
@@ -45,7 +45,7 @@
                                         <td>{{$nv->gioitinh}}</td>
                                         <td>{{$nv->sdt}}</td>
                                         <td>{{$nv->diachi}}</td>
-                                        <td>{{$nv->luongcb}}</td>
+                                        <td>{{$nv->calam}}</td>
                                         <td>{{$nv->tochuc->tentc}}</td>
                                         <td>{{$nv->ghichu}}</td>
                                         <td class="left">
@@ -55,6 +55,10 @@
                                             </button>
                                             <a href="{{route('nhanvien-xoa',$nv->id)}}"><button type="button"
                                                     class="btn btn-danger"><i class="far fa-trash-alt"></i>
+                                                </button>
+                                            </a>
+                                            <a href="{{route('get-nhanvien-luong-tochuc',$nv->id)}}"><button type="button"
+                                                    class="btn btn-info"><i class="fas fa-donate"> Tính lương</i>
                                                 </button>
                                             </a>
                                         </td>

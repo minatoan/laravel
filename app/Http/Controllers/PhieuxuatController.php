@@ -44,9 +44,9 @@ class PhieuxuatController extends Controller
             'tensp.required' => 'Lỗi rồi! Bạn chưa chọn tên sản phẩm ',
             'soluong.required' => 'Lỗi rồi! Bạn chưa chọn số lượng ',          
         ]);
-        
+        $id = time();
         $dataxuat = array(
-            'id' => time(), // inique row ID
+            'id' =>  $id, // inique row ID
             'name' => $req->tensp,
             'quantity' => $req->soluong,
             'attributes' => array(
@@ -57,7 +57,7 @@ class PhieuxuatController extends Controller
                 'id_tc' => $id_tc,
             )
         );
-        array_push($data_listxuat, $dataxuat);
+        $data_listxuat[$id] = $dataxuat;
         $req->session()->put('dataxuat', $data_listxuat);
         //bat loi xuat hang
         $dataxuat = $req->session()->get('dataxuat');
@@ -127,5 +127,13 @@ class PhieuxuatController extends Controller
         $phieuxuat  = phieuxuat::where('matc', $id)->orderBy('id', 'DESC')->whereBetween('ngayxuat', [$dateform, date('Y-m-d', strtotime($dateto. '+1 days'))])->get();
         return view('admin.nhaphang.lichsuxuat' ,compact('phieuxuat','ctphieuxuat'));
     }
-    
+    //xóa hàng trong xuathang
+    public function xoaitems($index, Request $req)
+    {   
+        // $req->session()->forget('dataxuat');
+        $data_listxuat = session()->get('dataxuat');
+        unset($data_listxuat[$index]);
+        session()->put('dataxuat', $data_listxuat);
+        return redirect()->back()->with(Toastr::success('Xóa thành công'));
+    }
 }

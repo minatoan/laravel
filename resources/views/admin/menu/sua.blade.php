@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Đơn giá</label>
-                        <input type="text" name="dongia" id="don_gia" value="{{$mn->dongia}}" class="form-control">
+                        <input type="text" name="dongia" id="don_gia" value="{{number_format($mn->dongia,0,",",".")}}"  class="form-control">
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Tên tổ chức</label>

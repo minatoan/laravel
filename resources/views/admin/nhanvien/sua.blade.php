@@ -15,11 +15,12 @@
                     <div class="form-group row">
                         <div class="col-sm-6 ">
                             <label class="col-form-label">Tài khoản</label>
-                            <input type="text" name="username"  value="{{$nv->username}}" class="form-control">
+                            <input type="text" name="username" value="{{$nv->username}}" class="form-control">
                         </div>
                         <div class="col-sm-6 ">
                             <label class="col-form-label">Tên nhân viên</label>
-                            <input type="text" name="tennv" id="ten_nhan_vien" value="{{$nv->tennv}}" class="form-control">
+                            <input type="text" name="tennv" id="ten_nhan_vien" value="{{$nv->tennv}}"
+                                class="form-control">
                         </div>
                     </div>
                     <!-- <label class="col-form-label">Tên nhân viên</label>
@@ -30,10 +31,10 @@
                             <input type="date" name="ngaysinh" value="{{$nv->ngaysinh}}" class="form-control">
                         </div>
                         <div class="col-sm-6">
-                            <label class="col-form-label">Giới tính</label>                            
-                            <select class="form-control" name="gioitinh"  > 
-                            <option >{{$nv->gioitinh}}</option>
-                                <option >Nam</option>
+                            <label class="col-form-label">Giới tính</label>
+                            <select class="form-control" name="gioitinh">
+                                <option>{{$nv->gioitinh}}</option>
+                                <option>Nam</option>
                                 <option>Nữ</option>
                             </select>
                         </div>
@@ -44,34 +45,42 @@
                             <input type="text" name="sdt" value="{{$nv->sdt}}" class="form-control">
                         </div>
                         <div class="col-sm-6 ">
-                            <label class="col-form-label">Lương</label>
-                            <input type="text" name="luongcb" value="{{$nv->luongcb}}" class="form-control">
+                        <label class="col-form-label">Ca làm</label>
+                        <select class="form-control" name="calam">
+                            <option>{{$nv->calam}}</option>
+                            <option>Sáng</option>
+                            <option>Chiều</option>
+                            <option>Tối</option>
+                            <option>Khuya</option>
+                            <option>Không</option>
+                        </select>
                         </div>
                     </div>
                     
-                        <label class="col-form-label">Địa chỉ</label>
-                        <input type="text" name="diachi" value="{{$nv->diachi}}" class="form-control">
 
-                        <div class="form-group row">
-                            <div class="col-sm-6 ">
-                                <label class="col-form-label">Tên tổ chức</label>
-                        <select class="form-control" readonly name="matc" id="ma_tc">
-                            @foreach($tochuc as $tc)
-                            <option @if($tc->id == $nv->matc)
-                                {{"selected"}}
-                                @endif
-                                value="{{$tc->id}}">{{$tc->tentc}}</option>
-                            @endforeach
-                        </select>
-                            </div>
-                            <div class="col-sm-6 ">
-                                <label class="col-form-label">Quyền</label>
-                                <select class="form-control" name="quyen">
-                                    <option value="1">Admin</option>
-                                    <option value="0">Nhân viên</option>
-                                </select>
-                            </div>
+                    <label class="col-form-label">Địa chỉ</label>
+                    <input type="text" name="diachi" value="{{$nv->diachi}}" class="form-control">
+
+                    <div class="form-group row">
+                        <div class="col-sm-6 ">
+                            <label class="col-form-label">Tên tổ chức</label>
+                            <select class="form-control" readonly name="matc" id="ma_tc">
+                                @foreach($tochuc as $tc)
+                                <option @if($tc->id == $nv->matc)
+                                    {{"selected"}}
+                                    @endif
+                                    value="{{$tc->id}}">{{$tc->tentc}}</option>
+                                @endforeach
+                            </select>
                         </div>
+                        <div class="col-sm-6 ">
+                            <label class="col-form-label">Quyền</label>
+                            <select class="form-control" name="quyen">
+                                <option value="1">Admin</option>
+                                <option value="0">Nhân viên</option>
+                            </select>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label class="col-form-label">Ghi chú</label>

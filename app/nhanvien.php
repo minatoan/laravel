@@ -18,6 +18,10 @@ class nhanvien extends Model
     public function bill()
     {
         return $this->hasMany('App\bill','manv','id');        
+    }
+    public function tinhluong()
+    {
+        return $this->hasMany('App\tinhluong','manv','id');        
     } 
 
 

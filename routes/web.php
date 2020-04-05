@@ -178,6 +178,7 @@ Route::group(['prefix'=>''],function(){
             'as'=> 'nhanvien-xoa',
             'uses'=> 'NhanViencontroller@getXoaNhanVien'
         ]);
+        
     });
     //admin/tochuc/tochuc
     Route::group(['prefix'=>''],function()
@@ -334,7 +335,7 @@ Route::group(['prefix'=>''],function(){
                 'uses'=> 'PhieunhapController@addPhieunhapcart'
             ]);
 
-            Route::get('xoa-cart/{idtc}/{idnv}/{idsp}', [
+            Route::get('xoa-cart/{index}', [
                 'as' => 'xoa-cart',
                 'uses' => 'PhieunhapController@xoacart'
             ]);
@@ -371,6 +372,10 @@ Route::group(['prefix'=>''],function(){
             Route::get('get-donxuathang-theo-tochuc/{idtc}/{idnv}', [
                 'as' => 'get-donxuathang-theo-tochuc',
                 'uses' => 'PhieuxuatController@likexuat'
+            ]);
+            Route::get('xoa-items/{index}', [
+                'as' => 'xoa-items',
+                'uses' => 'PhieuxuatController@xoaitems'
             ]);
 
         });
@@ -412,5 +417,45 @@ Route::group(['prefix'=>''],function(){
         ]);
         
     });
+    //admin/tinhluong
+    Route::group(['prefix'=>''],function(){
+
+        Route::get('get-nhanvien-luong-tochuc/{id}', [
+            'as'=> 'get-nhanvien-luong-tochuc',
+            'uses'=> 'TinhluongController@getLuongNhanVien'
+        ]);
+        //thietlap
+        Route::post('luong', [
+            'as'=> 'luong-them',
+            'uses'=> 'TinhluongController@postThemluong'
+        ]);
+        //capnhat
+        Route::get('luong/{id?}', [
+            'as'=> 'luong-sua',
+            'uses'=> 'TinhluongController@getSualuong'
+        ]);
+
+        Route::post('luong/{id?}', [
+            'as'=> 'luong-sua',
+            'uses'=> 'TinhluongController@postSualuong'
+        ]);
+
+        Route::get('luong/{id?}', [
+            'as'=> 'luong-xoa',
+            'uses'=> 'TinhluongController@getXoaluong'
+        ]);
+
+        //get lich su tinh lương
+        Route::get('get-lichsuluong-theo-tochuc/{idtc}/{idnv}', [
+            'as' => 'get-lichsuluong-theo-tochuc',
+            'uses' => 'TinhluongController@getLichsuluong'
+        ]);
+        Route::get('get-timkiem-theo-luong/{idtc}/{idnv}', [
+            'as' => 'get-timkiem-theo-luong',
+            'uses' => 'TinhluongController@likeluong'
+        ]);
+        
+    });
+
     
 });

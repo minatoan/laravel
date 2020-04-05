@@ -75,8 +75,9 @@ class PhieunhapController extends Controller
             'soluong.required' => 'Lỗi rồi! Bạn chưa chọn số lượng ',          
             'dongia.required' => 'Lỗi rồi! Bạn chưa chọn đơn giá ',
         ]);
+        $id = time();
         $data = array(
-            'id' => time(), // inique row ID
+            'id' => $id, // inique row ID
             'name' => $req->tensp,
             'price' => $req->dongia,
             'quantity' => $req->soluong,
@@ -89,7 +90,7 @@ class PhieunhapController extends Controller
                 'id_tc' => $id_tc,
             )
         );
-        array_push($data_list, $data);
+        $data_list[$id] = $data;
         $req->session()->put('data', $data_list);
 
 
@@ -161,13 +162,13 @@ class PhieunhapController extends Controller
 
     }
     //xóa hàng trong nhaphang
-    public function xoacart($id, Request $req)
+    public function xoacart($index, Request $req)
     {   
-        
-        Session::forget('id');
-        return redirect()->back();
-        
-
+        // $req->session()->forget('data');
+        $data_list = session()->get('data');
+        unset($data_list[$index]);
+        session()->put('data', $data_list);
+        return redirect()->back()->with(Toastr::success('Xóa thành công'));
     }
 
     

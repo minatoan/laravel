@@ -21,9 +21,22 @@
                             <input type="text" name="matkhau" class="form-control">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-form-label">Tên nhân viên</label>
-                        <input type="text" name="tennv" class="form-control">
+                    <div class="form-group row">
+                        <div class="col-sm-6 ">
+                            <label class="col-form-label">Tên nhân viên</label>
+                            <input type="text" name="tennv" class="form-control">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="col-form-label">Ca làm</label>
+                            <select name="calam" class="form-control">
+                                <option value="" disabled selected>Chọn ca làm</option>
+                                <option value="Sáng">Sáng</option>
+                                <option value="Chiều">Chiều</option>
+                                <option value="Tối">Tối</option>
+                                <option value="Khuya">Khuya</option>
+                                <option value="Không">Không</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 ">
@@ -33,6 +46,7 @@
                         <div class="col-sm-6">
                             <label class="col-form-label">Giới tính</label>
                             <select name="gioitinh" class="form-control">
+                                <option value="" disabled selected>Chọn giới tính</option>
                                 <option value="Nam">Nam</option>
                                 <option value="Nữ">Nữ</option>
                                 <option value="Khác">Khác</option>
@@ -44,31 +58,28 @@
                             <label class="col-form-label">Số điện thoại</label>
                             <input type="text" name="sdt" class="form-control">
                         </div>
-                        <div class="col-sm-6 ">
-                            <label class="col-form-label">Lương cơ bản</label>
-                            <input type="text" name="luongcb" class="form-control">
-                        </div>
                     </div>
+
                     <div class="form-group">
                         <label class="col-form-label">Địa chỉ</label>
                         <input type="text" name="diachi" class="form-control">
                     </div>
-                
+
                     <div class="form-group row">
                         <div class="col-sm-6 ">
                             <label class="col-form-label">Tổ chức</label>
-                        <select class="form-control" name="matc" id="ma_tc">
-                            @foreach($tochuc as $tc)
-                            <option value="{{$tc->id}}">{{$tc->tentc}}</option>
-                            @endforeach
-                        </select>
+                            <select class="form-control" name="matc" id="ma_tc">
+                                @foreach($tochuc as $tc)
+                                <option value="{{$tc->id}}">{{$tc->tentc}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-sm-6 ">
                             <label class="col-form-label">Quyền</label>
-                        <select class="form-control" name="quyen">
-                            <option value="1">Admin</option>
-                            <option value="0">Nhan vien</option>
-                        </select>
+                            <select class="form-control" name="quyen">
+                                <option value="1">Admin</option>
+                                <option value="0">Nhan vien</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">

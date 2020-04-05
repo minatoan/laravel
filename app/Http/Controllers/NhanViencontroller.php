@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use App\nhanvien;
 use App\tochuc;
+use App\tinhluong;
 use Hash;
 
 
@@ -25,9 +26,12 @@ class NhanViencontroller extends Controller
     //Hiện nv
     public function getThemNhanVien($id)
     {
-        $nhanvien = nhanvien::where('matc', $id)->get();
+        $nhanvien = nhanvien::where('matc', $id)->orderBy('id', 'DESC')->get();
         $tochuc = tochuc::where('id', $id)->get();
-        return view('admin.nhanvien.nhanvien',['nhanvien' => $nhanvien, 'tochuc' => $tochuc]);
+        $tinhluong = tinhluong::all();
+
+
+        return view('admin.nhanvien.nhanvien',['nhanvien' => $nhanvien, 'tochuc' => $tochuc, 'tinhluong' => $tinhluong]);
     }
 
     public function postThemnhanvien(Request $request)
@@ -40,7 +44,6 @@ class NhanViencontroller extends Controller
                 'gioitinh' => 'required',
                 'sdt' => 'required|min:10|max:10',
                 'diachi' =>'required',
-                'luongcb' => 'required|min:1|max:100',
                 'matc' => 'required',
                 'username' => 'required|unique:nhanvien,username',                
                 
@@ -51,7 +54,6 @@ class NhanViencontroller extends Controller
                 'sdt.required' =>'Lỗi rồi! Bạn chưa điền số điện thoại',   
                 'sdt.min' =>'Số điện thoại phải có ít nhất 10 ký tự',
                 'diachi.required' =>'Lỗi rồi! Bạn chưa điền địa chỉ',
-                'luongcb.required' =>'Lỗi rồi! Bạn chưa điền số lương',  
                 'luongcb.min' =>'Lương phải có ít nhất 1 ký tự',
                 
             ]);
@@ -62,13 +64,13 @@ class NhanViencontroller extends Controller
             $nhanvien->gioitinh = $request->gioitinh;
             $nhanvien->sdt = $request->sdt;
             $nhanvien->diachi = $request->diachi;
-            $nhanvien->luongcb = $request->luongcb;
             $nhanvien->matc = $request->matc;
+            $nhanvien->calam = $request->calam;
             $nhanvien->username = $request->username;
             $nhanvien->password = Hash::make($request->matkhau);
             $nhanvien->ghichu = $request->ghichu;  
             $nhanvien->quyen = $request->quyen;  
-          
+        
             
             // echo "<pre>";
             // print_r($nhanvien->toArray());
@@ -96,7 +98,6 @@ class NhanViencontroller extends Controller
                 'gioitinh' => 'required',
                 'sdt' => 'required|min:10|max:10',
                 'diachi' =>'required',
-                'luongcb' => 'required|min:1|max:100',
                 'matc' => 'required',
                 'username' => 'required|min:3',
                 
@@ -108,7 +109,6 @@ class NhanViencontroller extends Controller
                 'sdt.min' =>'Số điện thoại phải có ít nhất 10 ký tự',
                 'diachi.required' =>'Lỗi rồi! Bạn chưa điền địa chỉ',
                 'luongcb.required' =>'Lỗi rồi! Bạn chưa điền số lương',  
-                'luongcb.min' =>'Lương phải có ít nhất 1 ký tự', 
                 'username.required' => 'Lỗi rồi! Bạn chưa điền tên tài khoản',
                 'username.min' => 'Tên tài khoản phải có ít nhất 3 ký tự',
                 'password.required' => 'Lỗi rồi! Bạn chưa điền mật khẩu',
@@ -121,9 +121,8 @@ class NhanViencontroller extends Controller
             $nhanvien->gioitinh = $request->gioitinh;
             $nhanvien->sdt = $request->sdt;
             $nhanvien->diachi = $request->diachi;
-            $nhanvien->luongcb = $request->luongcb;
             $nhanvien->matc = $request->matc;
-            
+            $nhanvien->calam = $request->calam;
             $nhanvien->ghichu = $request->ghichu;  
             $nhanvien->username = $request->username; 
 
@@ -141,5 +140,7 @@ class NhanViencontroller extends Controller
         $nhanvien = nhanvien::where('id', $id);        
         $nhanvien->delete($nhanvien);        
         return redirect()->back()->with(Toastr::success('Xóa thành công'));
-    }    
+    }  
+    
+    
 }

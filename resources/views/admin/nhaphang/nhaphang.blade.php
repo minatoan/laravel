@@ -93,15 +93,18 @@
                                         $i=0;
                                         $sum = 0;
                                         $data = Request::session()->get('data');
+                                        $index=-1;
                                         @endphp
                                         @if($data)
 
                                         @foreach($data as $value)
                                         @php
+                                        echo $value['id'];
                                         $sp = DB::table('hanghoa')->where('id', $value['name'])->first();
                                         // var_dump($sp);
                                         $total = ($value['quantity'] * $value['price']);
                                         $sum+= $total;
+                                        $index++;
                                         @endphp
                                         <tr>
                                             <td>{{++$i}}</td>
@@ -111,7 +114,7 @@
                                             <td>{{number_format($value['price'],0,",",".")}}</td>
                                             <td>{{number_format($value['price']*$value['quantity'],0,",",".")}}</td>
                                             <td class="left">
-                                                <a href="{{route('xoa-cart', [$customer->matc, $customer->id, $value['id']])}}"
+                                                <a href="{{route('xoa-cart', [$value['id']])}}"
                                                     class="btn"><i class="fas fa-times"></i></a>
                                             </td>
                                         </tr>
