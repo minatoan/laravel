@@ -7,8 +7,8 @@
         <div class="row mb-2">
             <div class="col-sm-6">
                 <ul class="fc-color-picker" id="color-chooser">
-                    <li><a class="text-muted"><i class="fas fa-square"></i></a> Trống</li>
-                    <li><a class="text-danger"><i class="fas fa-square"></i></a> Đặt trước</li>
+                    <li><a class="text-primary"><i class="fas fa-square"></i></a> Trống</li>
+                    <li><a class="text-danger"><i class="fas fa-square"></i></a> Có khách</li>
                 </ul>
             </div><!-- /.col -->
             <!-- /.col -->
@@ -34,35 +34,23 @@
                                 <?php 
                                         $tenban = DB::table('ban')->where('maloaiban', $lb->id)->get();   
                                         foreach (Cart::getContent() as $key => $value){
-                                        
                                         }
                                     ?>
-                                <!-- <style>
-                                        button[id="61"] {
-                                            color:red;
-                                        }
-                                    </style>  -->
-                                @foreach($tenban as $od)
-                                <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
-                                    <a href="{{route('hien-thi',[$customer->matc, $od->id])}}" ><button
-                                            type="button" class="btn btn-info b" id="{{$od->id}}">{{ $od->tenban }}</button>
-                                    </a>
-                                </div>  
-                                @foreach($cart as $value)
-                                    @if(($value['attributes']['id_ban'] == $od->id))
-                                    <style>
-                                        button[id|="{{$id_ban->id}}"] {
-                                            background-color:red;
-                                        }
-                                    </style>                                    
-                                    @endif
-                                    @endforeach                              
-                                @endforeach  
-
+                                    @foreach($tenban as $od)
+                                    <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
+                                        <a href="{{route('hien-thi',[$customer->matc, $od->id])}}"><button type="button"
+                                                class="btn btn-primary b" id="{{$od->id}}">{{ $od->tenban }}</button>
+                                        </a>
+                                    </div>
+                                        @foreach($cart as $value)
+                                            <style>
+                                            button[id|="{{$value['attributes']['id_ban']}}"] {
+                                                background-color: #dc3545;
+                                            }
+                                            </style>
+                                        @endforeach
+                                    @endforeach
                                 @endforeach
-
-
-
                             </span>
                         </div>
                         <!-- code ..... -->
