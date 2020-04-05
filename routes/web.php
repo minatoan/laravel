@@ -415,6 +415,11 @@ Route::group(['prefix'=>''],function(){
             'as'=> 'get-thongke-theo-tochuc',
             'uses'=> 'Thongkecontroller@getthongke'
         ]);
+
+        Route::get('get-timkiem-theo-thongke/{idtc}/{idnv}', [
+            'as' => 'get-timkiem-theo-thongke',
+            'uses' => 'Thongkecontroller@likethongke'
+        ]);
         
     });
     //admin/tinhluong

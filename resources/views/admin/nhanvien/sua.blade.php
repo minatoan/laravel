@@ -76,6 +76,7 @@
                         <div class="col-sm-6 ">
                             <label class="col-form-label">Quyền</label>
                             <select class="form-control" name="quyen">
+                            <option value="{{$nv->quyen}}">{{$nv->ghichu}}</option>
                                 <option value="1">Admin</option>
                                 <option value="0">Nhân viên</option>
                             </select>

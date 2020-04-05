@@ -126,7 +126,7 @@ class Ordercontroller extends Controller
         $id_tc = Auth::id();
         $tochuc = tochuc::where('id', $id_tc)->first();
                 // dd($cart);
-                return view('admin.order.print', compact('loaimon', 'tenban', 'id_ban', 'mabill', 'menu', 'cart', 'id_nv','tochuc','loaiban'));
+                return view('admin.order.print', compact('loaimon', 'tenban', 'id_ban', 'menu', 'cart', 'id_nv','tochuc','loaiban'));
             }
 
 

@@ -8,8 +8,8 @@
         <div class="row mb-2">
             <div class="col-sm-6">
                 <ul class="fc-color-picker" id="color-chooser">
-                    <li><a class="text-muted"><i class="fas fa-square"></i></a> Trống</li>
-                    <li><a class="text-danger"><i class="fas fa-square"></i></a> Đặt trước</li>
+                    <li><a class="text-primary"><i class="fas fa-square"></i></a> Trống</li>
+                    <li><a class="text-danger"><i class="fas fa-square"></i></a> Có khách</li>
                 </ul>
             </div><!-- /.col -->
             <!-- /.col -->
@@ -39,7 +39,7 @@
                             @foreach($tenban as $od)
                             <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
                                 <a href="{{route('hien-thi',[$customer->matc, $od->id])}}"><button type="button"
-                                        class="btn btn-info">{{ $od->tenban }}</button>
+                                        class="btn btn-primary">{{ $od->tenban }}</button>
                                 </a>
                             </div>
                             @endforeach

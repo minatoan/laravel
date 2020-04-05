@@ -41,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
             // dd($customer);
             $view->with(['customer' => $customer]);
         });
+        
 
         view()->composer('admin.order.orderbill', function($view){
             $user = Auth::check();
