@@ -20,11 +20,11 @@ class Ordercontroller extends Controller
     public function getOrder($id)
     {
 
-        $tochuc = tochuc::where('id', $id)->first();
-        $loaimon = loaimon::where('matc', $id)->get();
-        $tenban  = ban::where('matc', $id)->get();
-        $loaiban = loaiban::where('matc', $id)->get();
-        // dd($loaiban);
+        // $tochuc = tochuc::where('id', $id)->first();
+        $tochuc = tochuc::layToChucTheoIdNhanVien($id);
+        $loaimon = loaimon::where('matc', $tochuc->id)->get();
+        $tenban  = ban::where('matc', $tochuc->id)->get();
+        $loaiban = loaiban::where('matc', $tochuc->id)->get();
 
         return view('admin.order.order', compact('loaimon', 'tenban','tochuc','loaiban'));
     }
@@ -62,16 +62,19 @@ class Ordercontroller extends Controller
 
     //get ban ra bill
     public function hienthi($id_tc, $id_ban)
-    {     
-        $loaiban = loaiban::where('matc', $id_tc)->get();
-        $cart = Cart::getContent();
-        $tenban  = ban::where('matc', $id_tc)->get();
-        $loaimon = loaimon::where('matc', $id_tc)->get();
-        $id_ban  = ban::find($id_ban);
-        $menu    = menu::all();
+    {   
         $id_nv = Auth::id();
         $id_tc = Auth::id();
-        $tochuc = tochuc::where('id', $id_tc)->first();
+        $tochuc = tochuc::layToChucTheoIdNhanVien($id_tc);
+        $loaiban = loaiban::where('matc', $tochuc->id)->get();
+        $cart = Cart::getContent();
+        $tenban  = ban::where('matc', $tochuc->id)->get();
+        $loaimon = loaimon::where('matc', $tochuc->id)->get();
+        $id_ban  = ban::find($id_ban);
+        $menu    = menu::all();
+        // $bann    = ban::where('matc', $tochuc->id)->where('id', '<>', $id_ban->id)->get();
+    //    dd($tenban);
+        // $tochucc = tochuc::where('id', $id)->first();
         // Cart::clear();
                 // dd($tochuc);
 
@@ -116,23 +119,24 @@ class Ordercontroller extends Controller
         public function print($id_tc, $id_ban)
             {
                 
-        $loaiban = loaiban::where('matc', $id_tc)->get();
-        $cart = Cart::getContent();
-        $tenban  = ban::where('matc', $id_tc)->get();
-        $loaimon = loaimon::where('matc', $id_tc)->get();
-        $id_ban  = ban::find($id_ban);
-        $menu    = menu::all();
-        $id_nv = Auth::id();
-        $id_tc = Auth::id();
-        $tochuc = tochuc::where('id', $id_tc)->first();
+                $id_nv = Auth::id();
+                $id_tc = Auth::id();
+                $tochuc = tochuc::layToChucTheoIdNhanVien($id_tc);
+                $loaiban = loaiban::where('matc', $tochuc->id)->get();
+                $cart = Cart::getContent();
+                $tenban  = ban::where('matc', $tochuc->id)->get();
+                $loaimon = loaimon::where('matc', $tochuc->id)->get();
+                $id_ban  = ban::find($id_ban);
+                $menu    = menu::all();
                 // dd($cart);
-                return view('admin.order.print', compact('loaimon', 'tenban', 'id_ban', 'menu', 'cart', 'id_nv','tochuc','loaiban'));
+                return view('admin.order.print', compact('loaimon', 'tenban', 'id_ban', 'menu', 'cart', 'id_nv','tochuc','loaiban','id_tc'));
             }
 
 
     //get order ra bill
     public function add($id_ban, $id_sp, Request $req)
     {
+        
         // Cart::clear();
         $product = menu::find($id_sp);
 
@@ -155,7 +159,8 @@ class Ordercontroller extends Controller
 
     public function savecart($id_tc, $id_nv, $id_ban, Request $req)
     {
-        
+        $id_tc = Auth::id();
+        $tochuc = tochuc::layToChucTheoIdNhanVien($id_tc);
         // // dd($bill);
         $sum = 0; 
         foreach (Cart::getContent() as $key => $value) {
@@ -175,7 +180,7 @@ class Ordercontroller extends Controller
                 $bill->maban = $id_ban;
                 $bill->tongtien = $sum;
                 $bill->tinhtrang = '1';
-                $bill->matc = $id_tc;
+                $bill->matc = $tochuc->id;
                 $bill->save();
         
             foreach (Cart::getContent() as $key => $value) {
@@ -186,7 +191,7 @@ class Ordercontroller extends Controller
                 $bill_detail->mamon = $value['attributes']['id_sp'];
                 $bill_detail->soluong = $value['quantity'];
                 $bill_detail->dongia = $value['price'];
-                $bill_detail->matc = $id_tc;
+                $bill_detail->matc = $tochuc->id;
 
                 $bill_detail->save();
             }

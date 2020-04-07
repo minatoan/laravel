@@ -13,10 +13,12 @@
                 {{csrf_field()}}
                 <div class="modal-body">
                     <div class="form-group row">
+                        @if ($quyen==1 or $quyen==2)
                         <div class="col-sm-6 ">
                             <label class="col-form-label">Tài khoản</label>
                             <input type="text" name="username" value="{{$nv->username}}" class="form-control">
                         </div>
+                        @endif
                         <div class="col-sm-6 ">
                             <label class="col-form-label">Tên nhân viên</label>
                             <input type="text" name="tennv" id="ten_nhan_vien" value="{{$nv->tennv}}"
@@ -45,18 +47,18 @@
                             <input type="text" name="sdt" value="{{$nv->sdt}}" class="form-control">
                         </div>
                         <div class="col-sm-6 ">
-                        <label class="col-form-label">Ca làm</label>
-                        <select class="form-control" name="calam">
-                            <option>{{$nv->calam}}</option>
-                            <option>Sáng</option>
-                            <option>Chiều</option>
-                            <option>Tối</option>
-                            <option>Khuya</option>
-                            <option>Không</option>
-                        </select>
+                            <label class="col-form-label">Ca làm</label>
+                            <select class="form-control" name="calam">
+                                <option>{{$nv->calam}}</option>
+                                <option>Sáng</option>
+                                <option>Chiều</option>
+                                <option>Tối</option>
+                                <option>Khuya</option>
+                                <option>Không</option>
+                            </select>
                         </div>
                     </div>
-                    
+
 
                     <label class="col-form-label">Địa chỉ</label>
                     <input type="text" name="diachi" value="{{$nv->diachi}}" class="form-control">
@@ -76,9 +78,15 @@
                         <div class="col-sm-6 ">
                             <label class="col-form-label">Quyền</label>
                             <select class="form-control" name="quyen">
-                            <option value="{{$nv->quyen}}">{{$nv->ghichu}}</option>
-                                <option value="1">Admin</option>
+                            @if($quyen==1 or $quyen==2)
+                                <option value="{{$nv->quyen}}">{{$nv->ghichu}}</option>
+                                <option value="1">Chủ quán</option>
+                                <option value="0">Thu ngân</option>
                                 <option value="0">Nhân viên</option>
+                            @else($quyen==0)
+                            <option value="{{$nv->quyen}}">{{$nv->ghichu}}</option>
+                            <option value="0">Nhân viên</option>
+                            @endif
                             </select>
                         </div>
                     </div>

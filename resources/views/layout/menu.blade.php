@@ -2,9 +2,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{route('order-get', $customer->matc)}}" class="brand-link">
-        <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
-        <span class="brand-text font-weight-light">Admin Coffee</span>
+        <!-- <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8">            -->
+            <i class="fas fa-mug-hot"  style="padding-left:30px"><span  class="font-weight-light">   {{$customer->tochuc->tentc}}</span></i>
     </a>
     <base href="{{asset('')}}">
     <!-- Sidebar -->
@@ -14,11 +14,11 @@
             
             @if($customer->quyen == '1')
                 <div class="info">
-                <a class="d-block">Admin: {{$customer->tennv}}</a>
+                <a class="d-block">Chủ quán: {{$customer->tennv}}</a>
                 </div>
             @elseif($customer->quyen == '0')
                 <div class="info">
-                <a  class="d-block">Nhân viên: {{$customer->tennv}}</a>
+                <a  class="d-block">Thu ngân: {{$customer->tennv}}</a>
                 </div>
             @endif
         </div>
@@ -33,6 +33,7 @@
                         <i class="nav-icon fas fa-building"></i>                        
                         <p>
                             Tổ chức
+                        
                         </p>
                     </a>
                 </li>
@@ -113,7 +114,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="admin/order/{{$customer->matc}}" class="nav-link">
+                            <a href="{{route('order-get', [$customer->matc])}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Trang order</p>
                             </a>

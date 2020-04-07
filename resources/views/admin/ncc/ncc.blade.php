@@ -38,7 +38,7 @@
                                     @php
                                     $i=0;
                                     @endphp
-                                    @foreach($ncc as $nc)
+                                    @foreach($nhacungcap as $nc)
                                     <tr>
                                         <td>{{++$i}}</td>
                                         <td>{{$nc->tenncc}}</td>

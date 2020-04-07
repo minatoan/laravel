@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class phieunhap extends Model
 {
@@ -26,4 +27,18 @@ class phieunhap extends Model
         return $this->belongsTo('App\tochuc','matc','id');           
     } 
     
+
+    public static function tinhTienNhapHang(int $matc){
+        $data = [];
+        for ($thang=1; $thang<=12; $thang++){
+            $tiennhap = DB::table('phieunhap')
+                ->where('matc', $matc)
+                ->where(DB::raw('month(ngaynhap)'), $thang)
+                ->where(DB::raw('year(ngaynhap)'),DB::raw('year(now())'))
+                ->select(DB::raw('sum(tongtien) as tongtien'))
+                ->first();
+            array_push($data, $tiennhap);
+        }
+        return $data;
+    }
 }

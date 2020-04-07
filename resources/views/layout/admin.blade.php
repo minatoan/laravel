@@ -118,6 +118,9 @@
     <!-- <script src="http://www.position-absolute.com/creation/print/jquery.printPage.js"></script> -->
     <script src="{{asset('dist/js/jquery.printPage.js')}}"></script>
 
+    <!-- AdminLTE App -->
+    <!-- <script src="{{asset('dist/js/chart.js/adminlte.min.js')}}"></script> -->
+
     <script>
     $(document).ready(function() {
         $(".btnPrint").printPage();
@@ -209,6 +212,7 @@ $(document).ready(function(){
         });
     });
     </script>
+    
     <!-- update cart -->
 
 

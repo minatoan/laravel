@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <ul class="fc-color-picker" id="color-chooser">
+            <ul class="fc-color-picker" id="color-chooser">
                     <li><a class="text-primary"><i class="fas fa-square"></i></a> Trống</li>
                     <li><a class="text-danger"><i class="fas fa-square"></i></a> Có khách</li>
                 </ul>

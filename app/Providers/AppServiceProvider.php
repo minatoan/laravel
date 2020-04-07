@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
             $user = Auth::check();
             $id = Auth::user()['id'];
             $customer = nhanvien::where('id',$id)->first();
-            // dd($customer);
+            // $tenquan = tochuc::all();
             $view->with(['customer' => $customer]);
         });
 
@@ -41,7 +41,6 @@ class AppServiceProvider extends ServiceProvider
             // dd($customer);
             $view->with(['customer' => $customer]);
         });
-        
 
         view()->composer('admin.order.orderbill', function($view){
             $user = Auth::check();

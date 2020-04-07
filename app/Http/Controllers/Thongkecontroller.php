@@ -35,7 +35,12 @@ class Thongkecontroller extends Controller
         $chitietbill = chitietbill::where('matc', $id)->get();
         $ncc = nhacungcap::where('matc', $id)->get();
         $tinhluong  = tinhluong::where('matc', $id)->orderBy('id', 'DESC')->get();
-        return view('admin.thongke.thongke',compact( 'chitietbill','bill','phieunhap','ctphieunhap','tochuc','ncc','hanghoa','phieuxuat','ctphieuxuat','nhanvien','tinhluong'));
+
+        $tongdoanhthu = bill::tinhDoanhThuTheoThang($id);
+        $tongtiennhaphang = phieunhap::tinhTienNhapHang($id);
+        $tongluongnv = tinhluong::tinhTienLuong($id);
+        // var_dump($tongluong);
+        return view('admin.thongke.thongke',compact( 'chitietbill','bill','phieunhap','ctphieunhap','tochuc','ncc','hanghoa','phieuxuat','ctphieuxuat','nhanvien','tinhluong', 'tongdoanhthu', 'tongtiennhaphang', 'tongluongnv'));
     }
     public function likethongke($id, Request $req)
     {
@@ -47,6 +52,9 @@ class Thongkecontroller extends Controller
         $tinhluong  = tinhluong::where('matc', $id)->orderBy('id', 'DESC')->whereBetween('ngay', [$dateform, date('Y-m-d', strtotime($dateto. '+1 days'))])->get();
         $bill  = bill::where('matc', $id)->orderBy('id', 'DESC')->whereBetween('ngaytao', [$dateform, date('Y-m-d', strtotime($dateto. '+1 days'))])->get();
         $phieunhap  = phieunhap::where('matc', $id)->orderBy('id', 'DESC')->whereBetween('ngaynhap', [$dateform, date('Y-m-d', strtotime($dateto. '+1 days'))])->get();
-        return view('admin.thongke.thongke' ,compact('tinhluong','bill','phieunhap','chitietbill','ctphieunhap'));
+        $tongdoanhthu = bill::tinhDoanhThuTheoThang($id);
+        $tongtiennhaphang = phieunhap::tinhTienNhapHang($id);
+        $tongluongnv = tinhluong::tinhTienLuong($id);
+        return view('admin.thongke.thongke' ,compact('tinhluong','bill','phieunhap','chitietbill','ctphieunhap', 'tongdoanhthu', 'tongtiennhaphang', 'tongluongnv'));
     }
 }

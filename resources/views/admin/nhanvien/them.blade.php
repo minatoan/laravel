@@ -12,14 +12,16 @@
                 {{csrf_field()}}
                 <div class="modal-body">
                     <div class="form-group row">
-                        <div class="col-sm-6 ">
+                    @if ($quyen==1 or $quyen==2)
+                                            <div class="col-sm-6 ">
                             <label class="col-form-label">Tài khoản</label>
                             <input type="text" name="username" class="form-control">
                         </div>
                         <div class="col-sm-6 ">
                             <label class="col-form-label">Mật khẩu</label>
-                            <input type="text" name="matkhau" class="form-control">
+                            <input type="password" name="matkhau" class="form-control">
                         </div>
+                        @endif
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 ">
@@ -68,17 +70,31 @@
                     <div class="form-group row">
                         <div class="col-sm-6 ">
                             <label class="col-form-label">Tổ chức</label>
+                            @if($quyen==2)
+
+                            <select class="form-control" name="matc" id="ma_tc">
+                            <option value="" disabled selected>Chọn tổ chức</option>
+                                @foreach($tochucc as $tcc)
+                                <option value="{{$tcc->id}}">{{$tcc->tentc}}</option>
+                                @endforeach
+                            </select>
+                            @else(quyen==0 or quyen==1)
                             <select class="form-control" name="matc" id="ma_tc">
                                 @foreach($tochuc as $tc)
                                 <option value="{{$tc->id}}">{{$tc->tentc}}</option>
                                 @endforeach
                             </select>
+                            @endif
                         </div>
                         <div class="col-sm-6 ">
                             <label class="col-form-label">Quyền</label>
                             <select class="form-control" name="quyen">
-                                <option value="1">Admin</option>
-                                <option value="0">Nhan vien</option>
+                            @if($quyen==1 or $quyen==2)
+                                <option value="1">Chủ quán</option>
+                                <option value="0">Thu ngân</option>
+                            @endif
+                                <option value="0">Nhân viên</option>
+
                             </select>
                         </div>
                     </div>

@@ -19,8 +19,10 @@
                     @endif
                     <div class="card-body">
                         <div class="form-group">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#them">Thêm</button>
+                            @if ($quyen==2)
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#them">Thêm</button>
+                            @endif
                         </div>
                         <div class="table-responsive">
                             <table id="datatables" class="table table-bordered table-striped table-hover"
@@ -44,14 +46,17 @@
                                         <td>{{$tc->nguoiql}}</td>
                                         <td>{{$tc->diachi}}</td>                                        
                                         <td class="left">
+                                            @if ($quyen==2)
                                             <button type="button" class="btn btn-warning" data-toggle="modal"
-                                                data-target="#sua{{$tc->id}}"><i class="far fa-edit"
-                                                    style="color:black"></i>
+                                            data-target="#sua{{$tc->id}}"><i class="far fa-edit"
+                                                style="color:black"></i>
                                             </button>
-                                            <a href="{{route('tochuc-xoa',$tc->id)}}"><button type="button"
+                                            <a href="{{route('tochuc-xoa',$tc->id)}}">
+                                                <button type="button"
                                                     class="btn btn-danger"><i class="far fa-trash-alt"></i>
                                                 </button>
                                             </a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach

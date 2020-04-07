@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use App\phieunhap;
 use App\tochuc;
-use App\ncc;
+use App\nhacungcap;
 use DB;
 
 
@@ -19,10 +19,10 @@ class NCCcontroller extends Controller
     //------------------------------------------Thêm hàng hóa
     public function getNCC($id)
     {
-        $ncc = ncc::where('matc', $id)->get();
+        $nhacungcap = nhacungcap::where('matc', $id)->get();
         $phieunhap = phieunhap::all();
         $tochuc = tochuc::where('id', $id)->get();
-        return view('admin.ncc.ncc',['ncc'=>$ncc, 'phieunhap' => $phieunhap, 'tochuc' => $tochuc]);
+        return view('admin.ncc.ncc',['nhacungcap'=>$nhacungcap, 'phieunhap' => $phieunhap, 'tochuc' => $tochuc]);
        
         
     }
@@ -31,7 +31,7 @@ class NCCcontroller extends Controller
     {
         $this->validate($request,
             [
-                'tenncc' => 'required|unique:ncc,tenncc|min:3|max:100',
+                'tenncc' => 'required|min:3|max:100',
                 'diachi' => 'required',
                 'sdt' => 'required',
                 'matc' => 'required',
@@ -39,16 +39,15 @@ class NCCcontroller extends Controller
             [
                 'tenncc.required' => 'Lỗi rồi! Bạn chưa điền tên nhà cung cấp',
                 'tenncc.min' => 'Tên nhà cung cấp phải có ít nhất 3 ký tự',
-                'tenncc.unique' => 'Lỗi rồi! Tên nhà cung cấp đã tồn tại',
                                 
             ]);
 
-            $ncc = new ncc;
-            $ncc->tenncc = $request->tenncc;
-            $ncc->diachi = $request->diachi;  
-            $ncc->sdt = $request->sdt;  
-            $ncc->matc = $request->matc;         
-            $ncc->save();
+            $nhacungcap = new nhacungcap;
+            $nhacungcap->tenncc = $request->tenncc;
+            $nhacungcap->diachi = $request->diachi;  
+            $nhacungcap->sdt = $request->sdt;  
+            $nhacungcap->matc = $request->matc;         
+            $nhacungcap->save();
             
             return redirect()->back()->with(Toastr::success('Thêm thành công'));
     }
@@ -56,14 +55,14 @@ class NCCcontroller extends Controller
     // ------------------------------------Sửa hàng hóa
     public function getSuaNCC($id)
     {
-        $phieunhap = phieunhap::find($id);       
+        $nhacungcap = nhacungcap::where('matc', $id)->get();
         $tochuc = tochuc::all();
-        return view('admin.ncc.ncc',['ncc'=>$ncc, 'tochuc' => $tochuc]);
+        return view('admin.ncc.ncc',['nhacungcap'=>$nhacungcap, 'tochuc' => $tochuc]);
     }
 
     public function postSuaNCC(Request $request, $id)
     {
-        $ncc = ncc::where('id', $id)->first();
+        $nhacungcap = nhacungcap::where('id', $id)->first();
 
         $this->validate($request,
         [
@@ -78,12 +77,12 @@ class NCCcontroller extends Controller
             
                             
         ]);
-        $ncc->id = $id;
-        $ncc->tenncc = $request->tenncc;
-        $ncc->diachi = $request->diachi;  
-        $ncc->sdt = $request->sdt;  
-        $ncc->matc = $request->matc;           
-        $ncc->save();
+        $nhacungcap->id = $id;
+        $nhacungcap->tenncc = $request->tenncc;
+        $nhacungcap->diachi = $request->diachi;  
+        $nhacungcap->sdt = $request->sdt;  
+        $nhacungcap->matc = $request->matc;           
+        $nhacungcap->save();
         return redirect()->back()->with(Toastr::success('Sửa thành công'));
     }
 
@@ -91,8 +90,8 @@ class NCCcontroller extends Controller
 
     public function getXoaNCC($id)
     {
-        $ncc = ncc::where('id', $id);        
-        $ncc->delete($ncc);
+        $nhacungcap = nhacungcap::where('id', $id);        
+        $nhacungcap->delete($nhacungcap);
         
         return redirect()->back()->with(Toastr::success('Xóa thành công'));
     }    

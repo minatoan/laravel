@@ -22,8 +22,8 @@ class ToChuccontroller extends Controller
     public function getThemTochuc()
     {
         $tochuc = tochuc::all();
-        
-        return view('admin.tochuc.tochuc',['tochuc'=>$tochuc]);
+        $quyen = Auth::user()['quyen'];    
+        return view('admin.tochuc.tochuc',['tochuc'=>$tochuc, 'quyen'=>$quyen]);
     }
 
     public function postThemTochuc(Request $request)

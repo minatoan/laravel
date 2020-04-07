@@ -29,9 +29,10 @@ class NhanViencontroller extends Controller
         $nhanvien = nhanvien::where('matc', $id)->orderBy('id', 'DESC')->get();
         $tochuc = tochuc::where('id', $id)->get();
         $tinhluong = tinhluong::all();
+        $quyen = Auth::user()['quyen']; 
+        $tochucc = tochuc::all();
 
-
-        return view('admin.nhanvien.nhanvien',['nhanvien' => $nhanvien, 'tochuc' => $tochuc, 'tinhluong' => $tinhluong]);
+        return view('admin.nhanvien.nhanvien',['nhanvien' => $nhanvien, 'tochuc' => $tochuc, 'tinhluong' => $tinhluong, 'quyen' => $quyen, 'tochucc' => $tochucc]);
     }
 
     public function postThemnhanvien(Request $request)
@@ -45,7 +46,6 @@ class NhanViencontroller extends Controller
                 'sdt' => 'required|min:10|max:10',
                 'diachi' =>'required',
                 'matc' => 'required',
-                'username' => 'required|unique:nhanvien,username',                
                 
             ],
             [
@@ -99,7 +99,6 @@ class NhanViencontroller extends Controller
                 'sdt' => 'required|min:10|max:10',
                 'diachi' =>'required',
                 'matc' => 'required',
-                'username' => 'required|min:3',
                 
             ],
             [
@@ -109,10 +108,7 @@ class NhanViencontroller extends Controller
                 'sdt.min' =>'Số điện thoại phải có ít nhất 10 ký tự',
                 'diachi.required' =>'Lỗi rồi! Bạn chưa điền địa chỉ',
                 'luongcb.required' =>'Lỗi rồi! Bạn chưa điền số lương',  
-                'username.required' => 'Lỗi rồi! Bạn chưa điền tên tài khoản',
-                'username.min' => 'Tên tài khoản phải có ít nhất 3 ký tự',
-                'password.required' => 'Lỗi rồi! Bạn chưa điền mật khẩu',
-                'password.min' => 'Mật khẩu phải có ít nhất 3 ký tự',
+                
 
             ]);
             $nhanvien->id = $id;

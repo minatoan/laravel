@@ -6,7 +6,5 @@
 <body>
 aaaaaaaaaaa
 </body>
-<script type="text/javascript"> 
-  window.addEventListener("load", window.print());
-</script>
+
 </html>

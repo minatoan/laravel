@@ -180,7 +180,8 @@
                                         <label class="col-form-label">Bàn chuyển đến</label>
                                         <select class="form-control" name="id_ban_den" style="width: 160px;">
                                             <?php 
-                                                $bann = DB::table('ban')->where('matc', $id_tc)->where('id', '<>', $id_ban->id)->get();                                               
+                                                $bann = DB::table('ban')->where('matc', $tochuc->id)->where('id', '<>', $id_ban->id)->get();
+                                                //   dd($bann);                                          
                                             ?>
                                             @foreach($bann as $bannn)
                                             <option value="{{$bannn->id}}">{{$bannn->tenban}}</option>
