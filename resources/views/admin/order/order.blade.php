@@ -31,13 +31,13 @@
                             <!-- code ..... -->
                             <span>
                             @foreach($loaiban as $lb)
-                                <h5  style="float:left; padding-right:75%; margin-bottom: 10px">Bàn {{$lb->tenloaiban}}
-                                <br></h5>
+                                <button style="border: none; text-align: left; font-size: 20px;" class="form-control"  >Bàn {{$lb->tenloaiban}}</button>
+
                                     <?php 
                                     $tenban = DB::table('ban')->where('maloaiban', $lb->id)->get();   
                                     ?>
                             @foreach($tenban as $od)
-                            <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px">
+                            <div style="float:left; width: 30px; margin-right:70px; margin-bottom: 10px; padding-left:12px">
                                 <a href="{{route('hien-thi',[$customer->matc, $od->id])}}"><button type="button"
                                         class="btn btn-primary">{{ $od->tenban }}</button>
                                 </a>
@@ -85,7 +85,6 @@
                                 </table>
                             </div>
                             <h5 align="right"> Tổng tiền: </h5>
-                            <h6 align="center">Xin cảm ơn Quý Khách! (^^)</h6>
                             <!-- code ... -->
                         </div>
                     </div>
