@@ -278,6 +278,10 @@ Route::group(['prefix'=>''],function(){
             'as' => 'chuyen-ban',
             'uses' => 'Ordercontroller@chuyenban'
         ]);
+        Route::get('print-lsbill/{idb}', [
+            'as' => 'print-lsbill',
+            'uses' => 'Ordercontroller@printbill'
+        ]);
 
     });
 
@@ -418,6 +422,11 @@ Route::group(['prefix'=>''],function(){
         Route::get('get-timkiem-theo-thongke/{idtc}/{idnv}', [
             'as' => 'get-timkiem-theo-thongke',
             'uses' => 'Thongkecontroller@likethongke'
+        ]);
+
+        Route::get('get-bill-theo-tochuc-print/{idtc}/{idnv}', [
+            'as' => 'get-bill-theo-tochuc-print',
+            'uses' => 'Ordercontroller@printbill'
         ]);
         
     });

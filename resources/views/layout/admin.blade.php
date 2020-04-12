@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin Coffee</title>
+    <title>{{$customer->tochuc->tentc}}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -34,6 +34,12 @@
     <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- datatables -->
+    <link href="{{asset('plugins/datatable-order/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('plugins/datatable-order/datatables/responsive.bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('plugins/datatable-order/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
+    
+    {{-- <link href="{{asset('dist/css/style-datatables.css')}}" rel="stylesheet" type="text/css"/> --}}
 
 
 </head>
@@ -117,6 +123,26 @@
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <!-- <script src="http://www.position-absolute.com/creation/print/jquery.printPage.js"></script> -->
     <script src="{{asset('dist/js/jquery.printPage.js')}}"></script>
+    <!-- datatables -->
+    <script src="{{asset('plugins/datatable-order/datatables/jquery.dataTables.min.js')}}"></script>
+    <!-- <script src="{{asset('plugins/datatable-order/datatables/dataTables.bootstrap.js')}}"></script> -->
+    <script src="{{asset('plugins/datatable-order/datatables/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('plugins/datatable-order/datatables/responsive.bootstrap.min.js')}}"></script>
+
+    <script src="{{asset('plugins/datatable-order/datatables/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('plugins/datatable-order/datatables/buttons.bootstrap.min.js')}}"></script>
+    <script src="{{asset('plugins/datatable-order/datatables/jszip.min.js')}}"></script>
+    <script src="{{asset('plugins/datatable-order/datatables/pdfmake.min.js')}}"></script>
+    <script src="{{asset('plugins/datatable-order/datatables/vfs_fonts.js')}}"></script>
+    <script src="{{asset('plugins/datatable-order/datatables/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('plugins/datatable-order/datatables/buttons.print.min.js')}}"></script>
+    <script src="{{asset('plugins/datatable-order/datatables/dataTables.fixedHeader.min.js')}}"></script>
+    <script src="{{asset('plugins/datatable-order/datatables/dataTables.keyTable.min.js')}}"></script>
+    <script src="{{asset('plugins/datatable-order/datatables/dataTables.scroller.min.js')}}"></script>
+
+    <script src="{{asset('pages/datatables/datatables.init.js')}}"></script>
+
+
 
     <!-- AdminLTE App -->
     <!-- <script src="{{asset('dist/js/chart.js/adminlte.min.js')}}"></script> -->

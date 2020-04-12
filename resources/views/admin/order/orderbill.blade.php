@@ -142,14 +142,14 @@
                                     </h5>
                                 </span>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-toggle="modal"
+                                    <button type="button" class="btn btn-outline-info" data-toggle="modal"
                                         data-target="#chuyenban"><i class="fas fa-exchange-alt"></i>
                                         Chuyển bàn</button>
                                     <a href="{{route('print-cart',[$customer->matc, $id_ban->id])}}"
-                                        class="btnPrint"><button type="button" class="btn btn-default"
+                                        class="btnPrint"><button type="button" class="btn btn-outline-info"
                                             data-toggle="modal" data-target="#showhd">
                                             <i class="fas fa-print"></i> Xuất bill</button></a>
-                                    <button type="submit" class="btn btn-default">
+                                    <button type="submit" class="btn btn-outline-info">
                                         <i class="fas fa-donate"></i> Thanh toán</button>
                                     <!-- <a href="{{route('clear-cart')}}" class="btn btn-info">Xóa hết</a> -->
                                 </div>

@@ -1,6 +1,7 @@
 @extends('layout.admin')
 
 @section('content')
+<link rel="stylesheet" href="{{asset('dist/css/button/menu-hover-button.css')}}">
 
 <div class="content">
     <div class="container-fluid">
@@ -24,38 +25,59 @@
                                 </div>
                                 <div class="col-sd-1.5 ">
                                     <label class="col-form-label" style="color: #ffffff">.</label>
-                                    <button type="submit" class="btn btn-primary form-control">Tìm</button>
+                                    <button type="submit" class="btn btn-outline-primary form-control">Tìm</button>
                                 </div>
-                        </form>                        
+                        </form>
+                        <div class="col-sd-2 dropdown" style="padding-left: 7px">
+                            <label class="col-form-label" style="color: #ffffff">.</label>
+
+                            <button class="dropbtn btn btn-dark form-control">Xuất excel</button>
+                            <div class="dropdown-content">
+                                <a data-toggle="modal" data-target="#banhang">In phiếu</a>
+                            </div>
+                        </div>
                     </div>
-                            
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover" style="width:290px">
-                                    <thead class=" text-primary">
-                                        <th>Tổng số bill</th>
-                                        <th>Tổng tiền bán ra</th>
-                                        </th>
-                                    </thead>
-                                    <tbody>
-                                        @php
-                                        $ttt = 0;
-                                        $tongbill = 0;
-                                        @endphp
-                                        @foreach($bill as $bi)
-                                        <?php                                        
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover" style="width:auto">
+                            <thead class=" text-primary">
+                                <th>Tổng số bill</th>
+                                <th>Tổng sản phẩm bán ra</th>
+                                <th>Tổng tiền bán ra</th>
+                                </th>
+                            </thead>
+                            <tbody>
+                                @php
+                                $ttt = 0;
+                                $tongbill = 0;
+                                $tongsoly = 0;
+                                @endphp
+                                @foreach($bill as $bi)
+                                <?php                                        
                                         $ttt +=  $bi->tongtien ;
                                         $tsl[0] =  $bi->id;
                                         count($tsl);
                                         $tongbill += count($tsl);
                                         ?>
+                                <?php    
+                                    $ctbill = DB::table('chitietbill')->where('mabill', $bi->id)->get();
+                                ?>
+                                        @foreach($ctbill as $ctbilll)
+                                        <?php                                        
+                                            $tongsoly += $ctbilll->soluong;
+                                            
+                                        ?>
                                         @endforeach
-                                        <tr>
-                                            <td>{{($tongbill)}} bill</td>
-                                            <td>{{number_format($ttt,0,",",".")}} VNĐ</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                @endforeach
+                                <tr>
+                                    <td>{{($tongbill)}} bill</td>
+                                    <td>{{($tongsoly)}} ly</td>
+
+                                    <td>{{number_format($ttt,0,",",".")}} VNĐ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="table-responsive">
                         <table id="datatables" class="table table-bordered table-striped table-hover">
 
@@ -86,6 +108,7 @@
                                                 data-target="#showct{{$bbl->id}}" style="background-color:#605ca8;"><i
                                                     class="fas fa-copy" style="color:#ffffff"> Xem chi tiết</i>
                                             </button> </a>
+                                                                                    
                                     </td>
                                 </tr>
                                 @endforeach
@@ -102,6 +125,9 @@
         <!-- Sửa -->
         <!-- Modal -->
         @include('admin.order.chitietbill')
+        @include('admin.order.printlsbill')
+
+
 
         <!-- Đóng sửa -->
     </div>

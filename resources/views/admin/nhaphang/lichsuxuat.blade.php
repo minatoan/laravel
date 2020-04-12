@@ -1,6 +1,7 @@
 @extends('layout.admin')
 
 @section('content')
+<link rel="stylesheet" href="{{asset('dist/css/button/menu-hover-button.css')}}">
 
 <div class="content">
     <div class="container-fluid">
@@ -24,11 +25,19 @@
                                 </div>
                                 <div class="col-sd-1.5 ">
                                     <label class="col-form-label" style="color: #ffffff">.</label>
-                                    <button type="submit" class="btn btn-primary form-control">Tìm</button>
+                                    <button type="submit" class="btn btn-outline-primary form-control">Tìm</button>
                                 </div>
                         </form>
+                        <div class="col-sd-2 dropdown" style="padding-left: 7px">
+                            <label class="col-form-label" style="color: #ffffff">.</label>
+
+                            <button class="dropbtn btn btn-dark form-control">Xuất excel</button>
+                            <div class="dropdown-content">
+                                <a data-toggle="modal" data-target="#phieuxuat">In phiếu</a>
+                            </div>
+                        </div>
                     </div>
-                        <div class="table-responsive">
+                        <!-- <div class="table-responsive">
                             <table class="table table-bordered table-striped table-hover" style="width:290px">
                                 <thead class=" text-primary">
                                     <th>Tổng số đơn</th>
@@ -40,19 +49,14 @@
                                     $tongdon = 0;
                                     @endphp
                                     @foreach($phieuxuat as $pxuat)
-                                    <?php                                        
-                                      
-                                        $tsl[0] =  $pxuat->id;
-                                        count($tsl);
-                                        $tongdon += count($tsl);
-                                        ?>
+                                    
                                     @endforeach
                                     <tr>
                                         <td>{{($tongdon)}} đơn</td>
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </div> -->
                     <div class="table-responsive">
                         <table id="datatables" class="table table-bordered table-striped table-hover">
 
@@ -100,6 +104,8 @@
         
         @include('admin.nhaphang.chitietxuat')
         <!-- Đóng sửa -->
+        @include('admin.nhaphang.printphieuxuat')
+
     </div>
 </div>
 </div>

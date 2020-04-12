@@ -17,6 +17,7 @@ use App\nhanvien;
 use App\tochuc;
 use App\nhacungcap;
 use App\bill;
+use App\ban;
 use App\chitietbill;
 use Cart, Auth;
 use DB;
@@ -35,12 +36,14 @@ class Thongkecontroller extends Controller
         $chitietbill = chitietbill::where('matc', $id)->get();
         $ncc = nhacungcap::where('matc', $id)->get();
         $tinhluong  = tinhluong::where('matc', $id)->orderBy('id', 'DESC')->get();
+        $nhanvien = nhanvien::where('matc', $id)->get();
+        $ban = ban::find($id);
 
         $tongdoanhthu = bill::tinhDoanhThuTheoThang($id);
         $tongtiennhaphang = phieunhap::tinhTienNhapHang($id);
         $tongluongnv = tinhluong::tinhTienLuong($id);
         // var_dump($tongluong);
-        return view('admin.thongke.thongke',compact( 'chitietbill','bill','phieunhap','ctphieunhap','tochuc','ncc','hanghoa','phieuxuat','ctphieuxuat','nhanvien','tinhluong', 'tongdoanhthu', 'tongtiennhaphang', 'tongluongnv'));
+        return view('admin.thongke.thongke',compact( 'chitietbill','bill','phieunhap','ctphieunhap','tochuc','ncc','hanghoa','phieuxuat','ctphieuxuat','nhanvien','tinhluong', 'tongdoanhthu', 'tongtiennhaphang', 'tongluongnv','nhanvien','ban'));
     }
     public function likethongke($id, Request $req)
     {
@@ -57,4 +60,6 @@ class Thongkecontroller extends Controller
         $tongluongnv = tinhluong::tinhTienLuong($id);
         return view('admin.thongke.thongke' ,compact('tinhluong','bill','phieunhap','chitietbill','ctphieunhap', 'tongdoanhthu', 'tongtiennhaphang', 'tongluongnv'));
     }
+
+    
 }

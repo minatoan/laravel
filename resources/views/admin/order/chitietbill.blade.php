@@ -1,8 +1,9 @@
 @foreach($bill as $bbl)
-<div class="modal fade" id="showct{{$bbl->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade bd-example-modal-lg" id="showct{{$bbl->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div class="modal-dialog modal-lg" role="document"  style="width:auto">
+        <div class="modal-content"  style="width:auto">
+        
             <div class="modal-body">
                 <br>
                 <h4 align="center">CHI TIẾT BILL {{$bbl->ban->tenban}}</h4>
@@ -51,9 +52,14 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <a href="{{route('print-lsbill',$bbl->id)}}" class="btnPrint">
+            <button type="button" class="btn btn-default"  >
+            <i class="fas fa-print"></i> Xuất bill</button></a>
+            
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>
 </div>
+
 @endforeach

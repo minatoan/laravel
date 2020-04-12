@@ -1,6 +1,7 @@
 @extends('layout.admin')
 
 @section('content')
+<link rel="stylesheet" href="{{asset('dist/css/button/menu-hover-button.css')}}">
 
 <div class="content">
     <div class="container-fluid">
@@ -24,49 +25,60 @@
                                 </div>
                                 <div class="col-sd-1.5 ">
                                     <label class="col-form-label" style="color: #ffffff">.</label>
-                                    <button type="submit" class="btn btn-primary form-control">Tìm</button>
+                                    <button type="submit" class="btn btn-outline-primary form-control">Tìm</button>
                                 </div>
+
                         </form>
+                        <div class="col-sd-2 dropdown" style="padding-left: 7px">
+                            <label class="col-form-label" style="color: #ffffff">.</label>
+
+                            <button class="dropbtn btn btn-dark form-control">Xuất excel</button>
+                            <div class="dropdown-content">
+                                <a data-toggle="modal" data-target="#nhaphang">In phiếu</a>
+                            </div>
+                        </div>
                     </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover" style="width:290px">
-                                <thead class=" text-primary">
-                                    <th>Tổng số đơn</th>
-                                    <th>Tổng tiền nhập vào</th>
-                                    </th>
-                                </thead>
-                                <tbody>
-                                    @php
-                                    $ttt = 0;
-                                    $tongdon = 0;
-                                    $tongsospkho = 0;
-                                    @endphp
-                                    @foreach($phieunhap as $pnhap)
-                                    <?php                                        
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover" style="width:290px">
+                            <thead class=" text-primary">
+                                <th>Tổng số đơn</th>
+                                <th>Tổng tiền nhập vào</th>
+                                </th>
+                            </thead>
+                            <tbody>
+                                @php
+                                $ttt = 0;
+                                $tongdon = 0;
+                                $tongsospkho = 0;
+                                @endphp
+                                @foreach($phieunhap as $pnhap)
+                                <?php                                        
                                         $ttt +=  $pnhap->tongtien ;
                                         $tsl[0] =  $pnhap->id;
                                         count($tsl);
                                         $tongdon += count($tsl);
                                         ?>
-                                    @endforeach
-                                    
-                                    <tr>
-                                        <td>{{($tongdon)}} đơn</td>
+                                @endforeach
 
-                                        <td>{{number_format($ttt,0,",",".")}} VNĐ</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                                <tr>
+                                    <td>{{($tongdon)}} đơn</td>
+
+                                    <td>{{number_format($ttt,0,",",".")}} VNĐ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="table-responsive">
                         <table id="datatables" class="table table-bordered table-striped table-hover">
 
                             <thead class=" text-primary">
                                 <th>STT</th>
                                 <th>Tên nhân viên</th>
-                                <th>Ngày nhập</th>                                
+                                <th>Ngày nhập</th>
                                 <th>Tổ chức</th>
                                 <th>Nhà cung cấp</th>
+                                <th>Ghi chú</th>
+
                                 <th>Thao tác</th>
                                 </th>
                             </thead>
@@ -81,7 +93,7 @@
                                     <td>{{$pnhap->ngaynhap}}</td>
                                     <td>{{$pnhap->tochuc->tentc}}</td>
                                     <td>{{$pnhap->nhacungcap->tenncc}}</td>
-                                    
+                                    <td>{{$pnhap->nhacungcap->ghichu}}</td>
                                     <td class="left">
                                         <a>
                                             <button type="button" class="btn " data-toggle="modal"
@@ -97,16 +109,18 @@
                     </form>
                     <br>
                     <!-- bang thong ke -->
-                    
+
                 </div>
 
             </div>
         </div>
         <!-- Sửa -->
         <!-- Modal -->
-        
+
         @include('admin.nhaphang.chitietnhap')
         <!-- Đóng sửa -->
+        @include('admin.nhaphang.printnhaphang')
+
     </div>
 </div>
 </div>

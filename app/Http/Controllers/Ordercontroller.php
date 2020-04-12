@@ -19,9 +19,9 @@ class Ordercontroller extends Controller
     //getban
     public function getOrder($id)
     {
-
+        $id_tc = Auth::id();
         // $tochuc = tochuc::where('id', $id)->first();
-        $tochuc = tochuc::layToChucTheoIdNhanVien($id);
+        $tochuc = tochuc::layToChucTheoIdNhanVien($id_tc);
         $loaimon = loaimon::where('matc', $tochuc->id)->get();
         $tenban  = ban::where('matc', $tochuc->id)->get();
         $loaiban = loaiban::where('matc', $tochuc->id)->get();
@@ -55,10 +55,24 @@ class Ordercontroller extends Controller
     // public function getctbill($id)
     // {
     
-    //     $bill  = bill::find($id);
-    //     $ban = ban::find($id);
+        // $bill  = bill::find($id);
+        // $ban = ban::find($id);
     //     return view('admin.order.bill', compact('bill','ban'));
     // }
+    public function printbill($id)
+    {
+        $id_nv = Auth::id();
+        $id_tc = Auth::id();
+        $tochuc = tochuc::layToChucTheoIdNhanVien($id_tc);
+        $nhanvien = nhanvien::where('matc', $id)->get();
+        $bill  = bill::find($id);
+        $chitietbill = chitietbill::where('matc', $id)->get();
+        $ban = ban::find($id);
+        
+        // dd($bill);
+
+        return view('admin.order.printbill', compact('bill', 'chitietbill','nhanvien','tochuc','ban'));
+    }
 
     //get ban ra bill
     public function hienthi($id_tc, $id_ban)

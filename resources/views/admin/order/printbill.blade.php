@@ -2,79 +2,67 @@
 
 @section('content')
 
-<div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                
-                    <a href="{{route('get-bill-theo-tochuc-print',[$customer->matc, $customer->id])}}"
-                                class=""><button type="button" class="btn btn-default"
-                                        >
-                                            <i class="fas fa-print"></i> In trang</button></a>
-                    <div class="table-responsive">
-                        <table  class="table table-bordered table-striped table-hover">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <span>
+                <br>
+                <h3 align="center">{{$tochuc->tentc}}</h3>
+                <h6 align="center">ĐC: {{$tochuc->diachi}}
+                    <br>--------------------------------</h6>
+                <h4 align="center">PHIẾU TẠM TÍNH</h4>
 
-                            <thead class=" text-primary">
-                                <th>STT</th>
-                                <th>Tên thu ngân</th>
-                                <th>Ngày tạo</th>
-                                <th>Bàn</th>
-                                <th>Tên món</th>
-                                <th>Số lượng</th>
-                                <th>Đơn giá</th>
-                                <th>Thành tiền</th>
-                                </th>
-                            </thead>
-                            <tbody>
-                                @php
-                                $i=0;
-                                $sl = 0;
-                                @endphp
-                                @foreach($bill as $bbl)
-                                <?php 
-                                    $ctb  = DB::table('chitietbill')->where('mabill', $bbl->id)->get();
-                                    
-                                ?>
-                                @foreach($ctb as $ct)
-                                <?php
-                                        $food = DB::table('menu')->where('id', $ct->mamon)->first();
-                                        $sum = ($ct->dongia*$ct->soluong);                                            
-                                        $sl +=  $ct->soluong ;  
-                                ?>
-
-                                <tr>
-                                    <td>{{++$i}}</td>
-                                    <td>{{$bbl->nhanvien->tennv}}</td>
-                                    <td>{{$bbl->ngaytao}}</td>
-                                    <td>{{$bbl->ban->tenban}}</td>
-                                    <td>{{$food->tenmon}}</td>
-                                    <td>{{$ct->soluong}}</td>
-                                    <td>{{number_format($ct->dongia,0,",",".")}} VNĐ</td>
-                                    <td>{{number_format($sum,0,",",".")}} VNĐ</td>
-                                    
-                                </tr>
-                                @endforeach
-
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    </form>
-                    <br>
-
+                <h5 align="center">{{$bill->ban->tenban}}</h5>
+                <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+                    <input style="text-align: center;border: none" class="form-control" type="text">
+                    <span class="input-group-addon"></span>
                 </div>
-
+            </span>
+            <label class="col-form-label">
+                Thu ngân: {{$bill->nhanvien->tennv}}
+            </label>
+            <div class="table-responsive">
+                <table class="table table-bordered  table-hover" id="table">
+                    <thead class=" text-dark">
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Thành tiền</th>
+                    </thead>
+                    <tbody>
+                        @php
+                        $i=0;
+                        @endphp
+                        <?php 
+                                            $ctb  = DB::table('chitietbill')->where('mabill', $bill->id)->get();
+                                            $sl = 0;
+                                        ?>
+                        @foreach($ctb as $value)
+                        <?php
+                                                $food = DB::table('menu')->where('id', $value->mamon)->first();
+                                                $sum = ($value->dongia*$value->soluong);                                            
+                                                $sl +=  $value->soluong ;                                            
+                                            ?>
+                        <tr>
+                            <td>{{++$i}}</td>
+                            <td>{{$food->tenmon}}</td>
+                            <td>{{$value->soluong}}</td>
+                            <td>{{number_format($value->dongia,0,",",".")}} VNĐ</td>
+                            <td>{{number_format($sum,0,",",".")}} VNĐ</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <h5 align="right">Tổng số lượng: {{($sl)}}</h5>
+                <h5 align="right">Tổng tiền: {{number_format($bill->tongtien,0,",",".")}} VNĐ</h5>
             </div>
+            <hr>
+                <h6 style="text-align: center;">Xin cảm ơn Quý khách! (^_^)</h6>
         </div>
-        <!-- Sửa -->
-        <!-- Modal -->
-
-        <!-- Đóng sửa -->
     </div>
+
 </div>
-</div>
-<script type="text/javascript"> 
-  window.addEventListener("load", window.print());
-</script>
+
+
 @endsection

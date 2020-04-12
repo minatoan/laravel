@@ -1,12 +1,25 @@
 @extends('layout.admin')
 
 @section('content')
-
+<style>
+    .btn-success{
+        background-color: green !important;
+    }
+    .paginate_button a{
+        background-color: red;
+    }
+</style>
+<link rel="stylesheet" href="{{asset('dist/css/button/menu-hover-button.css')}}">
 <div class="content">
     <div class="container-fluid">
         <div class="row">
+        </div>
+        <div class="row">
             <div class="col-md-12">
                 <div class="card">
+
+
+                    
 
                     <div class="card-header card-header-primary">
                         <h4 class="card-title ">Thống kê</h4>
@@ -24,10 +37,11 @@
                                 <label class="col-form-label">Đến ngày</label>
                                 <input type="date" name="dateto" class="form-control">
                             </div>
-                            <div class="col-sd-1.5 ">
+                            <div class="col-sd-1.5 "style="padding-right: 7px">
                                 <label class="col-form-label" style="color: #ffffff">.</label>
-                                <button type="submit" class="btn btn-primary form-control">Tìm</button>
+                                <button type="submit" class="btn btn-info form-control">Tìm</button>
                             </div>
+                            
                     </form>
                 </div>
                 <div class="row">
@@ -36,7 +50,7 @@
                         <!-- Widget: user widget style 1 -->
                         <div class="card card-widget widget-user">
                             <!-- Add the bg color to the header using any of the bg-* classes -->
-                            <div class="widget-user-header bg-success">
+                            <div class="widget-user-header bg-primary">
                                 <h3 class="widget-user-username">Bán hàng</h3>
                                 <h5 class="widget-user-desc">(order)</h5>
                             </div>
@@ -48,7 +62,7 @@
                                         $tongbill = 0;
                                 @endphp
                                 @foreach($bill as $bi)
-                                            <?php                                        
+                                        <?php                                        
                                             $tsl[0] =  $bi->id;
                                             count($tsl);
                                             $tongbill += count($tsl);
@@ -56,13 +70,13 @@
 
                                             $ctbill = DB::table('chitietbill')->where('mabill', $bi->id)->get();
                                             ?>
-                                @endforeach
-                                @foreach($chitietbill as $ctbill)
-                                <?php                                        
-                                $tongsoly += $ctbill->soluong;
-                                ?>
-
-                                @endforeach
+                                        @foreach($ctbill as $ctbilll)
+                                        <?php                                        
+                                            $tongsoly += $ctbilll->soluong;
+                                            
+                                        ?>
+                                        @endforeach
+                                        @endforeach
 
                                 <?php 
                                         ?>
@@ -108,22 +122,24 @@
                                         $tongsppn = 0;
                             @endphp
                             @foreach($phieunhap as $pnhap)
-                                            <?php                                        
+                                <?php                                        
                                             $tongsophieu[0] =  $pnhap->id;
                                             count($tongsophieu);
                                             $tongphieunhap += count($tongsophieu);
-                                            $tongtienkho += $pnhap->tongtien;                                            
+                                            $tongtienkho += $pnhap->tongtien;  
+                                            $ctpnn = DB::table('ctphieunhap')->where('maphieunhap', $pnhap->id)->get();
+                                        
                                             ?>
-                                @endforeach
-                                @foreach($ctphieunhap as $ctpn)
+                                            @foreach($ctpnn as $ctpnnn)
                                 <?php
                                 // $tongsosanpham[0] =  $ctpn->mahang;
                                 // count($tongsosanpham);
                                 // $tongsppn += count($tongsosanpham);
-                                $tongsospkho += $ctpn->soluong;
+                                $tongsospkho += $ctpnnn->soluong;
                                 ?>
                                 @endforeach
-                            <div class="widget-user-header bg-info">
+                                @endforeach
+                            <div class="widget-user-header bg-danger">
                                 <h3 class="widget-user-username">Nhập kho</h3>
                                 <h5 class="widget-user-desc">(Phiếu nhập)</h5>
                             </div>
@@ -132,7 +148,7 @@
                                     <div class="col-sm-4 border-right">
                                         <div class="description-block">
                                             <h4>{{$tongphieunhap}}</h4>
-                                            <span class="description-text">Tổng số phiếu nhập</span>
+                                            <span class="description-text">Tổng phiếu nhập</span>
                                         </div>
                                         <!-- /.description-block -->
                                     </div>
@@ -140,7 +156,7 @@
                                     <div class="col-sm-4 border-right">
                                         <div class="description-block">
                                             <h4 >{{$tongsospkho}}</h4>
-                                            <span class="description-text">Tổng lượng nhập vào</span>
+                                            <span class="description-text">Tổng lượng nhập</span>
                                         </div>
                                         <!-- /.description-block -->
                                     </div>
@@ -248,7 +264,7 @@
                             <!-- /.col -->
                             <div class="col-md-12">
                                 <div class="info-box">
-                                    <span class="info-box-icon bg-danger"><i class="fas fa-donate"></i></span>
+                                    <span class="info-box-icon bg-success"><i class="fas fa-donate"></i></span>
 
                                     <div class="info-box-content">
                                        <h4> <span class="info-box-text">Tổng danh thu = (Tổng tiền bán hàng - (Tổng tiền nhập kho + Tổng tiền lương) )</span> </h4>
@@ -264,7 +280,12 @@
                         <!-- /.row -->
                         <div class="row">
                             <!-- BAR CHART -->
-             <div class="card card-success" style="width: 100%">
+
+                            
+
+                            <br>
+
+             <div class="card card-secondary    " style="width: 100%">
                 <div class="card-header">
                   <h3 class="card-title">Biểu đồ thu chi (năm : 2020)</h3>
   
@@ -283,24 +304,7 @@
               </div>
               <!-- /.card -->
   
-              {{-- <!-- STACKED BAR CHART -->
-              <div class="card card-success">
-                <div class="card-header">
-                  <h3 class="card-title">Stacked Bar Chart</h3>
-  
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="chart">
-                    <canvas id="stackedBarChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                  </div>
-                </div>
-                <!-- /.card-body -->
-              </div> --}}
+           
                         </div>
                     </div>
                 </section>
@@ -344,11 +348,11 @@
         //   var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
       
           var areaChartData = {
-            labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            labels  : ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
             datasets: [
               {
                 label               : 'Doanh thu',
-                backgroundColor     : 'rgba(60,141,188,0.9)',
+                backgroundColor     : '#0035c5',
                 borderColor         : 'rgba(60,141,188,0.8)',
                 pointRadius          : false,
                 pointColor          : '#3b8bba',
