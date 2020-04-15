@@ -18,7 +18,7 @@ class Menucontroller extends Controller
 // ------------------------------------------Thêm menu
     public function getThemMenu($id)
     {
-        $menu = menu::where('matc', $id)->get();
+        $menu = menu::where('matc', $id)->orderBy('id', 'DESC')->get();
         $loaimon = loaimon::where('matc', $id)->get();
         $tochuc = tochuc::where('id', $id)->get();
         return view('admin.menu.menu',['menu' => $menu, 'loaimon' => $loaimon,'tochuc' => $tochuc]);

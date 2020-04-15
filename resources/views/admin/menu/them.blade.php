@@ -18,6 +18,8 @@
                     <div class="form-group">
                         <label class="col-form-label">Loại món</label>
                         <select class="form-control"  name="maloaimon" id="ma_loai_mon">
+                        <option value="" disabled selected>Chọn loại món</option>
+
                             @foreach($loaimon as $lm)
                             <option                                
                                 value="{{$lm->id}}">{{$lm->tenloaimon}}</option>

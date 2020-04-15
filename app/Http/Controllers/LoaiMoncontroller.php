@@ -17,7 +17,7 @@ class LoaiMoncontroller extends Controller
     // ------------------------------------------Thêm loại món
     public function getThemLoaiMon($id)
     {
-        $loaimon = loaimon::where('matc', $id)->get();
+        $loaimon = loaimon::where('matc', $id)->orderBy('id', 'DESC')->get();
         $tochuc = tochuc::where('id', $id)->get();
         return view('admin.loaimon.loaimon',['loaimon' => $loaimon, 'tochuc' => $tochuc]);
     }
