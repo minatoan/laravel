@@ -470,5 +470,34 @@ Route::group(['prefix'=>''],function(){
         
     });
 
-    
+    //admin/admin/admin
+    Route::group(['prefix'=>''],function()
+	{
+        // Route::get('tochuc','ToChuccontroller@getToChuc');
+        
+        Route::get('admin', [
+            'as'=> 'admin-them',
+            'uses'=> 'adminnhanvien@getThemNhanVienadmin'
+        ]);
+        Route::post('admin', [
+            'as'=> 'admin-them',
+            'uses'=> 'adminnhanvien@postThemNhanVienadmin'
+        ]);
+
+        Route::get('admin/{id?}', [
+            'as'=> 'admin-sua',
+            'uses'=> 'adminnhanvien@getSuaadmin'
+        ]);
+
+        Route::post('admin/{id?}', [
+            'as'=> 'admin-sua',
+            'uses'=> 'adminnhanvien@postSuaadmin'
+        ]);
+
+        Route::get('admin/{id?}', [
+            'as'=> 'test-xoa',
+            'uses'=> 'adminnhanvien@getXoaadmin'
+        ]);
+
+    });
 });

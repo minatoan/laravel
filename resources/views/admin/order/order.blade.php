@@ -120,7 +120,7 @@
                                             <ul class="nav nav-treeview">
                                                 <li class="nav-item">
                                                     <p>
-                                                        <table id="tables" class="table  table-striped">
+                                                        <table id="table" class="table  table-striped">
                                                             <thead class=" text-dark">
                                                                 <th>Tên</th>
                                                                 <th>Giá</th>

@@ -221,16 +221,16 @@
                                         data-accordion="false">
                                         <li class="nav-item has-treeview">
                                             <a class="nav-link">
-                                                <p>
+                                                <div  style="   margin-bottom: 10px; padding-left:12px">
                                                     <button type="button"
                                                         class="btn btn-success">{{ $lm->tenloaimon }}</button>
-                                                </p>
+                                        </div>
                                             </a>
                                             <ul class="nav nav-treeview">
                                                 <li class="nav-item">
 
-                                                    <div class="table-responsive">
-                                                        <table id="tables" class="table  table-striped">
+                                                    <div class="table">
+                                                        <table id="table" class="table  table-striped">
                                                             <thead class=" text-dark">
                                                                 <th>Tên</th>
                                                                 <th>Giá</th>

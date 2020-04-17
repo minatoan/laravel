@@ -56,11 +56,13 @@
                                             <a href="{{route('nhanvien-xoa',$nv->id)}}"><button type="button"
                                                     class="btn btn-danger"><i class="far fa-trash-alt"></i>
                                                 </button>
+                                                @if($quyen==1 or $quyen==0)
                                             </a>
                                             <a href="{{route('get-nhanvien-luong-tochuc',$nv->id)}}"><button type="button"
                                                     class="btn btn-info"><i class="fas fa-donate"> Tính lương</i>
                                                 </button>
                                             </a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach

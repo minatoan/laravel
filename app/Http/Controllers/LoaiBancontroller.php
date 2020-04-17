@@ -28,7 +28,7 @@ class LoaiBancontroller extends Controller
     {
         $this->validate($request,
             [
-                'tenloaiban' => 'required|min:3|max:100',
+                'tenloaiban' => 'required|min:2|max:100',
                 'matc' => 'required',
             ],
             [
