@@ -185,10 +185,7 @@ class Ordercontroller extends Controller
                 $sum+= $total; 
             
             }
-        }
-        
-        if($value['attributes']['id_ban'] == $id_ban)
-            {
+        }  
                 $bill = new bill;
                 $bill->manv = $id_nv;
                 $bill->maban = $id_ban;
@@ -209,12 +206,7 @@ class Ordercontroller extends Controller
 
                 $bill_detail->save();
             }
-        }
-        }elseif($value['attributes']['id_ban'] != $id_ban){
-            return redirect()->back()->with(Toastr::error('Bàn chưa có món'));
-
-        }
-
+        }  
         foreach (Cart::getContent() as $key => $value) {
             if($value['attributes']['id_ban'] == $id_ban)
             {
