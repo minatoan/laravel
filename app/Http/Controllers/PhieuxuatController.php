@@ -34,16 +34,15 @@ class PhieuxuatController extends Controller
         if ($data_listxuat==null){
             $data_listxuat=array();
         }
-        $this->validate($req,
-        [
-            'tensp' => "required",
-            'soluong' => "required", 
-        ]
-        ,
-        [
-            'tensp.required' => 'Lỗi rồi! Bạn chưa chọn tên sản phẩm ',
-            'soluong.required' => 'Lỗi rồi! Bạn chưa chọn số lượng ',          
-        ]);
+        if($req->tensp == null){
+            return back()->with(Toastr::error('Chưa chọn sản phẩm'));
+        }        
+        if($req->soluong == null){
+            return back()->with(Toastr::error('Chưa nhập số lượng'));
+        }
+        if($req->donvitinh == null){
+            return back()->with(Toastr::error('Chưa chọn đơn vị tính'));
+        }
         $id = time();
         $dataxuat = array(
             'id' =>  $id, // inique row ID

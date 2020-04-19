@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title ">Lịch sử bill</h4>
+                        <h4 class="card-title text-dark font-weight-bold">Lịch sử bill</h4>
                     </div>
                     <div class="card-body">
                         <form action="{{route('get-likebill-theo-tochuc',[$customer->matc, $customer->id])}}"

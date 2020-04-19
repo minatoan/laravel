@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title ">Nhập hàng</h4>
+                        <h4 class="card-title text-dark font-weight-bold">Nhập hàng</h4>
                     </div>
                     @if(count($errors)>0)
                     <div class="alert alert-warning">
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="col-sd-1.5 ">
                                     <label style="color: #ffffff">. </label>
-                                    <button class="btn btn-primary form-control"><i
+                                    <button class="btn btn-outline-primary form-control"><i
                                             class="fas fa-arrow-down"></i></button>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                             @endif
 
                             <div class="table-responsive">
-                                <table id="tablee" class="table table-bordered table-striped table-hover">
+                                <table id="tabl" class="table table-bordered table-striped table-hover">
                                     <thead class=" text-primary">
                                         <th>STT</th>
                                         <th>Sản phẩm</th>
@@ -99,7 +99,7 @@
 
                                         @foreach($data as $value)
                                         @php
-                                        echo $value['id'];
+                                        
                                         $sp = DB::table('hanghoa')->where('id', $value['name'])->first();
                                         // var_dump($sp);
                                         $total = ($value['quantity'] * $value['price']);
@@ -133,13 +133,13 @@
                                         <?php $nv = DB::table('nhanvien')->where('id', $id_nv)->first(); ?>
 
                                         <label>Nhân viên</label>
-                                        <input type="text" value="{{$nv->tennv}}" class="form-control">
+                                        <input type="text" value="{{$nv->tennv}}"  readonly class="form-control">
                                         <input type="hidden" value="{{$nv->id}}" class="form-control" name="id_nv">
                                     </div>
                                     <div class="col-md-2 ">
                                         <label>Ngày nhập</label>
                                         <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-                                            <input class="form-control" readonly type="text" name="ngaynhap">
+                                            <input class="form-control"  type="text" name="ngaynhap">
                                             <span class="input-group-addon"></span>
                                         </div>
                                     </div>

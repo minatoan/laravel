@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title ">Xuất hàng</h4>
+                        <h4 class="card-title text-dark font-weight-bold">Xuất hàng</h4>
                     </div>
                     @if(count($errors)>0)
                     <div class="alert alert-warning">
@@ -27,7 +27,7 @@
                                         <?php $nv = DB::table('nhanvien')->where('id', $id_nv)->first(); ?>
 
                                         <label>Nhân viên</label>
-                                        <input type="text" value="{{$nv->tennv}}" class="form-control">
+                                        <input type="text" value="{{$nv->tennv}}" readonly class="form-control">
                                         <input type="hidden" value="{{$nv->id}}" class="form-control" name="id_nv">
                                     </div>
                                 <div class="col-sm-2 ">
@@ -60,7 +60,7 @@
                                 <div class="col-md-2 ">
                                         <label>Ngày xuất</label>
                                         <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-                                            <input class="form-control" readonly type="text" name="ngaynhap">
+                                            <input class="form-control"  type="text" name="ngaynhap">
                                             <span class="input-group-addon"></span>
                                         </div>
                                     </div>
@@ -70,7 +70,7 @@
                                     </div>
                                 <div class="col-sd-1.5 ">
                                     <label style="color: #ffffff">. </label>
-                                    <button class="btn btn-primary form-control"><i
+                                    <button class="btn btn-outline-primary form-control"><i
                                             class="fas fa-arrow-down"></i></button>
                                 </div>
                             </div>

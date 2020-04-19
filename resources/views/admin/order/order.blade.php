@@ -60,7 +60,7 @@
                     <div class="card card-outline card-success">
 
                         <div class="card-header">
-                            <h3 class="card-title">Bill</h3>
+                            <h3 class="card-title text-dark font-weight-bold">Bill</h3>
                         </div>
                         <div class="card-body">
                             <span>
@@ -96,7 +96,7 @@
                 <div class="sticky-top mb-3">
                     <div class="card card-outline card-success">
                         <div class="card-header">
-                            <h4 class="card-title">Đồ uống</h4>
+                            <h4 class="card-title text-dark font-weight-bold">Đồ uống</h4>
                         </div>
                         <div class="card-body">
                             <!-- the events -->

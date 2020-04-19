@@ -173,6 +173,7 @@ class Ordercontroller extends Controller
 
     public function savecart($id_tc, $id_nv, $id_ban, Request $req)
     {
+       
         $id_tc = Auth::id();
         $tochuc = tochuc::layToChucTheoIdNhanVien($id_tc);
         // // dd($bill);
@@ -186,6 +187,10 @@ class Ordercontroller extends Controller
             
             }
         }  
+        if($sum < 2){
+            return redirect()->back()->with(Toastr::error('Bàn chưa có món'));
+        }else{
+
                 $bill = new bill;
                 $bill->manv = $id_nv;
                 $bill->maban = $id_ban;
@@ -206,7 +211,10 @@ class Ordercontroller extends Controller
 
                 $bill_detail->save();
             }
-        }  
+        }
+    }
+
+        
         foreach (Cart::getContent() as $key => $value) {
             if($value['attributes']['id_ban'] == $id_ban)
             {

@@ -15,11 +15,13 @@
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
 </div>
+
 <!-- /.content-header -->
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
         <div class="row">
+        
             <!-- /.col -->
             <div class="col-md-5">
                 <div class="sticky-top mb-3">
@@ -65,8 +67,16 @@
                     <!-- /.card -->
                     <div class="card card-outline card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Bill </h3>
+                            <h3 class="card-title text-dark font-weight-bold">Bill </h3>
+                            
                         </div>
+                        @if(count($errors)>0)
+                    <div class="alert alert-danger">
+                        @foreach($errors->all() as $err)
+                        {{$err}}<br>
+                        @endforeach
+                    </div>
+                    @endif
                         <div class="card-body">
                             <span>
                                 <h3 align="center">{{$tochuc->tentc}}</h3>
@@ -135,7 +145,7 @@
                                     @endif
                                     @endforeach
 
-                                    <input type="hidden" name="tongtien" value="">
+                                    <input type="hidden" name="tongtien" >
                                     <h5 style="padding-left: 200px;">Tổng tiền: {{number_format($sum,0,",",".")}}
                                         VNĐ
                                     </h5>
@@ -203,7 +213,7 @@
                 <div class="sticky-top mb-3">
                     <div class="card card-outline card-success">
                         <div class="card-header">
-                            <h4 class="card-title">Đồ uống</h4>
+                            <h4 class="card-title text-dark font-weight-bold">Đồ uống</h4>
 
                         </div>
                         <div class="card-body">

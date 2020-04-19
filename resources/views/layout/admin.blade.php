@@ -203,7 +203,7 @@ $(document).ready(function(){
         $('#tables').DataTable({
             "paging": true,
             "lengthChange": false,
-            "searching": true,
+            "searching": false,
             "ordering": true,
             "info": false,
             "autoWidth": false,

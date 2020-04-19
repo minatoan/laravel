@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title ">Danh sách loại món</h4>
+                        <h4 class="card-title text-dark font-weight-bold">Danh sách loại món</h4>
                     </div>
                     @if(count($errors)>0)
                     <div class="alert alert-danger">
@@ -41,7 +41,6 @@
                                         <td>{{++$i}}</td>
                                         <td>{{$lm->tenloaimon}}</td>
                                         <td>{{$lm->tochuc->tentc}}</td>
-                                       
                                         <td class="left">
                                             <button type="button" class="btn btn-warning" data-toggle="modal"
                                                 data-target="#sua{{$lm->id}}"><i class="far fa-edit"

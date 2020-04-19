@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title ">Danh sách loại bàn</h4>
+                        <h4 class="card-title text-dark font-weight-bold">Danh sách loại bàn</h4>
                     </div>
                     @if(count($errors)>0)
                     <div class="alert alert-danger">

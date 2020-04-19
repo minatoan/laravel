@@ -61,20 +61,18 @@ class PhieunhapController extends Controller
         if ($data_list==null){
             $data_list=array();
         }
-        $this->validate($req,
-        [
-            'tensp' => "required",
-            'soluong' => "required",            
-            'dongia' => "required",            
-
-            
-        ]
-        ,
-        [
-            'tensp.required' => 'Lỗi rồi! Bạn chưa chọn tên sản phẩm ',
-            'soluong.required' => 'Lỗi rồi! Bạn chưa chọn số lượng ',          
-            'dongia.required' => 'Lỗi rồi! Bạn chưa chọn đơn giá ',
-        ]);
+        if($req->tensp == null){
+            return back()->with(Toastr::error('Chưa chọn sản phẩm'));
+        }        
+        if($req->soluong == null){
+            return back()->with(Toastr::error('Chưa nhập số lượng'));
+        }
+        if($req->donvitinh == null){
+            return back()->with(Toastr::error('Chưa chọn đơn vị tính'));
+        }
+        if($req->dongia == null){
+            return back()->with(Toastr::error('Chưa nhập giá'));
+        }
         $id = time();
         $data = array(
             'id' => $id, // inique row ID
