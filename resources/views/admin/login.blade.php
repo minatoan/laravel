@@ -1,133 +1,62 @@
-<!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Log in</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base href="{{asset('')}}">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <title> Đăng nhập </title>
+
+    <link rel="stylesheet" type="text/css" href="csslogin/style.css">
+    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a ><b>Admin</b>Coffe</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Đăng nhập để sử dụng</p>
-{{-- ---------------------------------------------------------------------------------------------------------------------- --}}
-      <?php //Hiển thị thông báo thành công?>
-@if ( Session::has('success') )
-	<div class="alert alert-success alert-dismissible" role="alert">
-		<strong>{{ Session::get('success') }}</strong>
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-			<span class="sr-only">Close</span>
-		</button>
-	</div>
-@endif
-<?php //Hiển thị thông báo lỗi?>
-@if ( Session::has('error') )
-	<div class="alert alert-danger alert-dismissible" role="alert">
-		<strong>{{ Session::get('error') }}</strong>
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-			<span class="sr-only">Close</span>
-		</button>
-	</div>
-@endif
-@if ($errors->any())
-	<div class="alert alert-danger alert-dismissible" role="alert">
-		<ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-			<span class="sr-only">Close</span>
-		</button>
-	</div>
-@endif
-{{-- -------------------------------------------------------------------------------------------------- --}}
-      <form role="form" action="{{ url('/login') }}" method="POST">
-        {!! csrf_field() !!}
-        <fieldset>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" name="username" placeholder="Tài khoản" value="{{ old('user') }}" autofocus>
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
+
+<body>
+
+    <div class="login-box">
+        <img src="csslogin/avatar.png" class="avatar">
+        <h1>Login Here</h1>
+
+            <?php //Hiển thị thông báo thành công?>
+            @if ( Session::has('success') )
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <strong>{{ Session::get('success') }}</strong>
+                <button type="button" class="close" data-dismiss="alert" >
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
             </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Mật khẩu">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+            @endif
+            <?php //Hiển thị thông báo lỗi?>
+            @if ( Session::has('error') )
+            <div class="alert alert-danger alert-dismissible" style="text-align: center;padding-bottom:10px; color:red" role="alert">
+                <strong>{{ Session::get('error') }}</strong>
+                
             </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                Ghi nhớ
-              </label>
+            @endif
+            @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible" style="text-align: center; padding-bottom:10px; color:red" role="alert">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                
             </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
-          </div>
-          <!-- /.col -->
+            @endif
+            <form role="form" action="{{ url('/login') }}" method="POST">
+                {!! csrf_field() !!}
+                <p>Tài khoản</p>
+                <input type="text" style="border: none" name="username" class="form-control"
+                    placeholder="Nhập tài khoản" value="{{ old('user') }}" autofocus>
+                <p>Mật khẩu</p>
+                <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu">
+                <input type="submit" class="btn btn-primary btn-block" value="Đăng nhập"></input>
+
+            </form>
+
+
         </div>
-      </fieldset>
-      </form>
-
-      {{-- <div class="social-auth-links text-center mb-3">
-        <p>- OR -</p>
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-        </a>
-      </div> --}}
-      <!-- /.social-auth-links -->
-
-      <p class="mb-1">
-        <a href="forgot-password.html">Quên mật khẩu</a>
-      </p>
-      <p class="mb-0">
-        <a href="register.html" class="text-center">Đăng ký</a>
-      </p>
-    </div>
-    <!-- /.login-card-body -->
-  </div>
-</div>
-<!-- /.login-box -->
-
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
-
+        <script src="plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
