@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use App\nhanvien;
 use App\User;
-// use App\tochuc;
+use App\tochuc;
 
 class LoginController extends Controller
 {
@@ -52,7 +52,7 @@ class LoginController extends Controller
             $id = Auth::id();
             $customer = nhanvien::where('id',$id)->first();
 
-            return redirect()->route('order-get', $customer->matc);
+            return redirect()->route('tochuc-them', $customer->matc);
             // return redirect('order-get', $customer->matc);
 
         }

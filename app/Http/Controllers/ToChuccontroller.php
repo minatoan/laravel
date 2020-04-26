@@ -22,6 +22,7 @@ class ToChuccontroller extends Controller
     public function getThemTochuc()
     {
         $tochuc = tochuc::all();
+        
         $quyen = Auth::user()['quyen'];    
         return view('admin.tochuc.tochuc',['tochuc'=>$tochuc, 'quyen'=>$quyen]);
     }
@@ -54,7 +55,7 @@ class ToChuccontroller extends Controller
     // ------------------------------------Sửa tổ chức
     public function getSuaTochuc($id)
     {
-        $tochuc = ban::find($id);        
+        $tochuc = tochuc::find($id);        
         return view('admin.tochuc.tochuc',['tochuc'=>$tochuc]);
     }
 

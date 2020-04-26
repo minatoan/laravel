@@ -18,6 +18,7 @@
                     <div class="form-group">
                         <label class="col-form-label">Loại bàn</label>
                         <select class="form-control" name="maloaiban" id="loai_ban">
+                        <option value="" disabled selected>Chọn loại bàn</option>
                             @foreach($loaiban as $lb)
                             <option value="{{$lb->id}}">{{$lb->tenloaiban}}</option>
                             @endforeach
