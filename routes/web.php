@@ -210,6 +210,18 @@ Route::group(['prefix'=>''],function(){
         ]);
 
     });
+    //admin/tochuc/tochucnhanvien
+    Route::group(['prefix'=>''],function()
+	{
+        // Route::get('tochuc','ToChuccontroller@getToChuc');
+        
+        Route::get('get-nhanvien-theo-tochucnhanvien/{idtc}/{idnv}', [
+            'as'=> 'get-nhanvien-theo-tochucnhanvien',
+            'uses'=> 'tochucnhanvien@gettochucnhanvien'
+        ]);
+        
+
+    });
 //trang chủ order
     Route::group(['prefix'=>''],function()
 	{

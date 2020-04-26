@@ -32,6 +32,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
+            @if($customer->quyen == '2')
 
                 <li class="nav-item">
                     <a href="admin/tochuc" class="nav-link">
@@ -42,7 +43,8 @@
                         </p>
                     </a>
                 </li>
-                @if($customer->quyen == '2')
+
+                
 
                 <li class="nav-item">
                     <a href="admin/admin" class="nav-link">
@@ -55,7 +57,15 @@
                 </li>
                 @endif
                 @if($customer->quyen == '1' or $customer->quyen == '0')
+                <li class="nav-item">
+                    <a href="{{route('get-nhanvien-theo-tochucnhanvien', [$customer->matc, $customer->id])}}" class="nav-link">
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>
+                            Tổ chức
 
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
 

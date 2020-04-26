@@ -51,8 +51,14 @@ class LoginController extends Controller
             $user = Auth::check();
             $id = Auth::id();
             $customer = nhanvien::where('id',$id)->first();
+            // dd($customer);
+            if($customer->quyen == '1' or $customer->quyen == '0'){
+                return redirect()->route('get-nhanvien-theo-tochucnhanvien', [$customer->matc, $customer->id]);
 
-            return redirect()->route('tochuc-them', $customer->matc);
+            }elseif($customer->quyen == '2')
+            {
+                return redirect()->route('tochuc-them');
+            }
             // return redirect('order-get', $customer->matc);
 
         }
