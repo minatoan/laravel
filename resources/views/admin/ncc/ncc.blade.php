@@ -19,8 +19,10 @@
                     @endif
                     <div class="card-body">
                         <div class="form-group">
+                        @if($quyen==1)
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#them">Thêm</button>
+                                @endif
                         </div>
                         <div class="table-responsive">
                             <table id="datatables" class="table table-bordered table-striped table-hover"
@@ -31,7 +33,9 @@
                                     <th>Địa chỉ </th>
                                     <th>SĐT</th>
                                     <th>Tên tổ chức</th>
+                                    @if($quyen==1)
                                     <th>Thao tác</th>
+                                    @endif
                                     </th>
                                 </thead>
                                 <tbody>
@@ -45,6 +49,7 @@
                                         <td>{{$nc->diachi}}</td>
                                         <td>{{$nc->sdt}}</td>
                                         <td>{{$nc->tochuc->tentc}}</td>
+                                        @if($quyen==1)
                                         <td class="left">
                                             <button type="button" class="btn btn-warning" data-toggle="modal"
                                                 data-target="#sua{{$nc->id}}"><i class="far fa-edit"
@@ -54,8 +59,8 @@
                                                     class="btn btn-danger"><i class="far fa-trash-alt"></i>
                                                 </button>
                                             </a>
-
                                         </td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>

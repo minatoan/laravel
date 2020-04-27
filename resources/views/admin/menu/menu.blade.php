@@ -19,8 +19,10 @@
                     @endif
                     <div class="card-body">
                         <div class="form-group">
+                        @if($quyen==1)
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#them">Thêm</button>
+                                @endif
                         </div>
                         <div class="table-responsive">
                             <table id="datatables" class="table table-bordered table-striped table-hover"
@@ -31,7 +33,10 @@
                                     <th>Loại món</th>
                                     <th>Giá</th>
                                     <th>Tổ chức</th>
+                                    @if($quyen==1)
                                     <th>Thao tác</th>
+                                    @endif
+
                                     </th>
                                 </thead>
                                 <tbody>
@@ -45,6 +50,7 @@
                                         <td>{{$mn->loaimon->tenloaimon}}</td>
                                         <td>{!! number_format($mn["dongia"],0,",",".")!!} VNĐ</td>
                                         <td>{{$mn->tochuc->tentc}}</td>
+                                        @if($quyen==1)
                                         <td class="left">
                                             <button type="button" class="btn btn-warning" data-toggle="modal"
                                                 data-target="#sua{{$mn->id}}"><i class="far fa-edit"
@@ -55,6 +61,7 @@
                                                 </button>
                                             </a>
                                         </td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>

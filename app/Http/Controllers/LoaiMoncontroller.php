@@ -19,7 +19,8 @@ class LoaiMoncontroller extends Controller
     {
         $loaimon = loaimon::where('matc', $id)->orderBy('id', 'DESC')->get();
         $tochuc = tochuc::where('id', $id)->get();
-        return view('admin.loaimon.loaimon',['loaimon' => $loaimon, 'tochuc' => $tochuc]);
+        $quyen = Auth::user()['quyen'];    
+        return view('admin.loaimon.loaimon',['loaimon' => $loaimon, 'tochuc' => $tochuc, 'quyen'=>$quyen]);
     }
 
     public function postThemLoaiMon(Request $request)

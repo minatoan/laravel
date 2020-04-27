@@ -11,6 +11,13 @@
                         <h4 class="card-title text-dark font-weight-bold">Nhân viên</h4>
                         <!-- <p class="card-category"> Here is a subtitle for this table</p> -->
                     </div>
+                    @if(count($errors)>0)
+                    <div class="alert alert-danger">
+                        @foreach($errors->all() as $err)
+                        {{$err}}<br>
+                        @endforeach
+                    </div>
+                    @endif
                     <div class="card-body">
                         <div class="form-group">
                             <button type="button" class="btn btn-primary" data-toggle="modal"

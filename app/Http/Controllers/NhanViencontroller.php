@@ -39,7 +39,7 @@ class NhanViencontroller extends Controller
     {
         $this->validate($request,
             [
-                
+                'username' => 'unique:nhanvien,username|min:1|max:100',
                 'tennv' => 'required|min:3|max:100',               
                 'ngaysinh' => 'required',
                 'gioitinh' => 'required',
@@ -49,6 +49,7 @@ class NhanViencontroller extends Controller
                 
             ],
             [
+                'username.unique' => 'Tài khoản đã tồn tại',
                 'tennv.required' => 'Lỗi rồi! Bạn chưa điền tên nhân viên',
                 'tennv.min' => 'Tên nhân viên phải có ít nhất 3 ký tự',                
                 'sdt.required' =>'Lỗi rồi! Bạn chưa điền số điện thoại',   
@@ -120,7 +121,6 @@ class NhanViencontroller extends Controller
             $nhanvien->matc = $request->matc;
             $nhanvien->calam = $request->calam;
             $nhanvien->ghichu = $request->ghichu;  
-            $nhanvien->username = $request->username; 
 
         // echo "<pre>";
         // print_r($nhanvien->toArray());

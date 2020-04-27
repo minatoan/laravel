@@ -22,8 +22,10 @@ class Bancontroller extends Controller
         $ban = ban::where('matc', $id)->get();
         $loaibann = loaiban::where('matc', $id)->get();
         $tochuc = tochuc::where('id', $id)->get();
+        $quyen = Auth::user()['quyen'];    
+
         // dd($ban);
-        return view('admin.ban.ban',['ban'=>$ban,'loaiban'=>$loaibann, 'tochuc' => $tochuc]);
+        return view('admin.ban.ban',['ban'=>$ban,'loaiban'=>$loaibann, 'tochuc' => $tochuc, 'quyen'=>$quyen]);
     }
 
     public function postThemBan(Request $request)

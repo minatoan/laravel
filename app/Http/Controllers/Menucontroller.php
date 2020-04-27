@@ -21,7 +21,8 @@ class Menucontroller extends Controller
         $menu = menu::where('matc', $id)->orderBy('id', 'DESC')->get();
         $loaimon = loaimon::where('matc', $id)->get();
         $tochuc = tochuc::where('id', $id)->get();
-        return view('admin.menu.menu',['menu' => $menu, 'loaimon' => $loaimon,'tochuc' => $tochuc]);
+        $quyen = Auth::user()['quyen'];    
+        return view('admin.menu.menu',['menu' => $menu, 'loaimon' => $loaimon,'tochuc' => $tochuc, 'quyen'=>$quyen]);
         // dd($tochuc);
     }
 

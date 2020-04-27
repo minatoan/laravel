@@ -19,8 +19,10 @@
                     @endif
                     <div class="card-body">
                         <div class="form-group">
+                        @if($quyen==1)
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#them">Thêm</button>
+                                @endif
                         </div>
                         <div class="table-responsive">
                             <table id="datatables" class="table table-bordered table-striped table-hover"
@@ -29,7 +31,9 @@
                                     <th>STT</th>
                                     <th>Tên loại món</th>
                                     <th>Tổ chức</th>
+                                    @if($quyen==1)
                                     <th>Thao tác</th>
+                                    @endif
                                     </th>
                                 </thead>
                                 <tbody>
@@ -41,6 +45,7 @@
                                         <td>{{++$i}}</td>
                                         <td>{{$lm->tenloaimon}}</td>
                                         <td>{{$lm->tochuc->tentc}}</td>
+                                        @if($quyen==1)
                                         <td class="left">
                                             <button type="button" class="btn btn-warning" data-toggle="modal"
                                                 data-target="#sua{{$lm->id}}"><i class="far fa-edit"
@@ -51,6 +56,7 @@
                                                 </button>
                                             </a>
                                         </td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>

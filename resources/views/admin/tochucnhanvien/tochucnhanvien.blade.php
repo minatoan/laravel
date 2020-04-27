@@ -31,8 +31,10 @@
                                     <th>ID</th>
                                     <th>Tên tổ chức</th>
                                     <th>Người quản lý</th>
-                                    <th>Địa chỉ</th>                                    
+                                    <th>Địa chỉ</th>   
+                                    @if ($quyen==2)                                 
                                     <th>Thao tác</th>
+                                    @endif
                                     </th>
                                 </thead>
                                 <tbody>
@@ -44,9 +46,9 @@
                                         <td>{{++$i}}</td>
                                         <td>{{$tc->tentc}}</td>
                                         <td>{{$tc->nguoiql}}</td>
-                                        <td>{{$tc->diachi}}</td>                                        
+                                        <td>{{$tc->diachi}}</td> 
+                                        @if ($quyen==2)                                       
                                         <td class="left">
-                                            @if ($quyen==2)
                                             <button type="button" class="btn btn-warning" data-toggle="modal"
                                             data-target="#sua{{$tc->id}}"><i class="far fa-edit"
                                                 style="color:black"></i>
@@ -56,8 +58,8 @@
                                                     class="btn btn-danger"><i class="far fa-trash-alt"></i>
                                                 </button>
                                             </a>
-                                            @endif
                                         </td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>

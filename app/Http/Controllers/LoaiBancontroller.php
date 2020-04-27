@@ -21,7 +21,8 @@ class LoaiBancontroller extends Controller
     {
         $loaiban = loaiban::where('matc', $id)->get();
         $tochuc = tochuc::where('id', $id)->get();
-        return view('admin.loaiban.loaiban',['loaiban' => $loaiban, 'tochuc' => $tochuc]);
+        $quyen = Auth::user()['quyen']; 
+        return view('admin.loaiban.loaiban',['loaiban' => $loaiban, 'tochuc' => $tochuc, 'quyen'=>$quyen]);
     }
 
     public function postThemLoaiBan(Request $request)

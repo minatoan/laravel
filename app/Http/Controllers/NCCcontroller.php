@@ -22,7 +22,8 @@ class NCCcontroller extends Controller
         $nhacungcap = nhacungcap::where('matc', $id)->get();
         $phieunhap = phieunhap::all();
         $tochuc = tochuc::where('id', $id)->get();
-        return view('admin.ncc.ncc',['nhacungcap'=>$nhacungcap, 'phieunhap' => $phieunhap, 'tochuc' => $tochuc]);
+        $quyen = Auth::user()['quyen'];    
+        return view('admin.ncc.ncc',['nhacungcap'=>$nhacungcap, 'phieunhap' => $phieunhap, 'tochuc' => $tochuc, 'quyen'=>$quyen]);
        
         
     }
