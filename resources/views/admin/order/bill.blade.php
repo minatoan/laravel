@@ -31,7 +31,7 @@
                         <div class="col-sd-2 dropdown" style="padding-left: 7px">
                             <label class="col-form-label" style="color: #ffffff">.</label>
 
-                            <button class="dropbtn btn btn-dark form-control">Xuất excel</button>
+                            <button class="dropbtn btn btn-dark form-control">Xuất file</button>
                             <div class="dropdown-content">
                                 <a data-toggle="modal" data-target="#banhang">In phiếu</a>
                             </div>

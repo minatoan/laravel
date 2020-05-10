@@ -191,6 +191,8 @@
                                                 $bann = DB::table('ban')->where('matc', $tochuc->id)->where('id', '<>', $id_ban->id)->get();
                                                 //   dd($bann);                                          
                                             ?>
+                                            <option value="" disabled selected>Chọn bàn</option>
+
                                             @foreach($bann as $bannn)
                                             <option value="{{$bannn->id}}">{{$bannn->tenban}}</option>
                                             @endforeach
