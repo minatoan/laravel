@@ -67,7 +67,6 @@
                                             count($tsl);
                                             $tongbill += count($tsl);
                                             $tongtien += $bi->tongtien;
-
                                             $ctbill = DB::table('chitietbill')->where('mabill', $bi->id)->get();
                                             ?>
                                         @foreach($ctbill as $ctbilll)
@@ -236,7 +235,6 @@
                             {{-- <div class="col-md-4">
                                 <div class="info-box">
                                     <span class="info-box-icon bg-info"><i class="fas fa-box"></i></span>
-
                                     <div class="info-box-content">
                                         <span class="info-box-text">Tổng tiền nhập kho</span>
                                         <span class="info-box-number">{{number_format($tongtienkho,0,",",".")}} VNĐ</span>
@@ -249,7 +247,6 @@
                             <div class="col-md-4">
                                 <div class="info-box">
                                     <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
-
                                     <div class="info-box-content">
                                         <span class="info-box-text">Tổng tiền order</span>
                                         <span class="info-box-number">{{number_format($tongtien,0,",",".")}} VNĐ</span>
