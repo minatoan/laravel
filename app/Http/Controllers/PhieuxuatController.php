@@ -121,7 +121,7 @@ class PhieuxuatController extends Controller
     {
         $dateform = $req->dateform;
         $dateto = $req->dateto;
-        $ctphieuxuat = where('matc', $id)->get();
+        $ctphieuxuat = ctphieuxuat::where('matc', $id)->get();
 
         $phieuxuat  = phieuxuat::where('matc', $id)->orderBy('id', 'DESC')->whereBetween('ngayxuat', [$dateform, date('Y-m-d', strtotime($dateto. '+1 days'))])->get();
         return view('admin.nhaphang.lichsuxuat' ,compact('phieuxuat','ctphieuxuat'));

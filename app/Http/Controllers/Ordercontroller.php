@@ -19,6 +19,7 @@ class Ordercontroller extends Controller
     //getban
     public function getOrder($id)
     {
+        // Cart::clear();
         $id_tc = Auth::id();
         // $tochuc = tochuc::where('id', $id)->first();
         $tochuc = tochuc::layToChucTheoIdNhanVien($id_tc);
